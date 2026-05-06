@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infresco — We Build the Tech That Runs Your Business</title>
+<meta name="description" content="Infresco builds ERP systems, websites, and digital marketing solutions for business owners. Based in Pakistan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:     #0A0E1A;
+  --ink2:    #2D3348;
+  --ink3:    #6B7490;
+  --rule:    #E8EBF2;
+  --bg:      #F8F9FC;
+  --white:   #FFFFFF;
+  --blue:    #1C52E3;
+  --blue2:   #0F3BBF;
+  --red:     #E8320D;
+  --accent:  #1C52E3;
+  --radius:  12px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Sora',sans-serif;
+  background:var(--white);
+  color:var(--ink);
+  font-size:15px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--rule);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--ink3)}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 6%;
+  height:68px;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--rule);
+  transition:all .3s;
+}
+
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  text-decoration:none;
+}
+
+.logo-mark{
+  display:flex;flex-direction:column;align-items:center;
+  gap:2px;
+}
+
+.logo-dot-red{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--red);
+}
+
+.logo-dot-blue{
+  width:10px;height:14px;border-radius:5px 5px 2px 8px;
+  background:var(--blue);
+}
+
+.logo-text{
+  font-family:'Sora',sans-serif;
+  font-size:20px;font-weight:700;
+  color:var(--ink2);
+  letter-spacing:-0.5px;
+}
+
+.nav-links{
+  display:flex;align-items:center;gap:32px;
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  font-size:13px;font-weight:500;
+  color:var(--ink3);
+  transition:color .2s;
+  letter-spacing:0.02em;
+}
+
+.nav-links a:hover{color:var(--blue)}
+
+.nav-cta{
+  background:var(--blue);
+  color:var(--white) !important;
+  padding:8px 20px;
+  border-radius:8px;
+  transition:background .2s !important;
+}
+
+.nav-cta:hover{background:var(--blue2) !important;color:var(--white) !important}
+
+.nav-toggle{
+  display:none;
+  flex-direction:column;gap:5px;cursor:pointer;
+  background:none;border:none;padding:4px;
+}
+
+.nav-toggle span{
+  display:block;width:22px;height:2px;
+  background:var(--ink2);border-radius:2px;
+  transition:all .3s;
+}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:120px 6% 80px;
+  position:relative;
+  overflow:hidden;
+  background:var(--white);
+}
+
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 50%, rgba(28,82,227,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(232,50,13,0.04) 0%, transparent 60%);
+  pointer-events:none;
+}
+
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size:60px 60px;
+  opacity:0.35;
+  pointer-events:none;
+}
+
+.hero-inner{
+  position:relative;
+  max-width:1100px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+}
+
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(28,82,227,0.08);
+  border:1px solid rgba(28,82,227,0.15);
+  border-radius:40px;
+  padding:6px 14px;
+  font-size:12px;font-weight:600;
+  color:var(--blue);
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  margin-bottom:24px;
+}
+
+.hero-tag-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--blue);
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.5;transform:scale(0.8)}
+}
+
+.hero h1{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(42px,5vw,64px);
+  font-weight:400;
+  line-height:1.1;
+  color:var(--ink);
+  margin-bottom:24px;
+  letter-spacing:-1px;
+}
+
+.hero h1 em{
+  font-style:italic;
+  color:var(--blue);
+}
+
+.hero h1 .strike{
+  position:relative;color:var(--ink3);
+}
+
+.hero h1 .strike::after{
+  content:'';
+  position:absolute;
+  left:0;top:50%;
+  width:100%;height:2px;
+  background:var(--red);
+  transform:translateY(-50%);
+}
+
+.hero-sub{
+  font-size:16px;
+  color:var(--ink3);
+  line-height:1.75;
+  margin-bottom:36px;
+  max-width:480px;
+}
+
+.hero-actions{
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+}
+
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--blue);
+  color:var(--white);
+  text-decoration:none;
+  padding:13px 26px;
+  border-radius:10px;
+  font-size:14px;font-weight:600;
+  transition:all .2s;
+  border:none;cursor:pointer;
+}
+
+.btn-primary:hover{
+  background:var(--blue2);
+  transform:translateY(-1px);
+  box-shadow:0 8px 24px rgba(28,82,227,0.25);
+}
+
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--ink2);
+  text-decoration:none;
+  padding:13px 26px;
+  border-radius:10px;
+  font-size:14px;font-weight:500;
+  border:1px solid var(--rule);
+  background:var(--white);
+  transition:all .2s;
+  cursor:pointer;
+}
+
+.btn-secondary:hover{
+  border-color:var(--blue);
+  color:var(--blue);
+  background:rgba(28,82,227,0.04);
+}
+
+.hero-stats{
+  display:flex;gap:32px;margin-top:48px;
+  padding-top:36px;
+  border-top:1px solid var(--rule);
+}
+
+.hero-stat-num{
+  font-family:'Instrument Serif',serif;
+  font-size:36px;font-weight:400;
+  color:var(--ink);
+  line-height:1;
+  margin-bottom:4px;
+}
+
+.hero-stat-label{
+  font-size:12px;color:var(--ink3);font-weight:500;
+  text-transform:uppercase;letter-spacing:0.06em;
+}
+
+/* Hero right - visual */
+.hero-visual{
+  position:relative;
+}
+
+.hero-card-main{
+  background:var(--white);
+  border:1px solid var(--rule);
+  border-radius:16px;
+  padding:28px;
+  box-shadow:0 24px 64px rgba(10,14,26,0.08);
+}
+
+.hero-card-tag{
+  font-size:11px;font-weight:600;
+  color:var(--blue);
+  text-transform:uppercase;letter-spacing:0.08em;
+  margin-bottom:14px;
+}
+
+.hero-card-title{
+  font-size:17px;font-weight:600;color:var(--ink);
+  margin-bottom:20px;
+}
+
+.progress-item{
+  margin-bottom:14px;
+}
+
+.progress-label{
+  display:flex;justify-content:space-between;
+  font-size:12px;color:var(--ink2);font-weight:500;
+  margin-bottom:6px;
+}
+
+.progress-bar{
+  height:6px;background:var(--bg);border-radius:3px;overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;border-radius:3px;background:var(--blue);
+  animation:fillBar 1.5s ease-out forwards;
+  transform-origin:left;
+}
+
+@keyframes fillBar{from{width:0%}to{width:var(--w)}}
+
+.hero-card-float{
+  position:absolute;
+  background:var(--white);
+  border:1px solid var(--rule);
+  border-radius:12px;
+  padding:14px 18px;
+  box-shadow:0 12px 32px rgba(10,14,26,0.10);
+}
+
+.hero-card-float.top{
+  top:-24px;right:-20px;
+  display:flex;align-items:center;gap:10px;
+}
+
+.hero-card-float.bottom{
+  bottom:-24px;left:-20px;
+}
+
+.float-icon{
+  width:36px;height:36px;border-radius:8px;
+  background:rgba(28,82,227,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;
+}
+
+.float-label{font-size:12px;font-weight:600;color:var(--ink);line-height:1.3}
+.float-sub{font-size:11px;color:var(--ink3)}
+
+.float-metric{
+  font-family:'Instrument Serif',serif;
+  font-size:28px;font-weight:400;color:var(--blue);
+  line-height:1;margin-bottom:2px;
+}
+
+/* ── SECTION SHARED ── */
+section{padding:100px 6%}
+
+.section-inner{max-width:1100px;margin:0 auto;width:100%}
+
+.section-label{
+  font-size:11px;font-weight:600;
+  color:var(--blue);
+  text-transform:uppercase;letter-spacing:0.12em;
+  margin-bottom:10px;
+}
+
+.section-title{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(32px,4vw,48px);
+  font-weight:400;
+  color:var(--ink);
+  line-height:1.15;
+  letter-spacing:-0.5px;
+  margin-bottom:16px;
+}
+
+.section-sub{
+  font-size:16px;
+  color:var(--ink3);
+  line-height:1.75;
+  max-width:560px;
+  margin-bottom:60px;
+}
+
+/* ── LOGOS STRIP ── */
+.logos-strip{
+  background:var(--bg);
+  padding:40px 6%;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
+
+.logos-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:24px;
+}
+
+.logos-label{
+  font-size:12px;font-weight:500;color:var(--ink3);
+  white-space:nowrap;text-transform:uppercase;letter-spacing:0.08em;
+}
+
+.logos-items{
+  display:flex;align-items:center;gap:40px;flex-wrap:wrap;
+}
+
+.logo-item{
+  font-size:13px;font-weight:600;color:var(--ink3);
+  opacity:0.6;
+  display:flex;align-items:center;gap:6px;
+}
+
+/* ── SERVICES ── */
+#services{background:var(--white)}
+
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:24px;
+}
+
+.service-card{
+  background:var(--white);
+  border:1px solid var(--rule);
+  border-radius:var(--radius);
+  padding:32px;
+  transition:all .25s;
+  position:relative;
+  overflow:hidden;
+}
+
+.service-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:var(--blue);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .3s;
+}
+
+.service-card:hover{
+  border-color:rgba(28,82,227,0.2);
+  box-shadow:0 12px 40px rgba(28,82,227,0.08);
+  transform:translateY(-3px);
+}
+
+.service-card:hover::before{transform:scaleX(1)}
+
+.service-icon{
+  width:48px;height:48px;border-radius:10px;
+  background:rgba(28,82,227,0.08);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;
+  margin-bottom:20px;
+}
+
+.service-name{
+  font-size:17px;font-weight:600;color:var(--ink);
+  margin-bottom:10px;
+}
+
+.service-desc{
+  font-size:13.5px;color:var(--ink3);line-height:1.7;
+  margin-bottom:20px;
+}
+
+.service-tags{
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+
+.tag{
+  font-size:11px;font-weight:500;
+  padding:3px 10px;border-radius:20px;
+  background:rgba(28,82,227,0.07);
+  color:var(--blue);
+  border:1px solid rgba(28,82,227,0.15);
+}
+
+/* ── PROJECTS ── */
+#projects{background:var(--bg)}
+
+.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+  gap:24px;
+}
+
+.project-card{
+  background:var(--white);
+  border:1px solid var(--rule);
+  border-radius:16px;
+  overflow:hidden;
+  transition:all .25s;
+}
+
+.project-card:hover{
+  border-color:rgba(28,82,227,0.2);
+  box-shadow:0 16px 48px rgba(10,14,26,0.1);
+  transform:translateY(-4px);
+}
+
+.project-thumb{
+  height:200px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.project-thumb.gym{background:linear-gradient(135deg,#0F3BBF 0%,#1C52E3 100%)}
+.project-thumb.solar{background:linear-gradient(135deg,#B45309 0%,#D97706 100%)}
+.project-thumb.flour{background:linear-gradient(135deg,#166534 0%,#16A34A 100%)}
+
+.project-thumb-icon{
+  font-size:64px;opacity:0.25;
+}
+
+.project-thumb-label{
+  position:absolute;bottom:16px;left:16px;
+  background:rgba(255,255,255,0.15);
+  border:1px solid rgba(255,255,255,0.2);
+  color:white;
+  font-size:11px;font-weight:600;
+  padding:4px 12px;border-radius:20px;
+  backdrop-filter:blur(8px);
+  text-transform:uppercase;letter-spacing:0.08em;
+}
+
+.project-body{padding:24px}
+
+.project-name{
+  font-size:18px;font-weight:600;color:var(--ink);
+  margin-bottom:8px;
+}
+
+.project-desc{
+  font-size:13px;color:var(--ink3);line-height:1.7;
+  margin-bottom:16px;
+}
+
+.project-meta{
+  display:flex;gap:16px;
+  padding-top:16px;
+  border-top:1px solid var(--rule);
+}
+
+.project-meta-item{
+  font-size:12px;color:var(--ink3);
+  display:flex;align-items:center;gap:5px;
+}
+
+.project-meta-dot{
+  width:6px;height:6px;border-radius:50%;
+}
+
+.dot-green{background:#16A34A}
+.dot-amber{background:#D97706}
+.dot-blue{background:var(--blue)}
+
+/* ── PROCESS ── */
+#process{background:var(--white)}
+
+.process-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:0;
+  position:relative;
+}
+
+.process-grid::before{
+  content:'';
+  position:absolute;
+  top:36px;left:10%;right:10%;
+  height:1px;
+  background:var(--rule);
+}
+
+.process-step{
+  text-align:center;
+  padding:0 24px 40px;
+  position:relative;
+}
+
+.process-num{
+  width:72px;height:72px;
+  border-radius:50%;
+  background:var(--white);
+  border:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 24px;
+  font-family:'Instrument Serif',serif;
+  font-size:24px;color:var(--blue);
+  position:relative;z-index:1;
+  transition:all .3s;
+}
+
+.process-step:hover .process-num{
+  background:var(--blue);color:var(--white);
+  border-color:var(--blue);
+  transform:scale(1.1);
+}
+
+.process-title{
+  font-size:15px;font-weight:600;color:var(--ink);
+  margin-bottom:8px;
+}
+
+.process-desc{
+  font-size:13px;color:var(--ink3);line-height:1.65;
+}
+
+/* ── TEAM ── */
+#team{background:var(--bg)}
+
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;
+}
+
+.team-card{
+  background:var(--white);
+  border:1px solid var(--rule);
+  border-radius:16px;
+  padding:36px;
+  text-align:center;
+  transition:all .25s;
+}
+
+.team-card:hover{
+  border-color:rgba(28,82,227,0.2);
+  box-shadow:0 12px 40px rgba(28,82,227,0.08);
+  transform:translateY(-3px);
+}
+
+.team-avatar{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue) 0%,#6B8EF7 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Instrument Serif',serif;
+  font-size:28px;color:white;font-weight:400;
+  margin:0 auto 20px;
+  border:3px solid var(--white);
+  box-shadow:0 0 0 2px var(--rule);
+}
+
+.team-name{
+  font-size:18px;font-weight:600;color:var(--ink);
+  margin-bottom:4px;
+}
+
+.team-role{
+  font-size:12px;font-weight:500;color:var(--blue);
+  text-transform:uppercase;letter-spacing:0.08em;
+  margin-bottom:16px;
+}
+
+.team-bio{
+  font-size:13px;color:var(--ink3);line-height:1.7;
+  margin-bottom:20px;
+}
+
+.team-links{
+  display:flex;justify-content:center;gap:10px;
+}
+
+.team-link{
+  width:36px;height:36px;border-radius:8px;
+  background:var(--bg);border:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--ink3);text-decoration:none;font-size:14px;
+  transition:all .2s;
+}
+
+.team-link:hover{
+  background:var(--blue);color:white;border-color:var(--blue);
+}
+
+/* ── TESTIMONIALS ── */
+#testimonials{background:var(--ink)}
+
+#testimonials .section-label{color:rgba(255,255,255,0.4)}
+#testimonials .section-title{color:white}
+#testimonials .section-sub{color:rgba(255,255,255,0.5)}
+
+.testimonials-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:24px;
+}
+
+.testimonial-card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:16px;
+  padding:32px;
+}
+
+.testimonial-stars{
+  font-size:14px;color:#F59E0B;
+  margin-bottom:16px;
+  letter-spacing:2px;
+}
+
+.testimonial-text{
+  font-size:15px;color:rgba(255,255,255,0.8);
+  line-height:1.75;
+  margin-bottom:24px;
+  font-style:italic;
+}
+
+.testimonial-author{
+  display:flex;align-items:center;gap:12px;
+}
+
+.testimonial-avatar{
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(28,82,227,0.4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:600;color:white;
+  border:2px solid rgba(255,255,255,0.1);
+}
+
+.testimonial-name{
+  font-size:14px;font-weight:600;color:white;
+  margin-bottom:2px;
+}
+
+.testimonial-company{
+  font-size:12px;color:rgba(255,255,255,0.4);
+}
+
+/* ── CONTACT ── */
+#contact{background:var(--white)}
+
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1.2fr;
+  gap:80px;align-items:start;
+}
+
+.contact-info-item{
+  display:flex;align-items:flex-start;gap:16px;
+  margin-bottom:28px;
+}
+
+.contact-info-icon{
+  width:44px;height:44px;border-radius:10px;
+  background:rgba(28,82,227,0.08);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+
+.contact-info-label{
+  font-size:12px;font-weight:600;color:var(--blue);
+  text-transform:uppercase;letter-spacing:0.08em;
+  margin-bottom:3px;
+}
+
+.contact-info-value{
+  font-size:14px;color:var(--ink2);line-height:1.5;
+}
+
+.contact-form{
+  background:var(--bg);
+  border:1px solid var(--rule);
+  border-radius:16px;
+  padding:36px;
+}
+
+.form-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+}
+
+.form-group{
+  margin-bottom:18px;
+}
+
+.form-label{
+  display:block;
+  font-size:12px;font-weight:600;color:var(--ink2);
+  text-transform:uppercase;letter-spacing:0.06em;
+  margin-bottom:7px;
+}
+
+.form-input{
+  width:100%;
+  background:var(--white);
+  border:1px solid var(--rule);
+  border-radius:8px;
+  padding:11px 14px;
+  font-family:'Sora',sans-serif;
+  font-size:14px;color:var(--ink);
+  transition:border-color .2s;
+  outline:none;
+}
+
+.form-input:focus{border-color:var(--blue)}
+.form-input::placeholder{color:var(--ink3)}
+
+textarea.form-input{
+  resize:vertical;min-height:120px;
+  font-family:'Sora',sans-serif;
+}
+
+select.form-input{cursor:pointer}
+
+.form-submit{
+  width:100%;
+  padding:14px;
+  background:var(--blue);
+  color:white;
+  border:none;border-radius:8px;
+  font-family:'Sora',sans-serif;
+  font-size:14px;font-weight:600;
+  cursor:pointer;
+  transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+
+.form-submit:hover{
+  background:var(--blue2);
+  transform:translateY(-1px);
+  box-shadow:0 8px 24px rgba(28,82,227,0.25);
+}
+
+.form-success{
+  display:none;
+  text-align:center;padding:24px;
+  color:var(--blue);font-weight:500;
+}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--ink);
+  padding:60px 6% 36px;
+}
+
+.footer-inner{
+  max-width:1100px;margin:0 auto;
+}
+
+.footer-top{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;
+  margin-bottom:48px;
+  padding-bottom:48px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.footer-brand-name{
+  font-family:'Sora',sans-serif;
+  font-size:22px;font-weight:700;
+  color:white;margin-bottom:12px;
+  display:flex;align-items:center;gap:10px;
+}
+
+.footer-brand-desc{
+  font-size:13px;color:rgba(255,255,255,0.4);
+  line-height:1.7;max-width:280px;margin-bottom:24px;
+}
+
+.footer-social{
+  display:flex;gap:10px;
+}
+
+.footer-social-link{
+  width:36px;height:36px;border-radius:8px;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,0.5);text-decoration:none;
+  font-size:14px;font-weight:600;
+  transition:all .2s;
+}
+
+.footer-social-link:hover{
+  background:var(--blue);color:white;border-color:var(--blue);
+}
+
+.footer-col-title{
+  font-size:12px;font-weight:600;color:white;
+  text-transform:uppercase;letter-spacing:0.1em;
+  margin-bottom:18px;
+}
+
+.footer-links{list-style:none}
+
+.footer-links li{margin-bottom:10px}
+
+.footer-links a{
+  text-decoration:none;
+  font-size:13px;color:rgba(255,255,255,0.45);
+  transition:color .2s;
+}
+
+.footer-links a:hover{color:white}
+
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:16px;
+}
+
+.footer-copy{
+  font-size:12px;color:rgba(255,255,255,0.3);
+}
+
+.footer-badge{
+  font-size:11px;font-weight:500;
+  color:rgba(255,255,255,0.3);
+  display:flex;align-items:center;gap:6px;
+}
+
+.footer-badge span{
+  color:var(--blue);
+}
+
+/* ── ANIMATIONS ── */
+.fade-up{
+  opacity:0;transform:translateY(24px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* ── MOBILE NAV ── */
+@media(max-width:768px){
+  .nav-links{
+    display:none;flex-direction:column;
+    position:fixed;top:68px;left:0;right:0;
+    background:white;padding:24px 6%;
+    border-bottom:1px solid var(--rule);
+    gap:4px;
+  }
+
+  .nav-links.open{display:flex}
+  .nav-links li{width:100%}
+  .nav-links a{
+    display:block;padding:10px 0;
+    font-size:15px;border-bottom:1px solid var(--rule);
+  }
+  .nav-links li:last-child a{border-bottom:none}
+
+  .nav-toggle{display:flex}
+
+  .hero-inner{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .hero{padding:100px 6% 60px}
+
+  .contact-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+
+  .footer-top{grid-template-columns:1fr 1fr}
+
+  .process-grid::before{display:none}
+
+  section{padding:72px 6%}
+}
+
+@media(max-width:480px){
+  .footer-top{grid-template-columns:1fr}
+  .hero-stats{flex-direction:column;gap:20px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="logo-mark">
+      <div class="logo-dot-red"></div>
+      <div class="logo-dot-blue"></div>
+    </div>
+    <span class="logo-text">infresco</span>
+  </a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#process">How We Work</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <div class="hero-tag-dot"></div>
+        Now accepting new clients
+      </div>
+
+      <h1>
+        We build the tech<br>
+        that <em>runs</em> your business<br>
+        and <em>grows</em> it.
+      </h1>
+
+      <p class="hero-sub">
+        Infresco delivers custom ERP systems, websites, and digital marketing — so business owners focus on their business, not their software.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          Start a project
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#projects" class="btn-secondary">See our work</a>
+      </div>
+
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">3</div>
+          <div class="hero-stat-label">Projects delivered</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">2</div>
+          <div class="hero-stat-label">Live ERP systems</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">On-time delivery</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card-float top">
+        <div class="float-icon">📈</div>
+        <div>
+          <div class="float-label">Client growth</div>
+          <div class="float-sub">Digital presence active</div>
+        </div>
+      </div>
+
+      <div class="hero-card-main">
+        <div class="hero-card-tag">Live system metrics</div>
+        <div class="hero-card-title">Gym Management ERP</div>
+
+        <div class="progress-item">
+          <div class="progress-label">
+            <span>Member tracking</span><span>98%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="--w:98%"></div>
+          </div>
+        </div>
+
+        <div class="progress-item">
+          <div class="progress-label">
+            <span>Payment processing</span><span>94%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="--w:94%"></div>
+          </div>
+        </div>
+
+        <div class="progress-item">
+          <div class="progress-label">
+            <span>Report automation</span><span>100%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="--w:100%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card-float bottom">
+        <div class="float-metric">PKR 0</div>
+        <div class="float-sub">Extra cost to client beyond retainer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LOGOS STRIP ══ -->
+<div class="logos-strip">
+  <div class="logos-inner">
+    <span class="logos-label">Built with</span>
+    <div class="logos-items">
+      <span class="logo-item">☕ Java</span>
+      <span class="logo-item">🐍 Python</span>
+      <span class="logo-item">⚛️ React</span>
+      <span class="logo-item">🗄️ MySQL</span>
+      <span class="logo-item">🍃 MongoDB</span>
+      <span class="logo-item">☁️ DigitalOcean</span>
+      <span class="logo-item">🤖 AI / ML</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SERVICES ══ -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-label">What we do</div>
+    <h2 class="section-title">Everything your business<br>needs to grow online</h2>
+    <p class="section-sub">Five integrated services — not five separate vendors. One team, one point of contact, every channel covered.</p>
+
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon">⚙️</div>
+        <div class="service-name">Custom ERP Systems</div>
+        <div class="service-desc">We build management systems from scratch — tailored exactly to how your business works. Not off-the-shelf. Not a template. Built for you.</div>
+        <div class="service-tags">
+          <span class="tag">Java / Python</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Custom dashboards</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">🌐</div>
+        <div class="service-name">Website Development & SEO</div>
+        <div class="service-desc">Professional websites built to rank on Google, load fast, and convert visitors into customers. We manage everything so you never have to.</div>
+        <div class="service-tags">
+          <span class="tag">WordPress</span>
+          <span class="tag">SEO</span>
+          <span class="tag">Google ranking</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">📱</div>
+        <div class="service-name">Social Media Management</div>
+        <div class="service-desc">Content creation, scheduling, and community management across Facebook, Instagram, and Google Business — tailored to each of your businesses.</div>
+        <div class="service-tags">
+          <span class="tag">Content creation</span>
+          <span class="tag">Instagram</span>
+          <span class="tag">Facebook</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">📊</div>
+        <div class="service-name">Data Analytics & Reporting</div>
+        <div class="service-desc">A live dashboard showing exactly what is working — website traffic, leads, social reach, and conversions. Delivered to you every morning.</div>
+        <div class="service-tags">
+          <span class="tag">Google Analytics</span>
+          <span class="tag">Looker Studio</span>
+          <span class="tag">Daily reports</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">📧</div>
+        <div class="service-name">Email Marketing</div>
+        <div class="service-desc">Targeted email campaigns that bring customers back. List building, campaign design, automation, and tracking — all managed for you.</div>
+        <div class="service-tags">
+          <span class="tag">Mailchimp</span>
+          <span class="tag">Automation</span>
+          <span class="tag">List building</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">🤖</div>
+        <div class="service-name">AI-Powered Solutions</div>
+        <div class="service-desc">From AI chatbots on your website to predictive analytics and automation — we bring the latest AI tools to your business in practical, useful ways.</div>
+        <div class="service-tags">
+          <span class="tag">AI agents</span>
+          <span class="tag">Automation</span>
+          <span class="tag">ML models</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECTS ══ -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">Our work</div>
+    <h2 class="section-title">Projects we have<br>built and delivered</h2>
+    <p class="section-sub">Real systems running in real businesses. Not demos. Not prototypes.</p>
+
+    <div class="projects-grid">
+      <div class="project-card fade-up">
+        <div class="project-thumb gym">
+          <div class="project-thumb-icon">🏋️</div>
+          <span class="project-thumb-label">✓ Live</span>
+        </div>
+        <div class="project-body">
+          <div class="project-name">Gym Management System</div>
+          <div class="project-desc">A complete ERP for gym owners — member management, payment tracking, attendance, staff records, and automated monthly reports. Built in Java with MySQL.</div>
+          <div class="project-meta">
+            <div class="project-meta-item">
+              <div class="project-meta-dot dot-green"></div>
+              Live in production
+            </div>
+            <div class="project-meta-item">
+              <div class="project-meta-dot dot-blue"></div>
+              Java + MySQL
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-thumb solar">
+          <div class="project-thumb-icon">☀️</div>
+          <span class="project-thumb-label">✓ Live</span>
+        </div>
+        <div class="project-body">
+          <div class="project-name">Solar Shop Management System</div>
+          <div class="project-desc">Inventory management, customer orders, installation tracking, and sales reporting for a solar equipment retailer. Fully custom built for their workflow.</div>
+          <div class="project-meta">
+            <div class="project-meta-item">
+              <div class="project-meta-dot dot-green"></div>
+              Live in production
+            </div>
+            <div class="project-meta-item">
+              <div class="project-meta-dot dot-blue"></div>
+              Java + MySQL
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-thumb flour">
+          <div class="project-thumb-icon">🌾</div>
+          <span class="project-thumb-label">⚡ In progress</span>
+        </div>
+        <div class="project-body">
+          <div class="project-name">Flour Mill Management App</div>
+          <div class="project-desc">Production tracking, raw material inventory, order management, and delivery scheduling for a flour mill. Currently in active development.</div>
+          <div class="project-meta">
+            <div class="project-meta-item">
+              <div class="project-meta-dot dot-amber"></div>
+              In development
+            </div>
+            <div class="project-meta-item">
+              <div class="project-meta-dot dot-blue"></div>
+              Mobile app
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ══ -->
+<section id="process">
+  <div class="section-inner">
+    <div class="section-label">How we work</div>
+    <h2 class="section-title">From first meeting<br>to final delivery</h2>
+    <p class="section-sub">A clear, structured process so you always know exactly what is happening and when.</p>
+
+    <div class="process-grid">
+      <div class="process-step fade-up">
+        <div class="process-num">01</div>
+        <div class="process-title">Discovery</div>
+        <div class="process-desc">We study your business, understand your pain points, and ask the right questions before writing a single line of code.</div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-num">02</div>
+        <div class="process-title">Planning</div>
+        <div class="process-desc">We share a detailed plan — what we will build, when each part is delivered, and what you need to provide. No surprises.</div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-num">03</div>
+        <div class="process-title">Build & Review</div>
+        <div class="process-desc">We build in stages and share progress with you regularly. Your feedback shapes the final product at every step.</div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-num">04</div>
+        <div class="process-title">Delivery & Support</div>
+        <div class="process-desc">We deliver, train your team, and stay available. We do not disappear after handover — we maintain what we build.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TEAM ══ -->
+<section id="team">
+  <div class="section-inner">
+    <div class="section-label">The team</div>
+    <h2 class="section-title">Two founders.<br>One mission.</h2>
+    <p class="section-sub">We started Infresco in our third semester of Computer Science — because we built something worth building and decided to share it with the world.</p>
+
+    <div class="team-grid">
+      <div class="team-card fade-up">
+        <div class="team-avatar">S</div>
+        <div class="team-name">Founder One</div>
+        <!-- REPLACE: Change "Founder One" to your actual name -->
+        <div class="team-role">Co-Founder & Lead Developer</div>
+        <div class="team-bio">Computer Science student with expertise in Java, Python, and database systems. Leads all ERP development and backend architecture at Infresco.</div>
+        <div class="team-links">
+          <a href="#" class="team-link">in</a>
+          <a href="#" class="team-link">gh</a>
+        </div>
+      </div>
+
+      <div class="team-card fade-up">
+        <div class="team-avatar">P</div>
+        <div class="team-name">Founder Two</div>
+        <!-- REPLACE: Change "Founder Two" to your partner's actual name -->
+        <div class="team-role">Co-Founder & Business Lead</div>
+        <div class="team-bio">Computer Science student specialising in client relations, project management, and digital strategy. Leads all client communication and growth at Infresco.</div>
+        <div class="team-links">
+          <a href="#" class="team-link">in</a>
+          <a href="#" class="team-link">gh</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section id="testimonials">
+  <div class="section-inner">
+    <div class="section-label">What clients say</div>
+    <h2 class="section-title">Built trust from<br>the first project.</h2>
+    <p class="section-sub">We are a young company. But we deliver like we have been doing this for years.</p>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">"The gym management system they built completely changed how we run our daily operations. Everything is automated now — memberships, payments, attendance. I don't know how we managed without it."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">GM</div>
+          <div>
+            <div class="testimonial-name">Gym Owner</div>
+            <div class="testimonial-company">Gym Management Client</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">"They understood exactly what our solar business needed. The system tracks our inventory, customer orders, and installations all in one place. The delivery was on time and exactly as promised."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SS</div>
+          <div>
+            <div class="testimonial-name">Solar Shop Owner</div>
+            <div class="testimonial-company">Solar Management Client</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">"Young team, but extremely professional. They came prepared with a full proposal, broke down every cost clearly, and answered every question I had. I signed the agreement the same day."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MC</div>
+          <div>
+            <div class="testimonial-name">Multi-Business Owner</div>
+            <div class="testimonial-company">Digital Growth Client</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Get in touch</div>
+    <h2 class="section-title">Ready to build<br>something together?</h2>
+
+    <div class="contact-grid">
+      <div>
+        <p class="section-sub">Tell us what you need. We will respond within 24 hours with a clear plan — no jargon, no fluff.</p>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📧</div>
+          <div>
+            <div class="contact-info-label">Email</div>
+            <div class="contact-info-value">hello@infresco.me</div>
+            <!-- REPLACE with your actual email -->
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon">💬</div>
+          <div>
+            <div class="contact-info-label">WhatsApp</div>
+            <div class="contact-info-value">+92 XXX XXX XXXX</div>
+            <!-- REPLACE with your actual WhatsApp number -->
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📍</div>
+          <div>
+            <div class="contact-info-label">Location</div>
+            <div class="contact-info-value">Karachi, Pakistan<br>Available remotely worldwide</div>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon">⏱️</div>
+          <div>
+            <div class="contact-info-label">Response time</div>
+            <div class="contact-info-value">Within 24 hours guaranteed</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First name</label>
+            <input type="text" class="form-input" placeholder="Your name" id="fname">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last name</label>
+            <input type="text" class="form-input" placeholder="Last name" id="lname">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input type="email" class="form-input" placeholder="you@company.com" id="email">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">WhatsApp number</label>
+          <input type="tel" class="form-input" placeholder="+92 XXX XXX XXXX" id="phone">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Service needed</label>
+          <select class="form-input" id="service">
+            <option value="">Select a service...</option>
+            <option>Custom ERP System</option>
+            <option>Website Development</option>
+            <option>Social Media Management</option>
+            <option>Data Analytics</option>
+            <option>Email Marketing</option>
+            <option>Full Digital Package</option>
+            <option>Something else</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Tell us about your business</label>
+          <textarea class="form-input" placeholder="What does your business do? What problem do you need solved?" id="message"></textarea>
+        </div>
+
+        <button class="form-submit" onclick="submitForm()">
+          Send message
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="form-success" id="formSuccess">
+          ✓ Message sent! We will get back to you within 24 hours.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">
+          <div class="logo-mark">
+            <div class="logo-dot-red"></div>
+            <div class="logo-dot-blue"></div>
+          </div>
+          infresco
+        </div>
+        <p class="footer-brand-desc">We build the tech that runs your business and the marketing that grows it — so you don't need to manage either.</p>
+        <div class="footer-social">
+          <a href="#" class="footer-social-link">in</a>
+          <a href="#" class="footer-social-link">gh</a>
+          <a href="#" class="footer-social-link">ig</a>
+          <a href="#" class="footer-social-link">fb</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#services">ERP Systems</a></li>
+          <li><a href="#services">Web Development</a></li>
+          <li><a href="#services">Social Media</a></li>
+          <li><a href="#services">Analytics</a></li>
+          <li><a href="#services">Email Marketing</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#team">About us</a></li>
+          <li><a href="#projects">Our work</a></li>
+          <li><a href="#process">How we work</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="mailto:hello@infresco.me">hello@infresco.me</a></li>
+          <li><a href="#">WhatsApp us</a></li>
+          <li><a href="#">Karachi, Pakistan</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Infresco. All rights reserved.</div>
+      <div class="footer-badge">
+        Built with <span>infresco.me</span> — powered by GitHub Education Pack
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav toggle
+const toggle = document.getElementById('navToggle');
+const links  = document.getElementById('navLinks');
+toggle.addEventListener('click', () => links.classList.toggle('open'));
+
+// Close nav on link click
+links.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => links.classList.remove('open'));
+});
+
+// Scroll animations
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach((el, i) => {
+  el.style.transitionDelay = `${(i % 3) * 0.1}s`;
+  observer.observe(el);
+});
+
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if(window.scrollY > 40) {
+    nav.style.boxShadow = '0 2px 20px rgba(10,14,26,0.08)';
+  } else {
+    nav.style.boxShadow = 'none';
+  }
+});
+
+// Form submit
+function submitForm() {
+  const fname   = document.getElementById('fname').value;
+  const email   = document.getElementById('email').value;
+  const service = document.getElementById('service').value;
+  const message = document.getElementById('message').value;
+
+  if(!fname || !email || !service || !message) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+
+  // Build mailto link
+  const subject = encodeURIComponent(`Infresco Enquiry — ${service}`);
+  const body    = encodeURIComponent(
+    `Name: ${document.getElementById('fname').value} ${document.getElementById('lname').value}\n` +
+    `Email: ${email}\n` +
+    `Phone: ${document.getElementById('phone').value}\n` +
+    `Service: ${service}\n\n` +
+    `Message:\n${message}`
+  );
+
+  // REPLACE hello@infresco.me with your actual email
+  window.location.href = `mailto:hello@infresco.me?subject=${subject}&body=${body}`;
+
+  document.getElementById('formSuccess').style.display = 'block';
+  setTimeout(() => {
+    document.getElementById('formSuccess').style.display = 'none';
+  }, 5000);
+}
+
+// Smooth active nav link
+const sections = document.querySelectorAll('section[id], div[id="home"]');
+const navAs    = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if(window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navAs.forEach(a => {
+    a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--blue)' : '';
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
