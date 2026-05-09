@@ -964,6 +964,46 @@ footer{
   .footer-top{grid-template-columns:1fr}
   .hero-stats{flex-direction:column;gap:20px}
 }
+/* ── AI AGENT ── */
+.agent-bubble{position:fixed;bottom:24px;right:24px;z-index:999;cursor:pointer}
+.agent-btn{width:54px;height:54px;border-radius:50%;background:#1C52E3;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(28,82,227,0.45);transition:all .3s;position:relative;font-size:22px}
+.agent-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(28,82,227,0.55)}
+.agent-notif{position:absolute;top:-3px;right:-3px;width:14px;height:14px;border-radius:50%;background:#E8320D;border:2px solid white;animation:agent-pulse 2s infinite}
+@keyframes agent-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(0.85)}}
+.agent-window{position:fixed;bottom:90px;right:24px;width:340px;background:#fff;border:1px solid #E8EBF2;border-radius:20px;box-shadow:0 24px 64px rgba(10,14,26,0.15);z-index:999;overflow:hidden;display:none;flex-direction:column;max-height:520px}
+.agent-window.open{display:flex;animation:agentSlide .25s ease}
+@keyframes agentSlide{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.agent-header{background:#1C52E3;padding:15px 18px;display:flex;align-items:center;gap:12px}
+.agent-avatar{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.agent-header-info{flex:1}
+.agent-name{font-size:13px;font-weight:600;color:white}
+.agent-status{font-size:11px;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:5px;margin-top:2px}
+.agent-status-dot{width:6px;height:6px;border-radius:50%;background:#4ADE80}
+.agent-close{background:none;border:none;color:rgba(255,255,255,0.75);cursor:pointer;font-size:20px;line-height:1;padding:0;transition:color .2s}
+.agent-close:hover{color:white}
+.agent-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:200px;max-height:300px}
+.agent-messages::-webkit-scrollbar{width:4px}
+.agent-messages::-webkit-scrollbar-thumb{background:#E8EBF2;border-radius:2px}
+.agent-msg{max-width:88%;font-size:13px;line-height:1.55;padding:10px 13px;border-radius:14px;font-family:'Sora',sans-serif}
+.agent-msg.bot{background:#F8F9FC;color:#2D3348;border-radius:14px 14px 14px 4px;align-self:flex-start}
+.agent-msg.user{background:#1C52E3;color:white;border-radius:14px 14px 4px 14px;align-self:flex-end}
+.agent-typing{display:flex;gap:4px;padding:10px 13px;background:#F8F9FC;border-radius:14px 14px 14px 4px;align-self:flex-start;width:fit-content}
+.agent-typing span{width:7px;height:7px;border-radius:50%;background:#6B7490;animation:agent-dot .8s infinite}
+.agent-typing span:nth-child(2){animation-delay:.15s}
+.agent-typing span:nth-child(3){animation-delay:.3s}
+@keyframes agent-dot{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-4px)}}
+.agent-opts{padding:10px 14px;display:flex;flex-direction:column;gap:6px;border-top:1px solid #E8EBF2}
+.agent-opt{background:#F8F9FC;border:1px solid #E8EBF2;border-radius:10px;padding:9px 13px;font-size:12.5px;color:#2D3348;cursor:pointer;text-align:left;transition:all .2s;font-family:'Sora',sans-serif;width:100%}
+.agent-opt:hover{border-color:#1C52E3;color:#1C52E3;background:rgba(28,82,227,0.04)}
+.agent-input-row{padding:12px 14px;border-top:1px solid #E8EBF2;display:flex;gap:8px;align-items:center}
+.agent-input{flex:1;background:#F8F9FC;border:1px solid #E8EBF2;border-radius:8px;padding:9px 12px;font-family:'Sora',sans-serif;font-size:13px;color:#0A0E1A;outline:none;transition:border-color .2s}
+.agent-input:focus{border-color:#1C52E3}
+.agent-input::placeholder{color:#6B7490}
+.agent-send{background:#1C52E3;border:none;color:white;border-radius:8px;width:36px;height:36px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}
+.agent-send:hover{background:#0F3BBF}
+@media(max-width:480px){
+  .agent-window{width:calc(100vw - 32px);right:16px;bottom:86px}
+}
 </style>
 </head>
 <body>
@@ -1607,6 +1647,246 @@ window.addEventListener('scroll', () => {
     a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--blue)' : '';
   });
 }, { passive: true });
+
+// ══ AI AGENT ══════════════════════════════════════════
+// REPLACE this with your actual WhatsApp number
+const AGENT_WA = 'https://wa.me/923XXXXXXXXX?text=Hi%20Infresco%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20discuss%20a%20project.';
+
+let agentOpen   = false;
+let agentStarted = false;
+
+// Conversation flows
+const FLOWS = {
+  start: {
+    msg: "Hi! 👋 I'm Infresco's assistant. I help business owners figure out what we can build for them.\n\nWhat best describes you?",
+    opts: [
+      "I need a custom ERP / management system",
+      "I need a website or SEO help",
+      "I need digital marketing help",
+      "I'm an international client",
+      "Just browsing — tell me about Infresco"
+    ]
+  },
+  erp: {
+    msg: "Great choice. We've built live ERP systems for a gym, a solar shop, and a flour mill — all from scratch in Java + MySQL. What type of business do you run?",
+    opts: ["Retail / shop","Restaurant / food","Real estate","Manufacturing","Healthcare","Something else"]
+  },
+  website: {
+    msg: "We build fast, SEO-optimised websites that rank on Google and convert visitors into customers. Are you starting fresh or improving an existing site?",
+    opts: ["Starting from scratch","I have a site but it's not working well","I need SEO for my existing site"]
+  },
+  marketing: {
+    msg: "Our digital growth packages start at PKR 45,000/month — social media, SEO, email marketing, and daily performance reports. What's your biggest challenge right now?",
+    opts: ["Not enough online visibility","I need more customers","No website or social media presence","I want to track my results properly"]
+  },
+  international: {
+    msg: "Welcome! 🌍 We serve clients in UAE, UK, USA, Saudi Arabia and beyond. We work fully remotely and accept Payoneer, Wise, and SWIFT. What would you like to know?",
+    opts: ["How do remote projects work?","What are your prices in USD?","Can I see your previous work?","How do I get started?"]
+  },
+  about: {
+    msg: "Infresco was founded by two CS students in their 3rd semester. We've delivered 2 live ERP systems in real businesses, and just signed our first major multi-business client.\n\nWe're young — and we work harder because of it. What would you like to know?",
+    opts: ["See your projects","How much do you charge?","Let's work together →"]
+  },
+  pricing: {
+    msg: "Here's our pricing at a glance:\n\n• Starter — PKR 45,000/mo (~$160 USD)\n• Growth — PKR 95,000/mo (~$340 USD) ⭐\n• Complete — PKR 140,000/mo (~$500 USD)\n\nAll prices include every tool cost. No hidden fees. Want a full breakdown?",
+    opts: ["Yes — send me the breakdown","I want to discuss my specific needs","Let's connect on WhatsApp"]
+  },
+  closing: {
+    msg: "The fastest way to reach us is WhatsApp — you'll usually get a reply within 2 hours. Or leave your email and we'll send a detailed proposal. 🚀",
+    opts: ["Open WhatsApp 💬","I'll email you instead","Book a discovery call"]
+  }
+};
+
+function toggleAgent() {
+  agentOpen = !agentOpen;
+  const w = document.getElementById('agentWindow');
+  if (agentOpen) {
+    w.classList.add('open');
+    document.getElementById('agentNotif').style.display = 'none';
+    if (!agentStarted) { agentStarted = true; agentBegin(); }
+  } else {
+    w.classList.remove('open');
+  }
+}
+
+function agentBegin() {
+  setTimeout(() => addBot(FLOWS.start.msg), 400);
+  setTimeout(() => showOpts(FLOWS.start.opts, 'start'), 1100);
+}
+
+function addBot(text) {
+  const el = document.createElement('div');
+  el.className = 'agent-msg bot';
+  el.textContent = text;
+  append(el);
+}
+
+function addUser(text) {
+  const el = document.createElement('div');
+  el.className = 'agent-msg user';
+  el.textContent = text;
+  append(el);
+}
+
+function append(el) {
+  const msgs = document.getElementById('agentMessages');
+  msgs.appendChild(el);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function typing(cb, delay = 900) {
+  const msgs = document.getElementById('agentMessages');
+  const t = document.createElement('div');
+  t.className = 'agent-typing';
+  t.innerHTML = '<span></span><span></span><span></span>';
+  msgs.appendChild(t);
+  msgs.scrollTop = msgs.scrollHeight;
+  setTimeout(() => { t.remove(); cb(); }, delay);
+}
+
+function clearOpts() {
+  document.getElementById('agentOpts').innerHTML = '';
+}
+
+function showOpts(opts, ctx) {
+  clearOpts();
+  const c = document.getElementById('agentOpts');
+  opts.forEach(o => {
+    const b = document.createElement('button');
+    b.className = 'agent-opt';
+    b.textContent = o;
+    b.onclick = () => pick(o, ctx);
+    c.appendChild(b);
+  });
+}
+
+function pick(opt, ctx) {
+  addUser(opt); clearOpts();
+  const o = opt.toLowerCase();
+
+  if (o.includes('erp') || o.includes('management system') || o.includes('retail') ||
+      o.includes('restaurant') || o.includes('real estate') || o.includes('manufact') ||
+      o.includes('healthcare') || o.includes('something else')) {
+    typing(() => { addBot(FLOWS.erp.msg); showOpts(FLOWS.erp.opts, 'erp'); });
+
+  } else if (o.includes('website') || o.includes('seo') || o.includes('starting from scratch') ||
+             o.includes('existing site') || o.includes('existing')) {
+    typing(() => { addBot(FLOWS.website.msg); showOpts(FLOWS.website.opts, 'website'); });
+
+  } else if (o.includes('marketing') || o.includes('visibility') || o.includes('customers') ||
+             o.includes('social media') || o.includes('track')) {
+    typing(() => { addBot(FLOWS.marketing.msg); showOpts(FLOWS.marketing.opts, 'marketing'); });
+
+  } else if (o.includes('international') || o.includes('remote') || o.includes('usd') ||
+             o.includes('outside') || o.includes('payoneer') || o.includes('wise')) {
+    typing(() => { addBot(FLOWS.international.msg); showOpts(FLOWS.international.opts, 'international'); });
+
+  } else if (o.includes('browsing') || o.includes('infresco') || o.includes('about') ||
+             o.includes('previous work') || o.includes('project')) {
+    typing(() => { addBot(FLOWS.about.msg); showOpts(FLOWS.about.opts, 'about'); });
+
+  } else if (o.includes('how much') || o.includes('price') || o.includes('cost') ||
+             o.includes('charge') || o.includes('breakdown')) {
+    typing(() => { addBot(FLOWS.pricing.msg); showOpts(FLOWS.pricing.opts, 'pricing'); });
+
+  } else if (o.includes('whatsapp') || o.includes('connect')) {
+    addBot("Opening WhatsApp now — our team will reply within 2 hours! 🚀");
+    setTimeout(() => window.open(AGENT_WA, '_blank'), 700);
+
+  } else if (o.includes('email')) {
+    addBot("Send us an email at hello@infresco.me with a brief description of your project. We will reply with a detailed proposal within 24 hours.");
+    // REPLACE hello@infresco.me with your actual email
+
+  } else if (o.includes('discovery call') || o.includes('book')) {
+    addBot("Send us a WhatsApp message and we will schedule a free 30-minute discovery call at a time that works for you — no obligation.");
+    setTimeout(() => showOpts(["Open WhatsApp 💬"], 'closing'), 800);
+
+  } else if (o.includes('let\'s work') || o.includes('get started') || o.includes('started')) {
+    typing(() => { addBot(FLOWS.closing.msg); showOpts(FLOWS.closing.opts, 'closing'); });
+
+  } else {
+    typing(() => { addBot(FLOWS.closing.msg); showOpts(FLOWS.closing.opts, 'closing'); });
+  }
+}
+
+function agentSend() {
+  const input = document.getElementById('agentInput');
+  const val   = input.value.trim();
+  if (!val) return;
+  input.value = '';
+  addUser(val); clearOpts();
+  const l = val.toLowerCase();
+
+  if (l.includes('price') || l.includes('cost') || l.includes('how much') || l.includes('charge')) {
+    typing(() => { addBot(FLOWS.pricing.msg); showOpts(FLOWS.pricing.opts, 'pricing'); });
+
+  } else if (l.includes('hello') || l.includes('hi') || l.includes('hey') || l.includes('salam')) {
+    typing(() => { addBot("Hi there! 👋 Great to hear from you. What can I help you with today?"); }, 600);
+    setTimeout(() => showOpts(FLOWS.start.opts, 'start'), 1500);
+
+  } else if (l.includes('erp') || l.includes('system') || l.includes('software')) {
+    typing(() => { addBot(FLOWS.erp.msg); showOpts(FLOWS.erp.opts, 'erp'); });
+
+  } else if (l.includes('website') || l.includes('seo')) {
+    typing(() => { addBot(FLOWS.website.msg); showOpts(FLOWS.website.opts, 'website'); });
+
+  } else if (l.includes('pakistan') || l.includes('karachi')) {
+    typing(() => addBot("We are based in Karachi, Pakistan (PKT — UTC+5). We work with both local and international clients. What would you like to build?"), 700);
+    setTimeout(() => showOpts(FLOWS.start.opts, 'start'), 1700);
+
+  } else if (l.includes('thank') || l.includes('thanks') || l.includes('shukriya')) {
+    typing(() => addBot("You're welcome! 😊 Feel free to reach out anytime. We are always happy to help."), 600);
+
+  } else {
+    typing(() => addBot("Thanks for your message! For the quickest response, our team is on WhatsApp. Or tell me more about what you need and I'll point you in the right direction."), 900);
+    setTimeout(() => showOpts(FLOWS.closing.opts, 'closing'), 1900);
+  }
+}
+
+// Auto-notify after 40 seconds if agent hasn't been opened
+setTimeout(() => {
+  if (!agentOpen && !agentStarted) {
+    const notif = document.getElementById('agentNotif');
+    if (notif) notif.style.animation = 'agent-pulse 1s infinite';
+  }
+}, 40000);
+// ══ END AI AGENT ══════════════════════════════════════
+
 </script>
+<!-- ══ AI AGENT BUTTON ══ -->
+<div class="agent-bubble">
+  <button class="agent-btn" onclick="toggleAgent()" aria-label="Chat with Infresco assistant">
+    🤖
+    <span class="agent-notif" id="agentNotif"></span>
+  </button>
+</div>
+
+<!-- ══ AI AGENT WINDOW ══ -->
+<div class="agent-window" id="agentWindow">
+  <div class="agent-header">
+    <div class="agent-avatar">🤖</div>
+    <div class="agent-header-info">
+      <div class="agent-name">Infresco Assistant</div>
+      <div class="agent-status">
+        <span class="agent-status-dot"></span>
+        Online — responds in seconds
+      </div>
+    </div>
+    <button class="agent-close" onclick="toggleAgent()">×</button>
+  </div>
+
+  <div class="agent-messages" id="agentMessages"></div>
+  <div class="agent-opts"     id="agentOpts"></div>
+
+  <div class="agent-input-row">
+    <input
+      class="agent-input"
+      id="agentInput"
+      placeholder="Type a message..."
+      onkeydown="if(event.key==='Enter')agentSend()"
+    >
+    <button class="agent-send" onclick="agentSend()">→</button>
+  </div>
+</div>
 </body>
 </html>
