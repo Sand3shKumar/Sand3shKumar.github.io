@@ -1328,7 +1328,7 @@ footer{
       </div>
     </div>
 
-<!-- PRICING TEASER — controlled by currency switcher -->
+    <!-- PRICING TEASER — controlled by currency switcher -->
 <div class="pricing-teaser">
   <div>
     <div class="pricing-teaser-title">Transparent pricing — no surprises</div>
@@ -1382,7 +1382,7 @@ footer{
       <div class="ptier-period">per month</div>
     </div>
   </div>
-</div>    
+</div>
 
   </div>
 </section>
@@ -1771,6 +1771,42 @@ window.addEventListener('scroll', () => {
   }
 });
 
+// ══ CURRENCY SWITCHER ══════════════════════════════════
+const CURR_SYMBOLS = { PKR: 'PKR', USD: '$', AED: 'AED', GBP: '£' };
+let activeCurr = 'PKR';
+
+function setCurr(c) {
+  activeCurr = c;
+
+  // Update nav buttons
+  document.querySelectorAll('.curr-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === c);
+  });
+
+  // Update all price values on page
+  document.querySelectorAll('.curr-val').forEach(el => {
+    const val = el.dataset[c.toLowerCase()];
+    if (val) {
+      el.style.opacity = '0';
+      setTimeout(() => {
+        el.textContent = val;
+        el.style.opacity = '1';
+      }, 120);
+    }
+  });
+
+  // Update all currency symbols on page
+  document.querySelectorAll('.curr-sym').forEach(el => {
+    el.style.opacity = '0';
+    setTimeout(() => {
+      el.textContent = CURR_SYMBOLS[c];
+      el.style.opacity = '1';
+    }, 120);
+  });
+}
+// ══ END CURRENCY SWITCHER ══════════════════════════════
+
+
 // Form submit
 function submitForm() {
   const fname   = document.getElementById('fname').value;
@@ -1815,41 +1851,6 @@ window.addEventListener('scroll', () => {
     a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--blue)' : '';
   });
 }, { passive: true });
-
-// ══ CURRENCY SWITCHER ══════════════════════════════════
-const CURR_SYMBOLS = { PKR: 'PKR', USD: '$', AED: 'AED', GBP: '£' };
-let activeCurr = 'PKR';
-
-function setCurr(c) {
-  activeCurr = c;
-
-  // Update nav buttons
-  document.querySelectorAll('.curr-btn').forEach(b => {
-    b.classList.toggle('active', b.textContent.trim() === c);
-  });
-
-  // Update all price values on page
-  document.querySelectorAll('.curr-val').forEach(el => {
-    const val = el.dataset[c.toLowerCase()];
-    if (val) {
-      el.style.opacity = '0';
-      setTimeout(() => {
-        el.textContent = val;
-        el.style.opacity = '1';
-      }, 120);
-    }
-  });
-
-  // Update all currency symbols on page
-  document.querySelectorAll('.curr-sym').forEach(el => {
-    el.style.opacity = '0';
-    setTimeout(() => {
-      el.textContent = CURR_SYMBOLS[c];
-      el.style.opacity = '1';
-    }, 120);
-  });
-}
-// ══ END CURRENCY SWITCHER ══════════════════════════════
 
 // ══ AI AGENT ══════════════════════════════════════════
 // REPLACE this with your actual WhatsApp number
