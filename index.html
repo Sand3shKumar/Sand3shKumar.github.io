@@ -1752,41 +1752,6 @@ footer{
 
 <script>
 
-// ══ WHATSAPP BUTTON ════════════════════════════════════
-
-// Hide floating WA button when AI agent is open
-// so they don't overlap on mobile
-const waFloat = document.getElementById('waFloat');
-
-function updateWaPosition() {
-  if (!waFloat) return;
-  // On mobile, if agent window is open, shift WA button up
-  if (window.innerWidth < 480 && agentOpen) {
-    waFloat.style.bottom = '440px';
-  } else {
-    waFloat.style.bottom = '90px';
-  }
-}
-
-// Hook into the existing toggleAgent function
-const _originalToggle = toggleAgent;
-window.toggleAgent = function () {
-  _originalToggle();
-  updateWaPosition();
-};
-
-// Show floating button after 3 seconds — not immediately,
-// so it doesn't distract from the hero on first load
-waFloat.style.opacity = '0';
-waFloat.style.transform = 'scale(0.8)';
-waFloat.style.transition = 'opacity .4s ease, transform .4s ease';
-
-setTimeout(() => {
-  waFloat.style.opacity = '1';
-  waFloat.style.transform = 'scale(1)';
-}, 3000);
-
-// ══ END WHATSAPP BUTTON ════════════════════════════════
 
 
 // Nav toggle
