@@ -118,6 +118,9 @@ nav{
 }
 
 /* ── HERO ── */
+
+
+
 .hero{
   min-height:100vh;
   display:flex;align-items:center;
@@ -1017,6 +1020,119 @@ footer{
   .ptier-divider { width: 60px; height: 1px; }
 }
 
+/* ── WHATSAPP FLOATING BUTTON ── */
+.wa-float {
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  z-index: 998;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+  text-decoration: none;
+  transition: all .3s;
+  font-size: 24px;
+}
+.wa-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(37,211,102,0.55);
+  background: #1ebe57;
+}
+.wa-float-tooltip {
+  position: absolute;
+  right: 62px;
+  background: #0A0E1A;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'Sora', sans-serif;
+  padding: 7px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+}
+.wa-float-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-right: none;
+  border-left-color: #0A0E1A;
+}
+.wa-float:hover .wa-float-tooltip {
+  opacity: 1;
+}
+
+/* WhatsApp button inside contact section */
+.wa-contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 13px;
+  background: #25D366;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 10px;
+  transition: all .2s;
+}
+.wa-contact-btn:hover {
+  background: #1ebe57;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(37,211,102,0.3);
+}
+
+/* WhatsApp button in hero actions */
+.btn-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25D366;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 13px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all .2s;
+  border: none;
+  cursor: pointer;
+  font-family: 'Sora', sans-serif;
+}
+.btn-wa:hover {
+  background: #1ebe57;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(37,211,102,0.3);
+}
+
+@media(max-width: 768px) {
+  .wa-float {
+    bottom: 90px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    font-size: 21px;
+  }
+  .wa-float-tooltip { display: none; }
+}
+
+
 </style>
 </head>
 <body>
@@ -1071,7 +1187,21 @@ footer{
       </p>
 
       <div class="hero-actions">
+        href="https://wa.me/923012702169?text=Hi%20Infresco%2C%20I%27d%20like%20to%20discuss%20a%20project."
+  class="btn-wa"
+  target="_blank"
+  rel="noopener"
+>
+  💬 WhatsApp us
+</a>
         <a href="#contact" class="btn-primary">
+          href="https://wa.me/923012702169?text=Hi%20Infresco%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20discuss%20a%20project."
+  class="wa-contact-btn"
+  target="_blank"
+  rel="noopener"
+>
+  💬 Or message us directly on WhatsApp
+</a>
           Start a project
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -1623,6 +1753,44 @@ footer{
 </footer>
 
 <script>
+
+// ══ WHATSAPP BUTTON ════════════════════════════════════
+
+// Hide floating WA button when AI agent is open
+// so they don't overlap on mobile
+const waFloat = document.getElementById('waFloat');
+
+function updateWaPosition() {
+  if (!waFloat) return;
+  // On mobile, if agent window is open, shift WA button up
+  if (window.innerWidth < 480 && agentOpen) {
+    waFloat.style.bottom = '440px';
+  } else {
+    waFloat.style.bottom = '90px';
+  }
+}
+
+// Hook into the existing toggleAgent function
+const _originalToggle = toggleAgent;
+window.toggleAgent = function () {
+  _originalToggle();
+  updateWaPosition();
+};
+
+// Show floating button after 3 seconds — not immediately,
+// so it doesn't distract from the hero on first load
+waFloat.style.opacity = '0';
+waFloat.style.transform = 'scale(0.8)';
+waFloat.style.transition = 'opacity .4s ease, transform .4s ease';
+
+setTimeout(() => {
+  waFloat.style.opacity = '1';
+  waFloat.style.transform = 'scale(1)';
+}, 3000);
+
+// ══ END WHATSAPP BUTTON ════════════════════════════════
+
+
 // Nav toggle
 const toggle = document.getElementById('navToggle');
 const links  = document.getElementById('navLinks');
@@ -1946,5 +2114,20 @@ setTimeout(() => {
     <button class="agent-send" onclick="agentSend()">→</button>
   </div>
 </div>
+
+<!-- ══ WHATSAPP FLOATING BUTTON ══ -->
+
+  href="https://wa.me/923012702169?text=Hi%20Infresco%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20discuss%20a%20project."
+  class="wa-float"
+  target="_blank"
+  rel="noopener"
+  aria-label="Chat with Infresco on WhatsApp"
+  id="waFloat"
+>
+  <!-- REPLACE 923XXXXXXXXX with your number — no + sign, no spaces -->
+  💬
+  <span class="wa-float-tooltip">Chat on WhatsApp</span>
+</a>
+
 </body>
 </html>
