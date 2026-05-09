@@ -1006,94 +1006,6 @@ footer{
 }
 
 /* ── CURRENCY SWITCHER ── */
-.curr-switcher {
-  display: flex;
-  gap: 2px;
-  background: #F8F9FC;
-  border: 1px solid #E8EBF2;
-  border-radius: 8px;
-  padding: 3px;
-}
-.curr-btn {
-  background: none;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #6B7490;
-  cursor: pointer;
-  transition: all .2s;
-  font-family: 'Sora', sans-serif;
-  letter-spacing: 0.04em;
-}
-.curr-btn.active {
-  background: #ffffff;
-  color: #1C52E3;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
-}
-.curr-btn:hover:not(.active) {
-  color: #2D3348;
-}
-
-/* Pricing teaser block — add this if not already in your CSS */
-.pricing-teaser {
-  background: #F8F9FC;
-  border: 1px solid #E8EBF2;
-  border-radius: 16px;
-  padding: 36px 44px;
-  margin-top: 48px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 40px;
-  align-items: center;
-}
-.pricing-teaser-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: 22px;
-  color: #0A0E1A;
-  margin-bottom: 6px;
-}
-.pricing-teaser-sub {
-  font-size: 13px;
-  color: #6B7490;
-  line-height: 1.65;
-}
-.pricing-tiers {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  flex-shrink: 0;
-}
-.ptier { text-align: center; }
-.ptier-name {
-  font-size: 11px;
-  font-weight: 600;
-  color: #6B7490;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 5px;
-}
-.ptier-price {
-  font-family: 'Instrument Serif', serif;
-  font-size: 22px;
-  color: #0A0E1A;
-  line-height: 1;
-}
-.ptier.featured .ptier-name { color: #1C52E3; }
-.ptier.featured .ptier-price { color: #1C52E3; }
-.ptier-period {
-  font-size: 11px;
-  color: #6B7490;
-  margin-top: 3px;
-}
-.ptier-divider {
-  width: 1px;
-  height: 44px;
-  background: #E8EBF2;
-}
-.curr-sym { transition: opacity .15s; }
-.curr-val { transition: opacity .15s; }
 
 @media(max-width: 768px) {
   .curr-switcher { display: none; }
@@ -1131,13 +1043,7 @@ footer{
     <span></span><span></span><span></span>
   </button>
 
-<!-- CURRENCY SWITCHER — sits in nav bar, right side -->
-<div class="curr-switcher" id="currSwitcher">
-  <button class="curr-btn active" onclick="setCurr('PKR')">PKR</button>
-  <button class="curr-btn"        onclick="setCurr('USD')">USD</button>
-  <button class="curr-btn"        onclick="setCurr('AED')">AED</button>
-  <button class="curr-btn"        onclick="setCurr('GBP')">GBP</button>
-</div>
+
 
 
 </nav>
@@ -1328,58 +1234,39 @@ footer{
       </div>
     </div>
 
-    <!-- PRICING TEASER — controlled by currency switcher -->
+    
+<!-- PRICING TEASER — no prices shown yet -->
 <div class="pricing-teaser">
   <div>
-    <div class="pricing-teaser-title">Transparent pricing — no surprises</div>
+    <div class="pricing-teaser-title">Transparent pricing — tailored to your needs</div>
     <div class="pricing-teaser-sub">
-      Three packages designed to start where you are comfortable and
-      scale as you see results. Every tool cost included — nothing extra to pay.
-      Use the switcher in the top bar to view prices in your currency.
+      We offer three flexible packages — Starter, Growth, and Complete.
+      Pricing is customised based on your business size, number of platforms,
+      and specific requirements. Get in touch for a free consultation and
+      a clear quote within 24 hours.
     </div>
   </div>
   <div class="pricing-tiers">
     <div class="ptier">
       <div class="ptier-name">Starter</div>
-      <div class="ptier-price">
-        <span class="curr-sym">PKR</span>&nbsp;<span
-          class="curr-val"
-          data-pkr="45,000"
-          data-usd="160"
-          data-aed="590"
-          data-gbp="125">45,000</span>
-      </div>
-      <div class="ptier-period">per month</div>
+      <div class="ptier-price" style="font-size:16px;color:#6B7490;font-family:'Sora',sans-serif;font-weight:500">Get a quote</div>
+      <div class="ptier-period">custom pricing</div>
     </div>
 
     <div class="ptier-divider"></div>
 
     <div class="ptier featured">
       <div class="ptier-name">Growth ⭐</div>
-      <div class="ptier-price">
-        <span class="curr-sym">PKR</span>&nbsp;<span
-          class="curr-val"
-          data-pkr="95,000"
-          data-usd="340"
-          data-aed="1,250"
-          data-gbp="265">95,000</span>
-      </div>
-      <div class="ptier-period">per month</div>
+      <div class="ptier-price" style="font-size:16px;font-family:'Sora',sans-serif;font-weight:500">Get a quote</div>
+      <div class="ptier-period">custom pricing</div>
     </div>
 
     <div class="ptier-divider"></div>
 
     <div class="ptier">
       <div class="ptier-name">Complete</div>
-      <div class="ptier-price">
-        <span class="curr-sym">PKR</span>&nbsp;<span
-          class="curr-val"
-          data-pkr="140,000"
-          data-usd="500"
-          data-aed="1,840"
-          data-gbp="395">140,000</span>
-      </div>
-      <div class="ptier-period">per month</div>
+      <div class="ptier-price" style="font-size:16px;color:#6B7490;font-family:'Sora',sans-serif;font-weight:500">Get a quote</div>
+      <div class="ptier-period">custom pricing</div>
     </div>
   </div>
 </div>
@@ -1772,38 +1659,7 @@ window.addEventListener('scroll', () => {
 });
 
 // ══ CURRENCY SWITCHER ══════════════════════════════════
-const CURR_SYMBOLS = { PKR: 'PKR', USD: '$', AED: 'AED', GBP: '£' };
-let activeCurr = 'PKR';
-
-function setCurr(c) {
-  activeCurr = c;
-
-  // Update nav buttons
-  document.querySelectorAll('.curr-btn').forEach(b => {
-    b.classList.toggle('active', b.textContent.trim() === c);
-  });
-
-  // Update all price values on page
-  document.querySelectorAll('.curr-val').forEach(el => {
-    const val = el.dataset[c.toLowerCase()];
-    if (val) {
-      el.style.opacity = '0';
-      setTimeout(() => {
-        el.textContent = val;
-        el.style.opacity = '1';
-      }, 120);
-    }
-  });
-
-  // Update all currency symbols on page
-  document.querySelectorAll('.curr-sym').forEach(el => {
-    el.style.opacity = '0';
-    setTimeout(() => {
-      el.textContent = CURR_SYMBOLS[c];
-      el.style.opacity = '1';
-    }, 120);
-  });
-}
+   
 // ══ END CURRENCY SWITCHER ══════════════════════════════
 
 
