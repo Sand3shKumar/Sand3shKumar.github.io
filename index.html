@@ -1481,6 +1481,190 @@ footer{
   }
 }
 
+/* ── INTERNATIONAL CLIENT ADDITIONS ── */
+
+/* Timezone indicator */
+.hero-tz {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #6B7490;
+  margin-bottom: 28px;
+  padding: 7px 14px;
+  background: #F8F9FC;
+  border: 1px solid #E8EBF2;
+  border-radius: 40px;
+}
+
+.tz-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16A34A;
+  animation: tz-pulse 2s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes tz-pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* Countries served strip */
+.countries-strip {
+  background: #0A0E1A;
+  padding: 28px 6%;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.countries-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.countries-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.countries-list {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.country-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  transition: color .2s;
+}
+
+.country-item:hover { color: rgba(255,255,255,0.9); }
+
+.country-flag { font-size: 16px; }
+
+/* Trust badges row */
+.trust-strip {
+  background: #ffffff;
+  padding: 32px 6%;
+  border-bottom: 1px solid #E8EBF2;
+}
+
+.trust-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.trust-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6B7490;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.trust-badges {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  background: #F8F9FC;
+  border: 1px solid #E8EBF2;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #2D3348;
+  transition: all .2s;
+}
+
+.trust-badge:hover {
+  border-color: rgba(28,82,227,0.2);
+  background: rgba(28,82,227,0.04);
+  color: #1C52E3;
+}
+
+.trust-badge-icon { font-size: 15px; }
+
+/* International contact additions */
+.contact-intl-info {
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: #F8F9FC;
+  border: 1px solid #E8EBF2;
+  border-radius: 10px;
+}
+
+.contact-intl-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1C52E3;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+.contact-intl-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: #6B7490;
+  margin-bottom: 7px;
+  line-height: 1.5;
+}
+
+.contact-intl-row:last-child { margin-bottom: 0; }
+.contact-intl-row span { font-size: 14px; }
+
+/* Country dropdown in form */
+.form-input option {
+  font-family: 'Sora', sans-serif;
+  background: #ffffff;
+  color: #0A0E1A;
+}
+
+@media(max-width: 768px) {
+  .countries-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .trust-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .countries-list { gap: 16px; }
+}
+
 </style>
 </head>
 <body>
@@ -1535,6 +1719,18 @@ footer{
       <p class="hero-sub">
         Infresco delivers custom ERP systems, websites, and digital marketing — so business owners focus on their business, not their software.
       </p>
+
+      <p class="hero-sub">
+  Infresco delivers custom ERP systems, websites, and digital
+  marketing — so business owners focus on their business,
+  not their software.
+</p>
+
+<!-- TIMEZONE INDICATOR -->
+<div class="hero-tz">
+  <span class="tz-dot"></span>
+  Available PKT (UTC+5) · Response within 24 hours · Serving clients globally
+</div>
 
       <div class="hero-actions">
         
@@ -1618,6 +1814,33 @@ footer{
     </div>
   </div>
 </section>
+
+<!-- ══ COUNTRIES SERVED STRIP ══ -->
+<div class="countries-strip">
+  <div class="countries-inner">
+    <span class="countries-label">Clients we serve</span>
+    <div class="countries-list">
+      <div class="country-item">
+        <span class="country-flag">🇵🇰</span> Pakistan
+      </div>
+      <div class="country-item">
+        <span class="country-flag">🇦🇪</span> UAE
+      </div>
+      <div class="country-item">
+        <span class="country-flag">🇸🇦</span> Saudi Arabia
+      </div>
+      <div class="country-item">
+        <span class="country-flag">🇬🇧</span> United Kingdom
+      </div>
+      <div class="country-item">
+        <span class="country-flag">🇺🇸</span> United States
+      </div>
+      <div class="country-item">
+        <span class="country-flag">🌍</span> Worldwide
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ══ LOGOS STRIP ══ -->
 <div class="logos-strip">
@@ -1786,6 +2009,18 @@ footer{
 
   </div>
 </section>
+
+<!-- ══ COUNTRIES SERVED STRIP ══ -->
+<div class="countries-strip">
+  ... countries content ...
+</div>
+
+<!-- ══ TRUST BADGES ══ -->
+<div class="trust-strip">
+  ... trust badges content ...
+</div>
+
+<section id="services">
 
 <!-- ══ SERVICES ══ -->
 <section id="services">
@@ -2229,6 +2464,34 @@ footer{
         </div>
       </div>
 
+      <div class="contact-grid">
+
+  <div>
+    <!-- contact info items are here -->
+    <div class="contact-info-item">...</div>
+    <div class="contact-info-item">...</div>
+    <div class="contact-info-item">...</div>
+
+    <!-- PASTE HERE — after last contact-info-item -->
+    <div class="contact-intl-info">
+      ... international info ...
+    </div>
+  </div>
+
+  <div class="contact-form" ...>
+    <!-- form is here -->
+  </div>
+
+</div>
+
+<div class="contact-info-item">
+  <div class="contact-info-icon">⏱️</div>
+  <div>
+    <div class="contact-info-label">Response time</div>
+    <div class="contact-info-value">Within 24 hours guaranteed</div>
+  </div>
+</div>
+
       <div class="contact-form" id="contactForm">
         <div class="form-row">
           <div class="form-group">
@@ -2252,18 +2515,34 @@ footer{
         </div>
 
         <div class="form-group">
-          <label class="form-label">Service needed</label>
-          <select class="form-input" id="service">
-            <option value="">Select a service...</option>
-            <option>Custom ERP System</option>
-            <option>Website Development</option>
-            <option>Social Media Management</option>
-            <option>Data Analytics</option>
-            <option>Email Marketing</option>
-            <option>Full Digital Package</option>
-            <option>Something else</option>
-          </select>
-        </div>
+  <label class="form-label">Your country</label>
+  <select class="form-input" id="country">
+    <option value="">Select your country...</option>
+    <option>Pakistan</option>
+    <option>United Arab Emirates</option>
+    <option>Saudi Arabia</option>
+    <option>United Kingdom</option>
+    <option>United States</option>
+    <option>Canada</option>
+    <option>Australia</option>
+    <option>Other</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label class="form-label">Service needed</label>
+  <select class="form-input" id="service">
+    <option value="">Select a service...</option>
+    <option>Custom ERP System</option>
+    <option>Website Development & SEO</option>
+    <option>Social Media Management</option>
+    <option>Data Analytics & Reporting</option>
+    <option>Email Marketing</option>
+    <option>AI Agent / Chatbot</option>
+    <option>Full Digital Growth Package</option>
+    <option>Something else</option>
+  </select>
+</div>
 
         <div class="form-group">
           <label class="form-label">Tell us about your business</label>
@@ -2398,33 +2677,65 @@ window.addEventListener('scroll', () => {
 
 // Form submit
 function submitForm() {
-  const fname   = document.getElementById('fname').value;
-  const email   = document.getElementById('email').value;
+  const fname   = document.getElementById('fname').value.trim();
+  const lname   = document.getElementById('lname').value.trim();
+  const email   = document.getElementById('email').value.trim();
+  const phone   = document.getElementById('phone').value.trim();
+  const country = document.getElementById('country').value;
   const service = document.getElementById('service').value;
-  const message = document.getElementById('message').value;
+  const message = document.getElementById('message').value.trim();
 
-  if(!fname || !email || !service || !message) {
-    alert('Please fill in all required fields.');
+  if (!fname || !email || !service || !message) {
+    alert('Please fill in your name, email, service, and message.');
     return;
   }
 
-  // Build mailto link
   const subject = encodeURIComponent(`Infresco Enquiry — ${service}`);
   const body    = encodeURIComponent(
-    `Name: ${document.getElementById('fname').value} ${document.getElementById('lname').value}\n` +
+    `Name: ${fname} ${lname}\n` +
     `Email: ${email}\n` +
-    `Phone: ${document.getElementById('phone').value}\n` +
-    `Service: ${service}\n\n` +
+    `Phone / WhatsApp: ${phone}\n` +
+    `Country: ${country}\n` +function submitForm() {
+  const fname   = document.getElementById('fname').value.trim();
+  const lname   = document.getElementById('lname').value.trim();
+  const email   = document.getElementById('email').value.trim();
+  const phone   = document.getElementById('phone').value.trim();
+  const country = document.getElementById('country').value;
+  const service = document.getElementById('service').value;
+  const message = document.getElementById('message').value.trim();
+
+  if (!fname || !email || !service || !message) {
+    alert('Please fill in your name, email, service, and message.');
+    return;
+  }
+
+  const subject = encodeURIComponent(`Infresco Enquiry — ${service}`);
+  const body    = encodeURIComponent(
+    `Name: ${fname} ${lname}\n` +
+    `Email: ${email}\n` +
+    `Phone / WhatsApp: ${phone}\n` +
+    `Country: ${country}\n` +
+    `Service needed: ${service}\n\n` +
     `Message:\n${message}`
   );
 
   // REPLACE hello@infresco.me with your actual email
   window.location.href = `mailto:hello@infresco.me?subject=${subject}&body=${body}`;
 
-  document.getElementById('formSuccess').style.display = 'block';
-  setTimeout(() => {
-    document.getElementById('formSuccess').style.display = 'none';
-  }, 5000);
+  const s = document.getElementById('formSuccess');
+  s.style.display = 'block';
+  setTimeout(() => s.style.display = 'none', 5000);
+}
+    `Service needed: ${service}\n\n` +
+    `Message:\n${message}`
+  );
+
+  // REPLACE hello@infresco.me with your actual email
+  window.location.href = `mailto:hello@infresco.me?subject=${subject}&body=${body}`;
+
+  const s = document.getElementById('formSuccess');
+  s.style.display = 'block';
+  setTimeout(() => s.style.display = 'none', 5000);
 }
 
 // Smooth active nav link
