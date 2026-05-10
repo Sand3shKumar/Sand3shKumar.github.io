@@ -1344,6 +1344,143 @@ footer{
   .story-stats { grid-template-columns: 1fr 1fr; }
 }
 
+/* ── PAYMENT METHODS ── */
+#payments {
+  background: #F8F9FC;
+  padding: 96px 6%;
+}
+
+.payments-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.payments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.payment-card {
+  background: #ffffff;
+  border: 1px solid #E8EBF2;
+  border-radius: 14px;
+  padding: 24px 20px;
+  text-align: center;
+  transition: all .25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: #1C52E3;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s;
+}
+
+.payment-card:hover {
+  border-color: rgba(28,82,227,0.2);
+  box-shadow: 0 8px 32px rgba(28,82,227,0.08);
+  transform: translateY(-3px);
+}
+
+.payment-card:hover::before {
+  transform: scaleX(1);
+}
+
+.payment-icon {
+  font-size: 30px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.payment-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0A0E1A;
+  margin-bottom: 6px;
+}
+
+.payment-desc {
+  font-size: 12px;
+  color: #6B7490;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.payment-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.badge-intl {
+  background: rgba(28,82,227,0.08);
+  color: #1C52E3;
+}
+
+.badge-local {
+  background: rgba(22,163,74,0.08);
+  color: #16A34A;
+}
+
+.badge-all {
+  background: rgba(107,116,144,0.1);
+  color: #6B7490;
+}
+
+/* Info strip below the grid */
+.payments-note {
+  margin-top: 36px;
+  padding: 20px 24px;
+  background: #ffffff;
+  border: 1px solid #E8EBF2;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.payments-note-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.payments-note-text {
+  font-size: 13px;
+  color: #6B7490;
+  line-height: 1.65;
+}
+
+.payments-note-text strong {
+  color: #0A0E1A;
+  font-weight: 600;
+}
+
+@media(max-width: 768px) {
+  #payments { padding: 72px 6%; }
+  .payments-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width: 400px) {
+  .payments-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1364,6 +1501,7 @@ footer{
   <li><a href="#projects">Projects</a></li>
   <li><a href="#process">How We Work</a></li>
   <li><a href="#team">Team</a></li>
+  <li><a href="#payments">Payments</a></li>
   <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
 </ul>
 
@@ -1951,6 +2089,100 @@ footer{
     </div>
   </div>
 </section>
+
+<!-- ══ PAYMENT METHODS ══ -->
+<section id="payments">
+  <div class="payments-inner">
+
+    <div class="section-label">For international clients</div>
+    <h2 class="section-title">We make it easy<br>to work with us globally</h2>
+    <p class="section-sub">
+      Based in Pakistan, serving clients in UAE, UK, USA, Saudi Arabia and beyond.
+      Here is exactly how you can pay us — no friction, no complicated transfers,
+      no surprises.
+    </p>
+
+    <div class="payments-grid">
+
+      <div class="payment-card fade-up">
+        <span class="payment-icon">💳</span>
+        <div class="payment-name">Payoneer</div>
+        <div class="payment-desc">
+          International bank transfers, ACH, and card payments.
+          Receive invoices in USD, EUR, or GBP.
+        </div>
+        <span class="payment-badge badge-intl">International</span>
+      </div>
+
+      <div class="payment-card fade-up">
+        <span class="payment-icon">🔄</span>
+        <div class="payment-name">Wise</div>
+        <div class="payment-desc">
+          Low-fee international transfers in GBP, EUR, USD, AED.
+          Arrives within 1 business day.
+        </div>
+        <span class="payment-badge badge-intl">International</span>
+      </div>
+
+      <div class="payment-card fade-up">
+        <span class="payment-icon">🏦</span>
+        <div class="payment-name">SWIFT Transfer</div>
+        <div class="payment-desc">
+          Direct international wire transfer for larger projects.
+          Bank details provided on invoice.
+        </div>
+        <span class="payment-badge badge-all">All regions</span>
+      </div>
+
+      <div class="payment-card fade-up">
+        <span class="payment-icon">📱</span>
+        <div class="payment-name">JazzCash</div>
+        <div class="payment-desc">
+          Instant mobile payments for Pakistan-based clients.
+          Zero transfer fees, immediate processing.
+        </div>
+        <span class="payment-badge badge-local">Pakistan</span>
+      </div>
+
+      <div class="payment-card fade-up">
+        <span class="payment-icon">📲</span>
+        <div class="payment-name">EasyPaisa</div>
+        <div class="payment-desc">
+          Mobile wallet payments for local clients.
+          Fast and reliable for PKR transactions.
+        </div>
+        <span class="payment-badge badge-local">Pakistan</span>
+      </div>
+
+      <div class="payment-card fade-up">
+        <span class="payment-icon">🧾</span>
+        <div class="payment-name">Milestone Invoicing</div>
+        <div class="payment-desc">
+          All projects use milestone-based payment. 50% upfront,
+          50% on delivery. No full payment before results.
+        </div>
+        <span class="payment-badge badge-all">All projects</span>
+      </div>
+
+    </div>
+
+    <!-- Info note -->
+    <div class="payments-note">
+      <span class="payments-note-icon">🔒</span>
+      <div class="payments-note-text">
+        <strong>Secure and transparent.</strong> Every project starts with
+        a written agreement and a clear invoice. You never pay in full upfront —
+        our milestone structure protects both sides. Currency conversion handled
+        at live market rate via Wise or Payoneer.
+        Questions about payment? <a href="#contact"
+        style="color:#1C52E3;font-weight:500;text-decoration:none">Get in touch</a>
+        and we will sort it out before you commit to anything.
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
 <!-- ══ CONTACT ══ -->
 <section id="contact">
