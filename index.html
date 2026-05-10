@@ -415,6 +415,158 @@ section{padding:100px 6%}
   display:flex;align-items:center;gap:6px;
 }
 
+<!-- ══ FOUNDER STORY ══ -->
+<section id="story">
+  <div class="story-inner">
+
+    <div class="story-label">Our story</div>
+    <h2 class="story-title">
+      Started with a project.<br>
+      <em>Built into a company.</em>
+    </h2>
+
+    <div class="story-grid">
+
+      <!-- LEFT — narrative -->
+      <div>
+        <div class="story-text">
+          <p>
+            We are two Computer Science students who started Infresco in our
+            <strong>3rd semester</strong> — not after graduation, not after years of
+            experience. Right then, in the middle of university.
+          </p>
+          <p>
+            Our OOP course gave us a Java project. We added MySQL, built a full
+            management system, and presented it to our teacher.
+            <strong>They were amazed.</strong> They presented our project to the
+            entire class as an example of what was possible.
+          </p>
+          <p>
+            Over tea after that presentation, we looked at what we had built and
+            made a decision: <strong>this is worth more than a grade.</strong>
+            Infresco was born that afternoon.
+          </p>
+          <p>
+            Three months later — two complete ERP systems running in real businesses.
+            A third in active development. And our first major multi-business client
+            signed on the <strong>day of the first pitch.</strong>
+          </p>
+          <p>
+            We are young. We work harder because of it, not in spite of it.
+            Every client gets our full attention — not a junior account manager,
+            not a ticket system. <strong>Us. Directly.</strong>
+          </p>
+        </div>
+
+        <div class="story-quote">
+          <div class="story-quote-text">
+            "We build the tech that runs your business and the marketing
+            that grows it — so you don't need to manage either."
+          </div>
+          <div class="story-quote-author">— Infresco founding principle</div>
+        </div>
+      </div>
+
+      <!-- RIGHT — milestones -->
+      <div class="story-milestones">
+
+        <div class="milestone">
+          <div class="milestone-num">01</div>
+          <div class="milestone-content">
+            <div class="milestone-title">3rd semester — the project</div>
+            <div class="milestone-desc">
+              Built a Java + MySQL management system for an OOP course.
+              Teacher presented it as an example to the entire class.
+            </div>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="milestone-num">02</div>
+          <div class="milestone-content">
+            <div class="milestone-title">One cup of tea — the decision</div>
+            <div class="milestone-desc">
+              After the presentation, discussed over tea: "We can make this a
+              business." Infresco was registered that same week.
+            </div>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="milestone-num">03</div>
+          <div class="milestone-content">
+            <div class="milestone-title">Gym Management ERP — delivered</div>
+            <div class="milestone-desc">
+              Complete system — members, payments, attendance, reports.
+              Live and running in a real business today.
+            </div>
+            <span class="milestone-tag tag-live">✓ Live</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="milestone-num">04</div>
+          <div class="milestone-content">
+            <div class="milestone-title">Solar Shop ERP — delivered</div>
+            <div class="milestone-desc">
+              Custom inventory, orders, and sales system for a solar
+              equipment retailer. Delivered on time, running live.
+            </div>
+            <span class="milestone-tag tag-live">✓ Live</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="milestone-num">05</div>
+          <div class="milestone-content">
+            <div class="milestone-title">Flour Mill App — in progress</div>
+            <div class="milestone-desc">
+              Production tracking, inventory, and delivery scheduling
+              for a flour mill. Currently in active development.
+            </div>
+            <span class="milestone-tag tag-building">⚡ Building</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="milestone-num">06</div>
+          <div class="milestone-content">
+            <div class="milestone-title">First major client — signed</div>
+            <div class="milestone-desc">
+              Multi-business owner with real estate, food, and retail.
+              Signed on the day of first pitch. Growth package upgrade
+              pending month one results.
+            </div>
+            <span class="milestone-tag tag-signed">★ Signed</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- STATS ROW -->
+    <div class="story-stats">
+      <div class="story-stat">
+        <div class="story-stat-num">3<span>+</span></div>
+        <div class="story-stat-label">Projects delivered or in progress</div>
+      </div>
+      <div class="story-stat">
+        <div class="story-stat-num">2</div>
+        <div class="story-stat-label">Live ERP systems in production</div>
+      </div>
+      <div class="story-stat">
+        <div class="story-stat-num">100<span>%</span></div>
+        <div class="story-stat-label">On-time delivery rate</div>
+      </div>
+      <div class="story-stat">
+        <div class="story-stat-num">24<span>h</span></div>
+        <div class="story-stat-label">Guaranteed response time</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 /* ── SERVICES ── */
 #services{background:var(--white)}
 
@@ -1132,6 +1284,215 @@ footer{
   .wa-float-tooltip { display: none; }
 }
 
+/* ── FOUNDER STORY SECTION ── */
+
+
+#story {
+  background: #0A0E1A;
+  padding: 96px 6%;
+}
+
+.story-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.story-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 10px;
+}
+
+.story-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 52px;
+}
+
+.story-title em {
+  font-style: italic;
+  color: #5B8EF0;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+
+/* Left — narrative text */
+.story-text p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.85;
+  margin-bottom: 18px;
+}
+
+.story-text p:last-child {
+  margin-bottom: 0;
+}
+
+.story-text strong {
+  color: rgba(255,255,255,0.92);
+  font-weight: 500;
+}
+
+.story-quote {
+  margin-top: 36px;
+  padding: 20px 24px;
+  border-left: 3px solid #1C52E3;
+  background: rgba(28,82,227,0.08);
+  border-radius: 0 10px 10px 0;
+}
+
+.story-quote-text {
+  font-family: 'Instrument Serif', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.story-quote-author {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* Right — milestones timeline */
+.story-milestones {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.milestone {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 0 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  position: relative;
+}
+
+.milestone:last-child {
+  border-bottom: none;
+}
+
+.milestone-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.1);
+  line-height: 1;
+  padding-top: 3px;
+}
+
+.milestone-content {}
+
+.milestone-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 4px;
+}
+
+.milestone-desc {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+}
+
+.milestone-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-top: 6px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.tag-live {
+  background: rgba(22,163,74,0.2);
+  color: #4ADE80;
+}
+
+.tag-signed {
+  background: rgba(28,82,227,0.2);
+  color: #5B8EF0;
+}
+
+.tag-building {
+  background: rgba(217,119,6,0.2);
+  color: #FCD34D;
+}
+
+/* Story stats row */
+.story-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-top: 64px;
+}
+
+.story-stat {
+  background: #0A0E1A;
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.story-stat-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.story-stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  line-height: 1.4;
+}
+
+.story-stat-num span {
+  color: #5B8EF0;
+}
+
+@media(max-width: 768px) {
+  .story-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .story-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  #story { padding: 72px 6%; }
+}
+
+@media(max-width: 480px) {
+  .story-stats { grid-template-columns: 1fr 1fr; }
+}
 
 </style>
 </head>
@@ -1148,12 +1509,13 @@ footer{
   </a>
 
   <ul class="nav-links" id="navLinks">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#process">How We Work</a></li>
-    <li><a href="#team">Team</a></li>
-    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
-  </ul>
+  <li><a href="#story">Our Story</a></li>
+  <li><a href="#services">Services</a></li>
+  <li><a href="#projects">Projects</a></li>
+  <li><a href="#process">How We Work</a></li>
+  <li><a href="#team">Team</a></li>
+  <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+</ul>
 
   <button class="nav-toggle" id="navToggle" aria-label="Menu">
     <span></span><span></span><span></span>
