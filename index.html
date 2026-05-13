@@ -993,7 +993,7 @@ footer{
 .agent-status-dot{width:6px;height:6px;border-radius:50%;background:#4ADE80}
 .agent-close{background:none;border:none;color:rgba(255,255,255,0.75);cursor:pointer;font-size:20px;line-height:1;padding:0;transition:color .2s}
 .agent-close:hover{color:white}
-.agent-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:200px;max-height:300px}
+.agent-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:200px;max-height:260px}
 .agent-messages::-webkit-scrollbar{width:4px}
 .agent-messages::-webkit-scrollbar-thumb{background:#E8EBF2;border-radius:2px}
 .agent-msg{max-width:88%;font-size:13px;line-height:1.55;padding:10px 13px;border-radius:14px;font-family:'Sora',sans-serif}
@@ -3158,7 +3158,11 @@ function agentSend() {
   if (l.includes('price') || l.includes('cost') || l.includes('how much') || l.includes('charge')) {
     typing(() => { addBot(FLOWS.pricing_local.msg); showOpts(FLOWS.pricing_local.opts, 'closing'); });
 
-  } else if (l.includes('hello') || l.includes('hi') || l.includes('hey') || l.includes('salam') || l.includes('assalam')) {
+  } else if (l.includes('hello') || l.includes('hi') || l.includes('hey')) {
+    typing(() => addBot("Hello! 👋 Welcome to Infresco. What can we help you with today?"), 500);
+    setTimeout(() => showOpts(FLOWS.start.opts, 'start'), 1400);
+
+} else if (l.includes('assalam') || l.includes('salam')) {
     typing(() => addBot("Wa alaikum assalam! 👋 Welcome to Infresco. What can we help you with today?"), 500);
     setTimeout(() => showOpts(FLOWS.start.opts, 'start'), 1400);
 
