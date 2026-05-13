@@ -2797,90 +2797,101 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // ══ AI AGENT ══════════════════════════════════════════
-// REPLACE this with your actual WhatsApp number
-const AGENT_WA = 'https://wa.me/923012702169?text=Hi%20Infresco%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20discuss%20a%20project.';
 
-let agentOpen   = false;
+const AGENT_WA = 'https://wa.me/923012702169?text=Hi%20Infresco%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20discuss%20a%20project.';
+const AGENT_EMAIL = 'hello@infresco.me';
+
+let agentOpen    = false;
 let agentStarted = false;
 
-// Conversation flows
+// ── specific responses per business type ──────────────
+const ERP_RESPONSES = {
+  'retail':        "Perfect — we have built inventory and sales management systems for retail shops. We can track your stock, sales, customer records, and daily reports all in one system. How many staff members use the system daily?",
+  'restaurant':    "Great — restaurants need order management, table tracking, staff scheduling, and daily sales reports. We build all of this into one clean dashboard your team can use from any device. Do you have one branch or multiple?",
+  'real estate':   "Real estate businesses need property listings, lead tracking, client follow-ups, and commission management. We build custom CRM and management systems specifically for property businesses. How many properties or agents do you manage?",
+  'manufacturing': "Manufacturing businesses need raw material tracking, production scheduling, quality control, and delivery management. We have experience building systems for industrial businesses including a flour mill currently in development. What is your main production challenge?",
+  'healthcare':    "Healthcare systems need patient records, appointment scheduling, billing, and staff management — all with privacy and reliability. We build HIPAA-aware management systems for clinics and hospitals. How many patients do you serve daily?",
+  'default':       "No problem — we build custom systems for all types of businesses. Tell me more about what your business does and what problem you want the system to solve. We will design it around your exact workflow."
+};
+
+// ── flows ─────────────────────────────────────────────
 const FLOWS = {
   start: {
-    msg: "Hi! 👋 I'm Infresco's assistant. I help business owners figure out what we can build for them.\n\nWhat best describes you?",
+    msg: "Hi! 👋 I am Infresco's assistant. We build ERP systems, websites, and digital marketing for business owners.\n\nWhat brings you here today?",
     opts: [
-      "I need a custom ERP / management system",
+      "I need a custom ERP or management system",
       "I need a website or SEO help",
       "I need digital marketing help",
-      "I'm an international client",
+      "I am an international client",
       "Just browsing — tell me about Infresco"
     ]
   },
-  erp: {
-    msg: "Great choice. We've built live ERP systems for a gym, a solar shop, and a flour mill — all from scratch in Java + MySQL. What type of business do you run?",
-    opts: ["Retail / shop","Restaurant / food","Real estate","Manufacturing","Healthcare","Something else"]
+  erp_type: {
+    msg: "We have built live ERP systems for a gym, a solar shop, and a flour mill — all from scratch in Java and MySQL, running in real businesses today.\n\nWhat type of business do you run?",
+    opts: ["Retail / shop", "Restaurant / food", "Real estate", "Manufacturing", "Healthcare", "Something else"]
+  },
+  erp_next: {
+    opts: ["Get a quote for my business", "See examples of your ERP work", "How long does it take to build?", "Talk to the team on WhatsApp"]
   },
   website: {
-    msg: "We build fast, SEO-optimised websites that rank on Google and convert visitors into customers. Are you starting fresh or improving an existing site?",
-    opts: ["Starting from scratch","I have a site but it's not working well","I need SEO for my existing site"]
+    msg: "We build fast, SEO-optimised websites that rank on Google and turn visitors into customers. We also manage and maintain existing sites.\n\nWhat is your situation?",
+    opts: ["I need a new website built from scratch", "My existing site is not working well", "I need SEO to rank higher on Google", "I need a website plus digital marketing"]
+  },
+  website_new: {
+    msg: "Great — a new website from Infresco includes professional design, mobile optimisation, Google ranking setup, WhatsApp integration, and fast hosting.\n\nWhat type of business is the website for?",
+    opts: ["Retail / e-commerce", "Restaurant or food business", "Real estate or property", "Professional services", "Something else"]
+  },
+  website_existing: {
+    msg: "We can take over your existing website — fix speed issues, improve Google ranking, update content, and make it actually convert visitors into customers.\n\nWhat is the main problem with your current site?",
+    opts: ["It is too slow", "It does not appear on Google", "It looks outdated", "It does not bring in customers", "All of the above"]
   },
   marketing: {
-    msg: "Our digital growth packages start at PKR 45,000/month — social media, SEO, email marketing, and daily performance reports. What's your biggest challenge right now?",
-    opts: ["Not enough online visibility","I need more customers","No website or social media presence","I want to track my results properly"]
+    msg: "Our digital marketing service covers social media management, SEO, email campaigns, and daily performance reports — all in one package managed by our team.\n\nWhat is your biggest challenge right now?",
+    opts: ["Nobody knows my business exists online", "I have social media but no results", "I want more customers from Google", "I want to track what is working", "I need everything set up from zero"]
+  },
+  marketing_next: {
+    msg: "We handle everything — content creation, posting, SEO, email campaigns, and daily reports sent to you every morning. You focus on your business, we handle the growth.\n\nWould you like to know more or speak directly with our team?",
+    opts: ["What does it cost?", "Talk to the team on WhatsApp", "Send me details by email", "Tell me more about results you have achieved"]
   },
   international: {
-    msg: "Welcome! 🌍 We serve clients in UAE, UK, USA, Saudi Arabia and beyond. We work fully remotely and accept Payoneer, Wise, and SWIFT. What would you like to know?",
-    opts: ["How do remote projects work?","What are your prices in USD?","Can I see your previous work?","How do I get started?"]
+    msg: "Welcome! 🌍 We work with clients in UAE, UK, USA, Saudi Arabia, and beyond — fully remotely.\n\nWe accept Payoneer, Wise, and SWIFT bank transfer. All projects start with a written agreement. 50% upfront, 50% on delivery.\n\nWhat would you like to know?",
+    opts: ["How does a remote project work?", "What are your prices in USD?", "Can I see your previous work?", "How do I get started?"]
+  },
+  international_process: {
+    msg: "Here is how a remote project works with Infresco:\n\n1. Free 30-minute discovery call — we understand your needs\n2. We send a written proposal with timeline and fixed price\n3. You sign the agreement and pay 50% upfront\n4. We build and share progress weekly\n5. You approve and we deliver — pay the remaining 50%\n\nEvery step is documented. No surprises.",
+    opts: ["What are your prices?", "Book a discovery call", "Send me more details by email"]
+  },
+  international_pricing: {
+    msg: "Our pricing in USD:\n\n• ERP / management system: from $500 depending on complexity\n• Website development: from $200\n• Digital marketing: from $160/month\n• Full growth package: from $500/month\n\nAll prices are fixed — no hourly billing surprises. Want a quote for your specific project?",
+    opts: ["Get a custom quote", "Book a discovery call", "Talk on WhatsApp"]
   },
   about: {
-    msg: "Infresco was founded by two CS students in their 3rd semester. We've delivered 2 live ERP systems in real businesses, and just signed our first major multi-business client.\n\nWe're young — and we work harder because of it. What would you like to know?",
-    opts: ["See your projects","How much do you charge?","Let's work together →"]
+    msg: "Infresco was started by two Computer Science students in their 3rd semester — after their teacher showed their project to the whole class as an example of what was possible.\n\nIn 3 months we delivered:\n• Gym Management ERP — live in production\n• Solar Shop ERP — live in production\n• Flour Mill App — in development\n• First major multi-business client signed\n\nWe are young. We work harder because of it.",
+    opts: ["See the projects on the website", "How much do you charge?", "I want to work with you", "Talk to the founders directly"]
   },
-  pricing: {
-    msg: "Here's our pricing at a glance:\n\n• Starter — PKR 45,000/mo (~$160 USD)\n• Growth — PKR 95,000/mo (~$340 USD) ⭐\n• Complete — PKR 140,000/mo (~$500 USD)\n\nAll prices include every tool cost. No hidden fees. Want a full breakdown?",
-    opts: ["Yes — send me the breakdown","I want to discuss my specific needs","Let's connect on WhatsApp"]
+  pricing_local: {
+    msg: "Our pricing is based on your specific needs — every business is different so we do not use fixed packages.\n\nHere is a rough guide:\n\n• Custom ERP system: quote based on features needed\n• Website: quote based on size and requirements\n• Digital marketing: monthly retainer, customised per business\n\nThe best next step is a free 20-minute call where we understand your needs and give you an exact number. No obligation.",
+    opts: ["Book a free call", "Talk on WhatsApp now", "Send me details by email"]
   },
-  closing: {
-    msg: "The fastest way to reach us is WhatsApp — you'll usually get a reply within 2 hours. Or leave your email and we'll send a detailed proposal. 🚀",
-    opts: ["Open WhatsApp 💬","I'll email you instead","Book a discovery call"]
+  how_long: {
+    msg: "Project timelines at Infresco:\n\n• Basic website: 1 to 2 weeks\n• ERP system (simple): 3 to 6 weeks\n• ERP system (complex): 6 to 12 weeks\n• Digital marketing setup: 1 week to go live\n\nWe give you a fixed timeline in writing before starting. We have delivered 100% of our projects on time.",
+    opts: ["Get a timeline for my project", "Talk on WhatsApp", "Book a free call"]
+  },
+  different: {
+    msg: "What makes Infresco different:\n\n• We build real systems — 2 live ERPs already running in businesses\n• You talk directly to the founders — not a junior account manager\n• Fixed price always — no surprise invoices\n• We deliver on time — 100% track record so far\n• One team for everything — ERP, website, marketing, all connected\n• We are young and hungry — every client gets our full attention",
+    opts: ["I want to work with Infresco", "Talk on WhatsApp", "Tell me about your projects"]
+  },
+  closing_local: {
+    msg: "The fastest way to reach us is WhatsApp — our team replies within 2 hours. Just tap below and we will take it from there. 🚀",
+    opts: ["Open WhatsApp 💬", "Send an email instead"]
+  },
+  closing_intl: {
+    msg: "For international clients, email works best for project details and we can schedule a video call at your timezone. 🌍",
+    opts: ["Send an email", "Open WhatsApp 💬", "Book a discovery call"]
   }
 };
 
-// ══ WHATSAPP BUTTON ════════════════════════════════════
-
-// Hide floating WA button when AI agent is open
-// so they don't overlap on mobile
-const waFloat = document.getElementById('waFloat');
-
-function updateWaPosition() {
-  if (!waFloat) return;
-  // On mobile, if agent window is open, shift WA button up
-  if (window.innerWidth < 480 && agentOpen) {
-    waFloat.style.bottom = '440px';
-  } else {
-    waFloat.style.bottom = '90px';
-  }
-}
-
-// Hook into the existing toggleAgent function
-const _originalToggle = toggleAgent;
-window.toggleAgent = function () {
-  _originalToggle();
-  updateWaPosition();
-};
-
-// Show floating button after 3 seconds — not immediately,
-// so it doesn't distract from the hero on first load
-waFloat.style.opacity = '0';
-waFloat.style.transform = 'scale(0.8)';
-waFloat.style.transition = 'opacity .4s ease, transform .4s ease';
-
-setTimeout(() => {
-  waFloat.style.opacity = '1';
-  waFloat.style.transform = 'scale(1)';
-}, 3000);
-
-// ══ END WHATSAPP BUTTON ════════════════════════════════
-
+// ── toggle ─────────────────────────────────────────────
 function toggleAgent() {
   agentOpen = !agentOpen;
   const w = document.getElementById('agentWindow');
@@ -2898,27 +2909,29 @@ function agentBegin() {
   setTimeout(() => showOpts(FLOWS.start.opts, 'start'), 1100);
 }
 
+// ── message helpers ────────────────────────────────────
 function addBot(text) {
   const el = document.createElement('div');
   el.className = 'agent-msg bot';
+  el.style.whiteSpace = 'pre-line';
   el.textContent = text;
-  append(el);
+  appendMsg(el);
 }
 
 function addUser(text) {
   const el = document.createElement('div');
   el.className = 'agent-msg user';
   el.textContent = text;
-  append(el);
+  appendMsg(el);
 }
 
-function append(el) {
+function appendMsg(el) {
   const msgs = document.getElementById('agentMessages');
   msgs.appendChild(el);
   msgs.scrollTop = msgs.scrollHeight;
 }
 
-function typing(cb, delay = 900) {
+function typing(cb, delay = 800) {
   const msgs = document.getElementById('agentMessages');
   const t = document.createElement('div');
   t.className = 'agent-typing';
@@ -2944,96 +2957,292 @@ function showOpts(opts, ctx) {
   });
 }
 
-function pick(opt, ctx) {
-  addUser(opt); clearOpts();
-  const o = opt.toLowerCase();
-
-  if (o.includes('erp') || o.includes('management system') || o.includes('retail') ||
-      o.includes('restaurant') || o.includes('real estate') || o.includes('manufact') ||
-      o.includes('healthcare') || o.includes('something else')) {
-    typing(() => { addBot(FLOWS.erp.msg); showOpts(FLOWS.erp.opts, 'erp'); });
-
-  } else if (o.includes('website') || o.includes('seo') || o.includes('starting from scratch') ||
-             o.includes('existing site') || o.includes('existing')) {
-    typing(() => { addBot(FLOWS.website.msg); showOpts(FLOWS.website.opts, 'website'); });
-
-  } else if (o.includes('marketing') || o.includes('visibility') || o.includes('customers') ||
-             o.includes('social media') || o.includes('track')) {
-    typing(() => { addBot(FLOWS.marketing.msg); showOpts(FLOWS.marketing.opts, 'marketing'); });
-
-  } else if (o.includes('international') || o.includes('remote') || o.includes('usd') ||
-             o.includes('outside') || o.includes('payoneer') || o.includes('wise')) {
-    typing(() => { addBot(FLOWS.international.msg); showOpts(FLOWS.international.opts, 'international'); });
-
-  } else if (o.includes('browsing') || o.includes('infresco') || o.includes('about') ||
-             o.includes('previous work') || o.includes('project')) {
-    typing(() => { addBot(FLOWS.about.msg); showOpts(FLOWS.about.opts, 'about'); });
-
-  } else if (o.includes('how much') || o.includes('price') || o.includes('cost') ||
-             o.includes('charge') || o.includes('breakdown')) {
-    typing(() => { addBot(FLOWS.pricing.msg); showOpts(FLOWS.pricing.opts, 'pricing'); });
-
-  } else if (o.includes('whatsapp') || o.includes('connect')) {
-    addBot("Opening WhatsApp now — our team will reply within 2 hours! 🚀");
-    setTimeout(() => window.open(AGENT_WA, '_blank'), 700);
-
-  } else if (o.includes('email')) {
-    addBot("Send us an email at hello@infresco.me with a brief description of your project. We will reply with a detailed proposal within 24 hours.");
-    // REPLACE hello@infresco.me with your actual email
-
-  } else if (o.includes('discovery call') || o.includes('book')) {
-    addBot("Send us a WhatsApp message and we will schedule a free 30-minute discovery call at a time that works for you — no obligation.");
-    setTimeout(() => showOpts(["Open WhatsApp 💬"], 'closing'), 800);
-
-  } else if (o.includes('let\'s work') || o.includes('get started') || o.includes('started')) {
-    typing(() => { addBot(FLOWS.closing.msg); showOpts(FLOWS.closing.opts, 'closing'); });
-
-  } else {
-    typing(() => { addBot(FLOWS.closing.msg); showOpts(FLOWS.closing.opts, 'closing'); });
-  }
+// ── action helpers ─────────────────────────────────────
+function openWA() {
+  addBot("Opening WhatsApp now — our team will reply within 2 hours! 🚀");
+  setTimeout(() => window.open(AGENT_WA, '_blank'), 600);
 }
 
+function openEmail() {
+  addBot("Send us an email at " + AGENT_EMAIL + " — describe your project briefly and we will reply with a detailed proposal within 24 hours.");
+}
+
+function openDiscovery() {
+  addBot("Send us a WhatsApp message and we will schedule a free 30-minute call at a time that suits you. No obligation, no sales pressure.");
+  setTimeout(() => showOpts(["Open WhatsApp 💬"], 'wa_only'), 900);
+}
+
+// ── main pick logic ────────────────────────────────────
+function pick(opt, ctx) {
+  addUser(opt);
+  clearOpts();
+  const o = opt.toLowerCase();
+
+  // ── WhatsApp / email / call actions ──
+  if (o.includes('whatsapp') || o === 'open whatsapp 💬') {
+    openWA(); return;
+  }
+  if (o.includes('email') || o.includes('send me details')) {
+    openEmail(); return;
+  }
+  if (o.includes('discovery call') || o.includes('book a') || o.includes('book a free')) {
+    openDiscovery(); return;
+  }
+
+  // ── from START menu ──
+  if (ctx === 'start') {
+    if (o.includes('erp') || o.includes('management system')) {
+      typing(() => { addBot(FLOWS.erp_type.msg); showOpts(FLOWS.erp_type.opts, 'erp_type'); });
+    } else if (o.includes('website') || o.includes('seo')) {
+      typing(() => { addBot(FLOWS.website.msg); showOpts(FLOWS.website.opts, 'website'); });
+    } else if (o.includes('marketing')) {
+      typing(() => { addBot(FLOWS.marketing.msg); showOpts(FLOWS.marketing.opts, 'marketing'); });
+    } else if (o.includes('international')) {
+      typing(() => { addBot(FLOWS.international.msg); showOpts(FLOWS.international.opts, 'international'); });
+    } else if (o.includes('browsing') || o.includes('about') || o.includes('infresco')) {
+      typing(() => { addBot(FLOWS.about.msg); showOpts(FLOWS.about.opts, 'about'); });
+    }
+    return;
+  }
+
+  // ── from ERP TYPE menu — each gets a unique response ──
+  if (ctx === 'erp_type') {
+    let response = FLOWS.erp_type.msg;
+    if (o.includes('retail') || o.includes('shop')) {
+      response = ERP_RESPONSES['retail'];
+    } else if (o.includes('restaurant') || o.includes('food')) {
+      response = ERP_RESPONSES['restaurant'];
+    } else if (o.includes('real estate')) {
+      response = ERP_RESPONSES['real estate'];
+    } else if (o.includes('manufactur')) {
+      response = ERP_RESPONSES['manufacturing'];
+    } else if (o.includes('healthcare')) {
+      response = ERP_RESPONSES['healthcare'];
+    } else {
+      response = ERP_RESPONSES['default'];
+    }
+    typing(() => {
+      addBot(response);
+      setTimeout(() => showOpts(FLOWS.erp_next.opts, 'erp_next'), 600);
+    });
+    return;
+  }
+
+  // ── from ERP NEXT menu ──
+  if (ctx === 'erp_next') {
+    if (o.includes('quote')) {
+      typing(() => { addBot(FLOWS.pricing_local.msg); showOpts(FLOWS.pricing_local.opts, 'closing'); });
+    } else if (o.includes('example') || o.includes('work')) {
+      typing(() => { addBot("We have built:\n\n• Gym Management ERP — tracks members, payments, attendance, and reports. Live today.\n• Solar Shop ERP — inventory, orders, and sales. Live today.\n• Flour Mill App — production and delivery management. In development.\n\nAll built from scratch in Java + MySQL for real businesses."); setTimeout(() => showOpts(["Get a quote for my business", "Talk on WhatsApp", "Send me more details by email"], 'closing'), 800); });
+    } else if (o.includes('how long')) {
+      typing(() => { addBot(FLOWS.how_long.msg); showOpts(FLOWS.how_long.opts, 'closing'); });
+    } else if (o.includes('whatsapp') || o.includes('talk')) {
+      openWA();
+    }
+    return;
+  }
+
+  // ── from WEBSITE menu ──
+  if (ctx === 'website') {
+    if (o.includes('scratch') || o.includes('new website')) {
+      typing(() => { addBot(FLOWS.website_new.msg); showOpts(FLOWS.website_new.opts, 'website_type'); });
+    } else if (o.includes('existing') || o.includes('not working')) {
+      typing(() => { addBot(FLOWS.website_existing.msg); showOpts(FLOWS.website_existing.opts, 'website_problem'); });
+    } else if (o.includes('seo') || o.includes('rank')) {
+      typing(() => { addBot("SEO is one of our core services. We do keyword research, on-page optimisation, Google Business Profile setup, and monthly SEO reports.\n\nSEO results typically show within 60 to 90 days and then compound month after month — bringing you leads without paying for ads."); setTimeout(() => showOpts(["What does SEO cost?", "Talk on WhatsApp", "Tell me more"], 'seo_next'), 700); });
+    } else if (o.includes('marketing')) {
+      typing(() => { addBot(FLOWS.marketing.msg); showOpts(FLOWS.marketing.opts, 'marketing'); });
+    }
+    return;
+  }
+
+  // ── from WEBSITE TYPE / PROBLEM ──
+  if (ctx === 'website_type' || ctx === 'website_problem') {
+    typing(() => {
+      addBot("Perfect — we have built websites for exactly that type of business. The next step is a free 20-minute call where we look at your requirements and give you a fixed price and timeline.\n\nHow would you like to connect?");
+      showOpts(["Talk on WhatsApp", "Book a free call", "Send details by email"], 'closing');
+    });
+    return;
+  }
+
+  // ── from MARKETING menu ──
+  if (ctx === 'marketing') {
+    typing(() => { addBot(FLOWS.marketing_next.msg); showOpts(FLOWS.marketing_next.opts, 'marketing_next'); });
+    return;
+  }
+
+  // ── from MARKETING NEXT ──
+  if (ctx === 'marketing_next') {
+    if (o.includes('cost') || o.includes('price')) {
+      typing(() => { addBot(FLOWS.pricing_local.msg); showOpts(FLOWS.pricing_local.opts, 'closing'); });
+    } else if (o.includes('whatsapp')) {
+      openWA();
+    } else if (o.includes('email')) {
+      openEmail();
+    } else if (o.includes('results')) {
+      typing(() => { addBot("Our first digital marketing client signed after seeing our proposal and approach. We track every metric — website traffic, social reach, leads generated, and email performance — and report to you every morning.\n\nResults vary by business but we typically see measurable improvement in website traffic within the first 30 days."); setTimeout(() => showOpts(["Talk on WhatsApp", "What does it cost?"], 'closing'), 800); });
+    }
+    return;
+  }
+
+  // ── from INTERNATIONAL menu ──
+  if (ctx === 'international') {
+    if (o.includes('how does') || o.includes('remote') || o.includes('process')) {
+      typing(() => { addBot(FLOWS.international_process.msg); showOpts(FLOWS.international_process.opts, 'intl_next'); });
+    } else if (o.includes('price') || o.includes('usd')) {
+      typing(() => { addBot(FLOWS.international_pricing.msg); showOpts(FLOWS.international_pricing.opts, 'intl_next'); });
+    } else if (o.includes('previous') || o.includes('work') || o.includes('example')) {
+      typing(() => { addBot("Our delivered projects:\n\n• Gym Management ERP — live, running in a real gym business today\n• Solar Shop ERP — live, running in a solar equipment retailer today\n• Flour Mill App — in active development\n• First multi-business digital marketing client — signed\n\nAll built from scratch. All delivered on time."); setTimeout(() => showOpts(["Get a quote", "Book a call", "Send me details by email"], 'intl_next'), 800); });
+    } else if (o.includes('get started') || o.includes('started')) {
+      typing(() => { addBot(FLOWS.closing_intl.msg); showOpts(FLOWS.closing_intl.opts, 'intl_closing'); });
+    }
+    return;
+  }
+
+  // ── from INTL NEXT ──
+  if (ctx === 'intl_next' || ctx === 'intl_closing') {
+    if (o.includes('quote') || o.includes('custom')) {
+      typing(() => { addBot("To give you an accurate quote we need to understand your requirements. The fastest way is a brief email to " + AGENT_EMAIL + " describing what you need. We will reply within 24 hours with a fixed price proposal."); });
+    } else if (o.includes('call') || o.includes('discovery')) {
+      openDiscovery();
+    } else if (o.includes('email')) {
+      openEmail();
+    } else if (o.includes('whatsapp')) {
+      openWA();
+    }
+    return;
+  }
+
+  // ── from ABOUT menu ──
+  if (ctx === 'about') {
+    if (o.includes('project') || o.includes('website')) {
+      typing(() => { addBot("You can see all our projects on the website — scroll to the Projects section. We have detailed descriptions of the Gym ERP, Solar Shop ERP, and the Flour Mill App currently in development."); setTimeout(() => showOpts(["How much do you charge?", "I want to work with Infresco", "Talk on WhatsApp"], 'about_next'), 800); });
+    } else if (o.includes('charge') || o.includes('price') || o.includes('cost')) {
+      typing(() => { addBot(FLOWS.pricing_local.msg); showOpts(FLOWS.pricing_local.opts, 'closing'); });
+    } else if (o.includes('work with') || o.includes('started')) {
+      typing(() => { addBot(FLOWS.closing_local.msg); showOpts(FLOWS.closing_local.opts, 'closing'); });
+    } else if (o.includes('founders') || o.includes('directly') || o.includes('talk')) {
+      openWA();
+    }
+    return;
+  }
+
+  // ── generic closing context ──
+  if (ctx === 'closing' || ctx === 'about_next' || ctx === 'seo_next' || ctx === 'wa_only') {
+    if (o.includes('whatsapp') || o.includes('talk')) { openWA(); }
+    else if (o.includes('email') || o.includes('send')) { openEmail(); }
+    else if (o.includes('call') || o.includes('book')) { openDiscovery(); }
+    else if (o.includes('cost') || o.includes('price') || o.includes('quote')) {
+      typing(() => { addBot(FLOWS.pricing_local.msg); showOpts(FLOWS.pricing_local.opts, 'closing'); });
+    }
+    return;
+  }
+
+  // ── fallback ──
+  typing(() => {
+    addBot("Thanks for that. The fastest way to get a precise answer is to speak with our team directly — they can answer anything in minutes.");
+    setTimeout(() => showOpts(["Talk on WhatsApp 💬", "Send an email", "Book a free call"], 'closing'), 800);
+  });
+}
+
+// ── typed input handler ────────────────────────────────
 function agentSend() {
   const input = document.getElementById('agentInput');
   const val   = input.value.trim();
   if (!val) return;
   input.value = '';
-  addUser(val); clearOpts();
+  addUser(val);
+  clearOpts();
   const l = val.toLowerCase();
 
   if (l.includes('price') || l.includes('cost') || l.includes('how much') || l.includes('charge')) {
-    typing(() => { addBot(FLOWS.pricing.msg); showOpts(FLOWS.pricing.opts, 'pricing'); });
+    typing(() => { addBot(FLOWS.pricing_local.msg); showOpts(FLOWS.pricing_local.opts, 'closing'); });
 
-  } else if (l.includes('hello') || l.includes('hi') || l.includes('hey') || l.includes('salam')) {
-    typing(() => { addBot("Hi there! 👋 Great to hear from you. What can I help you with today?"); }, 600);
-    setTimeout(() => showOpts(FLOWS.start.opts, 'start'), 1500);
+  } else if (l.includes('hello') || l.includes('hi') || l.includes('hey') || l.includes('salam') || l.includes('assalam')) {
+    typing(() => addBot("Wa alaikum assalam! 👋 Welcome to Infresco. What can we help you with today?"), 500);
+    setTimeout(() => showOpts(FLOWS.start.opts, 'start'), 1400);
 
-  } else if (l.includes('erp') || l.includes('system') || l.includes('software')) {
-    typing(() => { addBot(FLOWS.erp.msg); showOpts(FLOWS.erp.opts, 'erp'); });
+  } else if (l.includes('different') || l.includes('why infresco') || l.includes('why choose') || l.includes('better than')) {
+    typing(() => { addBot(FLOWS.different.msg); showOpts(["I want to work with Infresco", "Talk on WhatsApp", "Book a free call"], 'closing'); });
 
-  } else if (l.includes('website') || l.includes('seo')) {
+  } else if (l.includes('how long') || l.includes('timeline') || l.includes('how fast') || l.includes('deadline')) {
+    typing(() => { addBot(FLOWS.how_long.msg); showOpts(FLOWS.how_long.opts, 'closing'); });
+
+  } else if (l.includes('erp') || l.includes('management system') || l.includes('software') || l.includes('system')) {
+    typing(() => { addBot(FLOWS.erp_type.msg); showOpts(FLOWS.erp_type.opts, 'erp_type'); });
+
+  } else if (l.includes('website') || l.includes('seo') || l.includes('google')) {
     typing(() => { addBot(FLOWS.website.msg); showOpts(FLOWS.website.opts, 'website'); });
 
-  } else if (l.includes('pakistan') || l.includes('karachi')) {
-    typing(() => addBot("We are based in Karachi, Pakistan (PKT — UTC+5). We work with both local and international clients. What would you like to build?"), 700);
-    setTimeout(() => showOpts(FLOWS.start.opts, 'start'), 1700);
+  } else if (l.includes('marketing') || l.includes('social media') || l.includes('instagram') || l.includes('facebook')) {
+    typing(() => { addBot(FLOWS.marketing.msg); showOpts(FLOWS.marketing.opts, 'marketing'); });
 
-  } else if (l.includes('thank') || l.includes('thanks') || l.includes('shukriya')) {
-    typing(() => addBot("You're welcome! 😊 Feel free to reach out anytime. We are always happy to help."), 600);
+  } else if (l.includes('uae') || l.includes('dubai') || l.includes('uk') || l.includes('usa') || l.includes('abroad') || l.includes('international') || l.includes('outside pakistan')) {
+    typing(() => { addBot(FLOWS.international.msg); showOpts(FLOWS.international.opts, 'international'); });
+
+  } else if (l.includes('pakistan') || l.includes('karachi') || l.includes('lahore') || l.includes('islamabad')) {
+    typing(() => addBot("We are based in Karachi, Pakistan (PKT — UTC+5). We serve both local Pakistani clients and international clients remotely. What would you like to build?"), 600);
+    setTimeout(() => showOpts(FLOWS.start.opts, 'start'), 1600);
+
+  } else if (l.includes('thank') || l.includes('thanks') || l.includes('shukriya') || l.includes('شکریہ')) {
+    typing(() => addBot("You are welcome! 😊 We are always happy to help. Feel free to reach out anytime."), 500);
+
+  } else if (l.includes('restaurant') || l.includes('gym') || l.includes('shop') || l.includes('clinic') || l.includes('hotel')) {
+    typing(() => {
+      let key = 'default';
+      if (l.includes('restaurant')) key = 'restaurant';
+      else if (l.includes('retail') || l.includes('shop')) key = 'retail';
+      else if (l.includes('healthcare') || l.includes('clinic')) key = 'healthcare';
+      addBot("We can definitely build a system for that.\n\n" + ERP_RESPONSES[key]);
+      setTimeout(() => showOpts(FLOWS.erp_next.opts, 'erp_next'), 700);
+    });
+
+  } else if (l.includes('whatsapp') || l.includes('contact') || l.includes('call')) {
+    openWA();
+
+  } else if (l.includes('email')) {
+    openEmail();
 
   } else {
-    typing(() => addBot("Thanks for your message! For the quickest response, our team is on WhatsApp. Or tell me more about what you need and I'll point you in the right direction."), 900);
-    setTimeout(() => showOpts(FLOWS.closing.opts, 'closing'), 1900);
+    typing(() => addBot("Good question — let me connect you with our team who can give you a precise answer in minutes."), 700);
+    setTimeout(() => showOpts(["Talk on WhatsApp 💬", "Send an email", "Book a free call"], 'closing'), 1600);
   }
 }
 
-// Auto-notify after 40 seconds if agent hasn't been opened
+// ── whatsapp float position ────────────────────────────
+const waFloat = document.getElementById('waFloat');
+
+function updateWaPosition() {
+  if (!waFloat) return;
+  if (window.innerWidth < 480 && agentOpen) {
+    waFloat.style.bottom = '440px';
+  } else {
+    waFloat.style.bottom = '90px';
+  }
+}
+
+const _origToggle = toggleAgent;
+window.toggleAgent = function () {
+  _origToggle();
+  updateWaPosition();
+};
+
+waFloat.style.opacity = '0';
+waFloat.style.transform = 'scale(0.8)';
+waFloat.style.transition = 'opacity .4s ease, transform .4s ease';
+setTimeout(() => {
+  waFloat.style.opacity = '1';
+  waFloat.style.transform = 'scale(1)';
+}, 3000);
+
+// ── auto notify ────────────────────────────────────────
 setTimeout(() => {
   if (!agentOpen && !agentStarted) {
     const notif = document.getElementById('agentNotif');
     if (notif) notif.style.animation = 'agent-pulse 1s infinite';
   }
 }, 40000);
+
 // ══ END AI AGENT ══════════════════════════════════════
 
 </script>
