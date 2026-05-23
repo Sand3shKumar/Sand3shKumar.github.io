@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How We Built a Custom Gym Management ERP System in Pakistan | Infresco</title>
+<meta name="description" content="A complete case study of how Infresco built a custom gym management ERP system for a 200+ member gym in Pakistan — replacing paper registers with one digital system.">
+<meta name="keywords" content="gym management system Pakistan, gym ERP Pakistan, gym software Karachi, membership management system, custom gym software Pakistan">
+<meta property="og:title" content="How We Built a Custom Gym Management ERP System in Pakistan">
+<meta property="og:description" content="From paper registers to a fully digital system — how Infresco delivered a complete gym management ERP in one month.">
+<meta property="og:url" content="https://infresco.me/gym-erp-case-study">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0A0E1A;
+  --ink2: #2D3348;
+  --ink3: #6B7490;
+  --rule: #E8EBF2;
+  --bg: #F8F9FC;
+  --white: #FFFFFF;
+  --blue: #1C52E3;
+  --blue2: #0F3BBF;
+  --red: #E8320D;
+  --green: #16A34A;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6%; height: 64px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-mark { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.logo-dot-r { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+.logo-dot-b { width: 10px; height: 14px; border-radius: 5px 5px 2px 8px; background: var(--blue); }
+.logo-text { font-size: 19px; font-weight: 700; color: var(--ink2); letter-spacing: -0.5px; }
+.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+.nav-links a { text-decoration: none; font-size: 13px; font-weight: 500; color: var(--ink3); transition: color .2s; }
+.nav-links a:hover { color: var(--blue); }
+.nav-cta { background: var(--blue) !important; color: var(--white) !important; padding: 8px 18px; border-radius: 8px; }
+
+/* ── HERO ── */
+.article-hero {
+  padding: 120px 6% 72px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.article-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(28,82,227,0.08);
+  border: 1px solid rgba(28,82,227,0.15);
+  border-radius: 40px;
+  padding: 5px 14px;
+  font-size: 11px; font-weight: 600;
+  color: var(--blue);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.article-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  margin-bottom: 20px;
+}
+
+.article-subtitle {
+  font-size: 18px;
+  color: var(--ink3);
+  line-height: 1.7;
+  margin-bottom: 36px;
+  max-width: 640px;
+}
+
+.article-meta {
+  display: flex; align-items: center; gap: 24px;
+  padding: 20px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex; flex-direction: column; gap: 2px;
+}
+
+.meta-label {
+  font-size: 10px; font-weight: 600;
+  color: var(--ink3);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+
+.meta-value {
+  font-size: 13px; font-weight: 500;
+  color: var(--ink2);
+}
+
+.meta-divider {
+  width: 1px; height: 36px;
+  background: var(--rule);
+}
+
+/* ── STATS STRIP ── */
+.stats-strip {
+  background: var(--ink);
+  padding: 48px 6%;
+  margin: 60px 0;
+}
+
+.stats-inner {
+  max-width: 860px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.stat-cell {
+  background: var(--ink);
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px; font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-num span { color: #5B8EF0; }
+
+.stat-label {
+  font-size: 11px; font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  line-height: 1.4;
+}
+
+/* ── ARTICLE BODY ── */
+.article-body {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 6% 80px;
+}
+
+.article-body h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 600;
+  color: var(--ink);
+  margin: 52px 0 16px;
+  letter-spacing: -0.3px;
+}
+
+.article-body h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px; font-weight: 600;
+  color: var(--ink);
+  margin: 32px 0 12px;
+}
+
+.article-body p {
+  font-size: 16px;
+  color: var(--ink2);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.article-body p strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Pull quote */
+.pull-quote {
+  border-left: 3px solid var(--blue);
+  padding: 20px 28px;
+  margin: 36px 0;
+  background: rgba(28,82,227,0.04);
+  border-radius: 0 10px 10px 0;
+}
+
+.pull-quote p {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-style: italic;
+  color: var(--ink);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.pull-quote cite {
+  font-size: 12px; font-weight: 600;
+  color: var(--ink3);
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+
+/* Problem/solution cards */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.info-card {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.info-card.problem { border-left: 3px solid var(--red); }
+.info-card.solution { border-left: 3px solid var(--green); }
+
+.info-card-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.info-card.problem .info-card-label { color: var(--red); }
+.info-card.solution .info-card-label { color: var(--green); }
+
+.info-card ul {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.info-card ul li {
+  font-size: 13.5px;
+  color: var(--ink2);
+  line-height: 1.55;
+  padding-left: 16px;
+  position: relative;
+}
+
+.info-card ul li::before {
+  content: '';
+  position: absolute; left: 0; top: 8px;
+  width: 6px; height: 6px; border-radius: 50%;
+}
+
+.info-card.problem ul li::before { background: var(--red); }
+.info-card.solution ul li::before { background: var(--green); }
+
+/* Tech stack */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.tech-item {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.tech-icon { font-size: 24px; margin-bottom: 8px; display: block; }
+.tech-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.tech-desc { font-size: 11px; color: var(--ink3); margin-top: 3px; }
+
+/* Result highlight */
+.result-box {
+  background: var(--ink);
+  border-radius: 16px;
+  padding: 40px;
+  margin: 36px 0;
+  color: white;
+}
+
+.result-box h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 600;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.result-list {
+  display: flex; flex-direction: column; gap: 12px;
+}
+
+.result-item {
+  display: flex; align-items: flex-start; gap: 12px;
+}
+
+.result-check {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: rgba(22,163,74,0.2);
+  color: #4ADE80;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+.result-text {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.6;
+}
+
+/* CTA section */
+.article-cta {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: 40px;
+  margin: 52px 0 0;
+  text-align: center;
+}
+
+.article-cta h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.article-cta p {
+  font-size: 15px;
+  color: var(--ink3);
+  margin-bottom: 24px;
+  max-width: 480px;
+  margin-left: auto; margin-right: auto;
+}
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--blue); color: var(--white);
+  text-decoration: none;
+  padding: 13px 24px; border-radius: 10px;
+  font-size: 14px; font-weight: 600;
+  transition: all .2s; margin: 4px;
+}
+
+.btn-primary:hover { background: var(--blue2); transform: translateY(-1px); }
+
+.btn-wa {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #25D366; color: white;
+  text-decoration: none;
+  padding: 13px 24px; border-radius: 10px;
+  font-size: 14px; font-weight: 600;
+  transition: all .2s; margin: 4px;
+}
+
+.btn-wa:hover { background: #1ebe57; transform: translateY(-1px); }
+
+/* Footer */
+footer {
+  background: var(--ink);
+  padding: 40px 6%;
+  text-align: center;
+}
+
+.footer-logo { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 12px; }
+.footer-copy { font-size: 13px; color: rgba(255,255,255,0.3); }
+.footer-links { display: flex; gap: 24px; justify-content: center; margin-top: 16px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: white; }
+
+/* Timeline */
+.timeline {
+  margin: 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.timeline-item:last-child { border-bottom: none; }
+
+.timeline-week {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding-top: 2px;
+}
+
+.timeline-content { font-size: 14px; color: var(--ink2); line-height: 1.6; }
+.timeline-content strong { color: var(--ink); font-weight: 600; }
+
+@media(max-width: 768px) {
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .article-meta { gap: 16px; }
+  .meta-divider { display: none; }
+}
+
+@media(max-width: 480px) {
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .tech-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://infresco.me" class="nav-logo">
+    <div class="logo-mark">
+      <div class="logo-dot-r"></div>
+      <div class="logo-dot-b"></div>
+    </div>
+    <span class="logo-text">infresco</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="https://infresco.me/#services">Services</a></li>
+    <li><a href="https://infresco.me/#projects">Projects</a></li>
+    <li><a href="https://infresco.me/#team">Team</a></li>
+    <li><a href="https://infresco.me/#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<!-- ARTICLE HERO -->
+<div class="article-hero">
+  <div class="article-tag">Case Study — ERP Development</div>
+
+  <h1 class="article-title">
+    How We Built a Custom Gym Management ERP System in Pakistan
+  </h1>
+
+  <p class="article-subtitle">
+    From paper registers and manual headaches to a fully digital management system — how Infresco replaced chaos with one platform for a 200+ member gym in Karachi.
+  </p>
+
+  <div class="article-meta">
+    <div class="meta-item">
+      <span class="meta-label">Published by</span>
+      <span class="meta-value">Infresco Team</span>
+    </div>
+    <div class="meta-divider"></div>
+    <div class="meta-item">
+      <span class="meta-label">Industry</span>
+      <span class="meta-value">Fitness & Gym Management</span>
+    </div>
+    <div class="meta-divider"></div>
+    <div class="meta-item">
+      <span class="meta-label">Location</span>
+      <span class="meta-value">Karachi, Pakistan</span>
+    </div>
+    <div class="meta-divider"></div>
+    <div class="meta-item">
+      <span class="meta-label">Delivery time</span>
+      <span class="meta-value">1 month</span>
+    </div>
+    <div class="meta-divider"></div>
+    <div class="meta-item">
+      <span class="meta-label">Status</span>
+      <span class="meta-value" style="color:#16A34A;font-weight:600">✓ Live in production</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-cell">
+      <div class="stat-num">200<span>+</span></div>
+      <div class="stat-label">Members tracked in the system</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">1</div>
+      <div class="stat-label">Month from start to delivery</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Paper registers needed today</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Core modules delivered</div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body">
+
+  <h2>The situation before Infresco</h2>
+
+  <p>
+    When the gym owner first approached us, the problem was clear. Managing a gym with over 200 members entirely on paper registers was creating daily headaches. Tracking who had paid, who had not, which memberships were active, and who had attended that day — all of it was done manually, all of it was prone to errors, and all of it was consuming time that should have been spent running the business.
+  </p>
+
+  <p>
+    In the gym owner's own words — <strong>"Paper waste thiyan piya ae register sambhaliro piyo pae"</strong> — the registers were a burden. Every day started with shuffling through papers. Every month ended with reconciling payments manually. There was no single source of truth for the business.
+  </p>
+
+  <div class="pull-quote">
+    <p>"When we got the software, after some time we wanted some changes in it, so we paid an amount for those changes. Now it is running very well, and our workload has become less."</p>
+    <cite>— Gym Owner, Karachi</cite>
+  </div>
+
+  <div class="two-col">
+    <div class="info-card problem">
+      <div class="info-card-label">Before Infresco</div>
+      <ul>
+        <li>Paper registers for every member record</li>
+        <li>Manual payment tracking — prone to errors</li>
+        <li>No way to quickly check membership status</li>
+        <li>Reports required hours of manual counting</li>
+        <li>Owner personally managing every record</li>
+        <li>No visibility into monthly performance</li>
+      </ul>
+    </div>
+    <div class="info-card solution">
+      <div class="info-card-label">After Infresco</div>
+      <ul>
+        <li>All 200+ members managed digitally</li>
+        <li>Payments tracked automatically with records</li>
+        <li>Instant membership status lookup</li>
+        <li>Reports generated in seconds</li>
+        <li>Owner accesses everything from one screen</li>
+        <li>Complete monthly performance visibility</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>What we built</h2>
+
+  <p>
+    Infresco built a complete, custom gym management ERP system from scratch — designed specifically around how this gym operates, not a generic template adapted for the purpose.
+  </p>
+
+  <p>
+    The system was built with one guiding principle: <strong>everything the gym owner needs to run his business should live in one place.</strong> No switching between apps, no cross-referencing paper records, no manual calculations.
+  </p>
+
+  <h3>Membership Management</h3>
+  <p>
+    The core of the system is a complete member database. Every member has a digital profile — their personal details, membership plan, start date, expiry date, and complete payment history. The owner can search any member instantly by name or membership number and see their complete record in seconds.
+  </p>
+
+  <h3>Payment Tracking</h3>
+  <p>
+    Every payment is recorded digitally the moment it is received. The system tracks which members have paid for the current month, which are overdue, and generates a complete monthly revenue summary automatically. What used to take hours of manual counting now takes seconds.
+  </p>
+
+  <h3>Reporting</h3>
+  <p>
+    The system generates complete reports on demand — active members, expired memberships, monthly revenue, payment history per member, and attendance summaries. The owner has real visibility into his business numbers for the first time.
+  </p>
+
+  <h2>How we built it — the tech stack</h2>
+
+  <p>
+    We built the system using the same proven technology stack we use for all our ERP projects — reliable, fast, and built to run without issues in a real business environment.
+  </p>
+
+  <div class="tech-grid">
+    <div class="tech-item">
+      <span class="tech-icon">☕</span>
+      <div class="tech-name">Java</div>
+      <div class="tech-desc">Core application logic</div>
+    </div>
+    <div class="tech-item">
+      <span class="tech-icon">🗄️</span>
+      <div class="tech-name">MySQL</div>
+      <div class="tech-desc">Member & payment data</div>
+    </div>
+    <div class="tech-item">
+      <span class="tech-icon">🖥️</span>
+      <div class="tech-name">JavaFX</div>
+      <div class="tech-desc">Desktop interface</div>
+    </div>
+    <div class="tech-item">
+      <span class="tech-icon">📄</span>
+      <div class="tech-name">PDF Reports</div>
+      <div class="tech-desc">Printable summaries</div>
+    </div>
+  </div>
+
+  <p>
+    The choice of Java and MySQL was deliberate — we have proven this stack works reliably in Pakistani business environments, it runs smoothly on standard hardware, and it requires no internet connection to function. The gym owner's data stays on their own machine, private and secure.
+  </p>
+
+  <h2>The delivery timeline</h2>
+
+  <p>
+    From the first meeting to final delivery took one month. We worked in focused stages — requirements first, then building, then testing with real data, then refinement based on the owner's feedback.
+  </p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-week">Week 1</div>
+      <div class="timeline-content"><strong>Requirements and database design.</strong> Understanding the gym's exact workflow, designing the member and payment database schema, setting up the project structure.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-week">Week 2</div>
+      <div class="timeline-content"><strong>Core system build.</strong> Member management module, payment recording system, and the main dashboard interface.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-week">Week 3</div>
+      <div class="timeline-content"><strong>Reporting and refinement.</strong> Report generation, membership expiry tracking, and UI refinements based on initial feedback.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-week">Week 4</div>
+      <div class="timeline-content"><strong>Testing, changes, and delivery.</strong> Real data testing, owner-requested modifications, final delivery, and training the owner on using the system.</div>
+    </div>
+  </div>
+
+  <h2>What happened after delivery</h2>
+
+  <p>
+    After the initial delivery the gym owner requested some specific changes — adjustments to how certain features worked based on actual daily use. This is completely normal and expected. We made those changes, charged a reasonable amount for the additional work, and the system has been running smoothly ever since.
+  </p>
+
+  <div class="result-box">
+    <h3>Results — in the gym owner's own words</h3>
+    <div class="result-list">
+      <div class="result-item">
+        <div class="result-check">✓</div>
+        <div class="result-text">Workload has significantly reduced — the owner no longer spends hours on manual record keeping every day</div>
+      </div>
+      <div class="result-item">
+        <div class="result-check">✓</div>
+        <div class="result-text">All 200+ members managed in one digital system — no more paper registers</div>
+      </div>
+      <div class="result-item">
+        <div class="result-check">✓</div>
+        <div class="result-text">Payments tracked automatically — complete visibility into who has paid and who has not</div>
+      </div>
+      <div class="result-item">
+        <div class="result-check">✓</div>
+        <div class="result-text">System is running very well — stable, reliable, and used daily by the gym owner</div>
+      </div>
+      <div class="result-item">
+        <div class="result-check">✓</div>
+        <div class="result-text">Delivered in one month — from first meeting to live production system</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>What we learned from this project</h2>
+
+  <p>
+    Every project teaches us something. From the gym management system we confirmed one important truth about building software for Pakistani business owners: <strong>the most important features are often the simplest ones.</strong>
+  </p>
+
+  <p>
+    The gym owner did not need a complex system with dozens of features. He needed one thing done well — his member and payment records organised, searchable, and reliable. Building that one thing with quality and reliability created more value than a feature-heavy system would have.
+  </p>
+
+  <p>
+    We also learned that post-delivery refinement is a normal and healthy part of the process. Real users find edge cases that no requirements document ever anticipates. The willingness to make changes after delivery — and to price those changes fairly — is what builds long-term client relationships.
+  </p>
+
+  <h2>Does your business need a similar system?</h2>
+
+  <p>
+    If you are running a gym, a fitness studio, a sports club, or any membership-based business in Pakistan — and you are still managing members and payments on paper or Excel — we can build you exactly what we built here.
+  </p>
+
+  <p>
+    Every system we build is custom — designed around how your business actually works, not a generic template. We deliver in weeks, not months, and we stay available after delivery for any changes or support you need.
+  </p>
+
+  <!-- CTA -->
+  <div class="article-cta">
+    <h3>Ready to digitalise your business?</h3>
+    <p>Tell us what you need. We respond within 24 hours with a clear plan — no jargon, no obligation.</p>
+    <div>
+      <a href="https://infresco.me/#contact" class="btn-primary">Start a conversation →</a>
+      <a href="https://wa.me/923012702169?text=Hi%20Infresco%2C%20I%20read%20your%20gym%20ERP%20case%20study%20and%20I%20am%20interested%20in%20a%20similar%20system%20for%20my%20business." class="btn-wa">💬 WhatsApp us</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="logo-mark">
+      <div class="logo-dot-r"></div>
+      <div class="logo-dot-b"></div>
+    </div>
+    <span class="logo-text" style="color:white">infresco</span>
+  </div>
+  <p class="footer-copy">© 2026 Infresco. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="https://infresco.me">Home</a>
+    <a href="https://infresco.me/#services">Services</a>
+    <a href="https://infresco.me/#projects">Projects</a>
+    <a href="https://infresco.me/#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
