@@ -126,9 +126,6 @@ nav{
 }
 
 /* ── HERO ── */
-
-
-
 .hero{
   min-height:100vh;
   display:flex;align-items:center;
@@ -423,8 +420,6 @@ section{padding:100px 6%}
   display:flex;align-items:center;gap:6px;
 }
 
-
-
 /* ── SERVICES ── */
 #services{background:var(--white)}
 
@@ -551,11 +546,11 @@ section{padding:100px 6%}
 
 .project-subtitle {
   font-size: 12px;
-  color: #888; /* or whatever your muted text color variable is */
+  color: #888;
   margin-top: 2px;
   margin-bottom: 6px;
 }
-  
+
 .project-desc{
   font-size:13px;color:var(--ink3);line-height:1.7;
   margin-bottom:16px;
@@ -753,36 +748,183 @@ section{padding:100px 6%}
   font-size:12px;color:rgba(255,255,255,0.4);
 }
 
-/* ── CONTACT ── */
-#contact{background:var(--white)}
+/* ── CONTACT — NEW REDESIGNED STYLES ── */
+#contact { background: var(--white); }
 
-.contact-grid{
-  display:grid;grid-template-columns:1fr 1.2fr;
-  gap:80px;align-items:start;
+.cs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
 }
 
-.contact-info-item{
-  display:flex;align-items:flex-start;gap:16px;
-  margin-bottom:28px;
+.cs-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 0 0 14px;
 }
 
-.contact-info-icon{
-  width:44px;height:44px;border-radius:10px;
-  background:rgba(28,82,227,0.08);
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;flex-shrink:0;
+.cs-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--ink);
+  margin: 0 0 16px;
+  letter-spacing: -0.5px;
 }
 
-.contact-info-label{
-  font-size:12px;font-weight:600;color:var(--blue);
-  text-transform:uppercase;letter-spacing:0.08em;
-  margin-bottom:3px;
+.cs-sub {
+  font-size: 15px;
+  color: var(--ink3);
+  line-height: 1.7;
+  margin: 0 0 32px;
 }
 
-.contact-info-value{
-  font-size:14px;color:var(--ink2);line-height:1.5;
+/* Contact item cards */
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  transition: border-color .2s;
+}
+
+.contact-item:hover {
+  border-color: rgba(28, 82, 227, 0.25);
+}
+
+.contact-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-icon-box svg {
+  width: 18px;
+  height: 18px;
+}
+
+.contact-item-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink3);
+  margin: 0 0 2px;
+}
+
+.contact-item-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+}
+
+.contact-item-note {
+  font-size: 12px;
+  color: var(--ink3);
+  margin: 2px 0 0;
+}
+
+/* International card */
+.intl-card {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.intl-card-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 0 0 20px;
+}
+
+.trust-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.trust-row:first-of-type { padding-top: 0; }
+
+.trust-row:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.trust-icon-box {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.trust-icon-box svg {
+  width: 16px;
+  height: 16px;
+}
+
+.trust-row-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 3px;
+}
+
+.trust-row-desc {
+  font-size: 12px;
+  color: var(--ink3);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Country pills */
+.country-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+}
+
+.cpill {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #E6F1FB;
+  color: #0C447C;
+  border: 1px solid #B5D4F4;
+}
+
+/* Contact form */
 .contact-form{
   background:var(--bg);
   border:1px solid var(--rule);
@@ -970,8 +1112,7 @@ footer{
   .hero-visual{display:none}
   .hero{padding:100px 6% 60px}
 
-  .contact-grid{grid-template-columns:1fr}
-  .form-row{grid-template-columns:1fr}
+  .cs-grid { grid-template-columns: 1fr; gap: 36px; }
 
   .footer-top{grid-template-columns:1fr 1fr}
 
@@ -983,7 +1124,9 @@ footer{
 @media(max-width:480px){
   .footer-top{grid-template-columns:1fr}
   .hero-stats{flex-direction:column;gap:20px}
+  .form-row { grid-template-columns: 1fr; }
 }
+
 /* ── AI AGENT ── */
 .agent-bubble{position:fixed;bottom:24px;right:24px;z-index:999;cursor:pointer}
 .agent-btn{width:54px;height:54px;border-radius:50%;background:#1C52E3;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(28,82,227,0.45);transition:all .3s;position:relative;font-size:22px}
@@ -1026,7 +1169,6 @@ footer{
 }
 
 /* ── CURRENCY SWITCHER ── */
-
 @media(max-width: 768px) {
   .curr-switcher { display: none; }
   .pricing-teaser { grid-template-columns: 1fr; gap: 28px; padding: 24px; }
@@ -1150,8 +1292,6 @@ footer{
 }
 
 /* ── FOUNDER STORY SECTION ── */
-
-
 #story {
   background: #0A0E1A;
   padding: 96px 6%;
@@ -1194,7 +1334,6 @@ footer{
   align-items: start;
 }
 
-/* Left — narrative text */
 .story-text p {
   font-size: 15px;
   color: rgba(255,255,255,0.6);
@@ -1235,7 +1374,6 @@ footer{
   letter-spacing: 0.04em;
 }
 
-/* Right — milestones timeline */
 .story-milestones {
   display: flex;
   flex-direction: column;
@@ -1263,8 +1401,6 @@ footer{
   line-height: 1;
   padding-top: 3px;
 }
-
-.milestone-content {}
 
 .milestone-title {
   font-size: 14px;
@@ -1305,7 +1441,6 @@ footer{
   color: #FCD34D;
 }
 
-/* Story stats row */
 .story-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1455,7 +1590,6 @@ footer{
   color: #6B7490;
 }
 
-/* Info strip below the grid */
 .payments-note {
   margin-top: 36px;
   padding: 20px 24px;
@@ -1497,8 +1631,6 @@ footer{
 }
 
 /* ── INTERNATIONAL CLIENT ADDITIONS ── */
-
-/* Timezone indicator */
 .hero-tz {
   display: inline-flex;
   align-items: center;
@@ -1526,7 +1658,6 @@ footer{
   50%      { opacity: 0.5; transform: scale(0.8); }
 }
 
-/* Countries served strip */
 .countries-strip {
   background: #0A0E1A;
   padding: 28px 6%;
@@ -1574,7 +1705,6 @@ footer{
 
 .country-flag { font-size: 16px; }
 
-/* Trust badges row */
 .trust-strip {
   background: #ffffff;
   padding: 32px 6%;
@@ -1629,38 +1759,6 @@ footer{
 
 .trust-badge-icon { font-size: 15px; }
 
-/* International contact additions */
-.contact-intl-info {
-  margin-top: 24px;
-  padding: 16px 20px;
-  background: #F8F9FC;
-  border: 1px solid #E8EBF2;
-  border-radius: 10px;
-}
-
-.contact-intl-title {
-  font-size: 12px;
-  font-weight: 600;
-  color: #1C52E3;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 10px;
-}
-
-.contact-intl-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12.5px;
-  color: #6B7490;
-  margin-bottom: 7px;
-  line-height: 1.5;
-}
-
-.contact-intl-row:last-child { margin-bottom: 0; }
-.contact-intl-row span { font-size: 14px; }
-
-/* Country dropdown in form */
 .form-input option {
   font-family: 'Sora', sans-serif;
   background: #ffffff;
@@ -1679,7 +1777,6 @@ footer{
   }
   .countries-list { gap: 16px; }
 }
-
 </style>
 </head>
 <body>
@@ -1708,10 +1805,6 @@ footer{
   <button class="nav-toggle" id="navToggle" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
-
-
-
-
 </nav>
 
 <!-- ══ HERO ══ -->
@@ -1736,7 +1829,6 @@ footer{
         Infresco delivers custom ERP systems, websites, and digital marketing — so business owners focus on their business, not their software.
       </p>
 
-
 <!-- TIMEZONE INDICATOR -->
 <div class="hero-tz">
   <span class="tz-dot"></span>
@@ -1744,22 +1836,20 @@ footer{
 </div>
 
       <div class="hero-actions">
-        
         <a href="#contact" class="btn-primary">
-          
           Start a project
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="#projects" class="btn-secondary">See our work</a>
       </div>
       <a
-      href="https://wa.me/923012702169?text=Hi%20Infresco%2C%20I%27d%20like%20to%20discuss%20a%20project."
-  class="btn-wa"
-  target="_blank"
-  rel="noopener"
->
-  💬 WhatsApp us
-</a>
+        href="https://wa.me/923012702169?text=Hi%20Infresco%2C%20I%27d%20like%20to%20discuss%20a%20project."
+        class="btn-wa"
+        target="_blank"
+        rel="noopener"
+      >
+        💬 WhatsApp us
+      </a>
 
       <div class="hero-stats">
         <div>
@@ -1825,7 +1915,6 @@ footer{
     </div>
   </div>
 </section>
-
 
 <!-- ══ LOGOS STRIP ══ -->
 <div class="logos-strip">
@@ -2132,7 +2221,6 @@ footer{
       </div>
     </div>
 
-    
 <!-- PRICING TEASER — no prices shown yet -->
 <div class="pricing-teaser">
   <div>
@@ -2290,7 +2378,6 @@ footer{
       <div class="team-card fade-up">
         <div class="team-avatar">F</div>
         <div class="team-name">Farman Memon</div>
-        <!-- REPLACE: Change "Founder One" to your actual name -->
         <div class="team-role">Co-Founder</div>
         <div class="team-bio">Computer Science student with expertise in Java, 
           Python, Database systems, and full-stack development. 
@@ -2304,7 +2391,6 @@ footer{
       <div class="team-card fade-up">
         <div class="team-avatar">S</div>
         <div class="team-name">Sandesh Kumar</div>
-        <!-- REPLACE: Change "Founder Two" to your partner's actual name -->
         <div class="team-role">Co-Founder</div>
         <div class="team-bio">Computer Science student specialising in Java, 
           Database systems, client relations, and digital 
@@ -2460,89 +2546,145 @@ footer{
 </section>
 
 
-<!-- ══ CONTACT ══ -->
+<!-- ══ CONTACT — REDESIGNED ══ -->
 <section id="contact">
   <div class="section-inner">
-    <div class="section-label">Get in touch</div>
-    <h2 class="section-title">Ready to build<br>something together?</h2>
 
-    <div class="contact-grid">
+    <div class="cs-grid">
+
+      <!-- ── Left column ── -->
       <div>
-        <p class="section-sub">Tell us what you need. We will respond within 24 hours with a clear plan — no jargon, no fluff.</p>
+        <p class="cs-eyebrow">Get in touch</p>
+        <h2 class="cs-title">Ready to build something together?</h2>
+        <p class="cs-sub">Tell us what you need. We'll respond within 24 hours with a clear plan — no jargon, no fluff.</p>
 
-        <div class="contact-info-item">
-          <div class="contact-info-icon">📧</div>
-          <div>
-            <div class="contact-info-label">Email</div>
-            <div class="contact-info-value">hello@infresco.me</div>
-            <!-- REPLACE with your actual email -->
+        <div class="contact-list">
+
+          <!-- Email -->
+          <div class="contact-item">
+            <div class="contact-icon-box" style="background:#E6F1FB;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="m2 7 10 7 10-7"/>
+              </svg>
+            </div>
+            <div>
+              <p class="contact-item-label">Email</p>
+              <p class="contact-item-value">hello@infresco.me</p>
+            </div>
+          </div>
+
+          <!-- WhatsApp -->
+          <div class="contact-item">
+            <div class="contact-icon-box" style="background:#EAF3DE;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#3B6D11" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="contact-item-label">WhatsApp</p>
+              <p class="contact-item-value">+92 XXX XXX XXXX</p>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="contact-item">
+            <div class="contact-icon-box" style="background:#FAEEDA;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#854F0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                <circle cx="12" cy="9" r="2.5"/>
+              </svg>
+            </div>
+            <div>
+              <p class="contact-item-label">Location</p>
+              <p class="contact-item-value">Karachi, Pakistan</p>
+              <p class="contact-item-note">Available remotely worldwide</p>
+            </div>
+          </div>
+
+          <!-- Response Time -->
+          <div class="contact-item">
+            <div class="contact-icon-box" style="background:#EEEDFE;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#534AB7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 7v5l3 3"/>
+              </svg>
+            </div>
+            <div>
+              <p class="contact-item-label">Response time</p>
+              <p class="contact-item-value">Within 24 hours guaranteed</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- International clients card -->
+        <div class="intl-card" style="margin-top: 24px;">
+          <p class="intl-card-label">For international clients</p>
+
+          <div class="trust-row">
+            <div class="trust-icon-box" style="background:#E6F1FB;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 7v5l3 3"/>
+              </svg>
+            </div>
+            <div>
+              <p class="trust-row-title">Timezone-friendly calls</p>
+              <p class="trust-row-desc">We're PKT (UTC+5) — we schedule calls to suit your timezone, not ours.</p>
+            </div>
+          </div>
+
+          <div class="trust-row">
+            <div class="trust-icon-box" style="background:#EAF3DE;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#3B6D11" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="5" width="20" height="14" rx="2"/>
+                <path d="M2 10h20"/>
+              </svg>
+            </div>
+            <div>
+              <p class="trust-row-title">Flexible payments</p>
+              <p class="trust-row-desc">Payoneer, Wise, SWIFT, and local bank transfer — pick what works for you.</p>
+            </div>
+          </div>
+
+          <div class="trust-row">
+            <div class="trust-icon-box" style="background:#FAEEDA;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#854F0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+              </svg>
+            </div>
+            <div>
+              <p class="trust-row-title">Written agreement first</p>
+              <p class="trust-row-desc">Every project starts with a clear contract — no surprises, ever.</p>
+            </div>
+          </div>
+
+          <div class="trust-row">
+            <div class="trust-icon-box" style="background:#EEEDFE;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#534AB7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="trust-row-title">Milestone-based billing</p>
+              <p class="trust-row-desc">50% upfront, 50% on delivery — your investment is always protected.</p>
+            </div>
+          </div>
+
+          <div class="country-pills">
+            <span class="cpill">🇦🇪 UAE</span>
+            <span class="cpill">🇬🇧 UK</span>
+            <span class="cpill">🇺🇸 USA</span>
+            <span class="cpill">🇸🇦 Saudi Arabia</span>
+            <span class="cpill">🌍 + more</span>
           </div>
         </div>
 
-        <div class="contact-info-item">
-          <div class="contact-info-icon">💬</div>
-          <div>
-            <div class="contact-info-label">WhatsApp</div>
-            <div class="contact-info-value">+92 XXX XXX XXXX</div>
-            <!-- REPLACE with your actual WhatsApp number -->
-          </div>
-        </div>
-
-        <div class="contact-info-item">
-          <div class="contact-info-icon">📍</div>
-          <div>
-            <div class="contact-info-label">Location</div>
-            <div class="contact-info-value">Karachi, Pakistan<br>Available remotely worldwide</div>
-          </div>
-        </div>
-
-        <div class="contact-info-item">
-          <div class="contact-info-icon">⏱️</div>
-          <div>
-            <div class="contact-info-label">Response time</div>
-            <div class="contact-info-value">Within 24 hours guaranteed</div>
-          </div>
-        </div>
       </div>
 
-      <div class="contact-grid">
-
-  <div>
-    
-    <!-- PASTE HERE — after last contact-info-item -->
-    <div class="contact-intl-info">
-      <div class="contact-intl-info">
-  <div class="contact-intl-title">For international clients</div>
-  <div class="contact-intl-row">
-    <span>🕐</span>
-    We are in PKT (UTC+5) — we schedule calls to suit your timezone
-  </div>
-  <div class="contact-intl-row">
-    <span>💳</span>
-    We accept Payoneer, Wise, SWIFT, and local bank transfer
-  </div>
-  <div class="contact-intl-row">
-    <span>📄</span>
-    All projects start with a written agreement — no surprises
-  </div>
-  <div class="contact-intl-row">
-    <span>🔒</span>
-    50% upfront, 50% on delivery — milestone-based for your protection
-  </div>
-  <div class="contact-intl-row">
-    <span>🌍</span>
-    We have worked remotely with clients in UAE, UK, USA and beyond
-  </div>
-</div>
-    </div>
-  </div>
-
-  
-
-</div>
-
-
-
+      <!-- ── Right column: contact form ── -->
       <div class="contact-form" id="contactForm">
         <div class="form-row">
           <div class="form-group">
@@ -2566,34 +2708,34 @@ footer{
         </div>
 
         <div class="form-group">
-  <label class="form-label">Your country</label>
-  <select class="form-input" id="country">
-    <option value="">Select your country...</option>
-    <option>Pakistan</option>
-    <option>United Arab Emirates</option>
-    <option>Saudi Arabia</option>
-    <option>United Kingdom</option>
-    <option>United States</option>
-    <option>Canada</option>
-    <option>Australia</option>
-    <option>Other</option>
-  </select>
-</div>
+          <label class="form-label">Your country</label>
+          <select class="form-input" id="country">
+            <option value="">Select your country...</option>
+            <option>Pakistan</option>
+            <option>United Arab Emirates</option>
+            <option>Saudi Arabia</option>
+            <option>United Kingdom</option>
+            <option>United States</option>
+            <option>Canada</option>
+            <option>Australia</option>
+            <option>Other</option>
+          </select>
+        </div>
 
-<div class="form-group">
-  <label class="form-label">Service needed</label>
-  <select class="form-input" id="service">
-    <option value="">Select a service...</option>
-    <option>Custom ERP System</option>
-    <option>Website Development & SEO</option>
-    <option>Social Media Management</option>
-    <option>Data Analytics & Reporting</option>
-    <option>Email Marketing</option>
-    <option>AI Agent / Chatbot</option>
-    <option>Full Digital Growth Package</option>
-    <option>Something else</option>
-  </select>
-</div>
+        <div class="form-group">
+          <label class="form-label">Service needed</label>
+          <select class="form-input" id="service">
+            <option value="">Select a service...</option>
+            <option>Custom ERP System</option>
+            <option>Website Development & SEO</option>
+            <option>Social Media Management</option>
+            <option>Data Analytics & Reporting</option>
+            <option>Email Marketing</option>
+            <option>AI Agent / Chatbot</option>
+            <option>Full Digital Growth Package</option>
+            <option>Something else</option>
+          </select>
+        </div>
 
         <div class="form-group">
           <label class="form-label">Tell us about your business</label>
@@ -2605,22 +2747,23 @@ footer{
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
 
-        
-
         <div class="form-success" id="formSuccess">
           ✓ Message sent! We will get back to you within 24 hours.
         </div>
       </div>
-    </div>
+
+    </div><!-- end cs-grid -->
+
+    <a
+      href="https://wa.me/923012702169?text=Hi%20Infresco%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20discuss%20a%20project."
+      class="wa-contact-btn"
+      target="_blank"
+      rel="noopener"
+    >
+      💬 Or message us directly on WhatsApp
+    </a>
+
   </div>
-  <a
-          href="https://wa.me/923012702169?text=Hi%20Infresco%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20discuss%20a%20project."
-  class="wa-contact-btn"
-  target="_blank"
-  rel="noopener"
->
-  💬 Or message us directly on WhatsApp
-</a>
 </section>
 
 <!-- ══ FOOTER ══ -->
@@ -2686,8 +2829,6 @@ footer{
 
 <script>
 
-
-
 // Nav toggle
 const toggle = document.getElementById('navToggle');
 const links  = document.getElementById('navLinks');
@@ -2722,9 +2863,6 @@ window.addEventListener('scroll', () => {
     nav.style.boxShadow = 'none';
   }
 });
-
-
-
 
 // Form submit
 function submitForm() {
@@ -2799,7 +2937,6 @@ const AGENT_EMAIL = 'hello@infresco.me';
 let agentOpen    = false;
 let agentStarted = false;
 
-// ── specific responses per business type ──────────────
 const ERP_RESPONSES = {
   'retail':        "Perfect — we have built inventory and sales management systems for retail shops. We can track your stock, sales, customer records, and daily reports all in one system. How many staff members use the system daily?",
   'restaurant':    "Great — restaurants need order management, table tracking, staff scheduling, and daily sales reports. We build all of this into one clean dashboard your team can use from any device. Do you have one branch or multiple?",
@@ -2809,7 +2946,6 @@ const ERP_RESPONSES = {
   'default':       "No problem — we build custom systems for all types of businesses. Tell me more about what your business does and what problem you want the system to solve. We will design it around your exact workflow."
 };
 
-// ── flows ─────────────────────────────────────────────
 const FLOWS = {
   start: {
     msg: "Hi! 👋 I am Infresco's assistant. We build ERP systems, websites, and digital marketing for business owners.\n\nWhat brings you here today?",
@@ -2886,7 +3022,6 @@ const FLOWS = {
   }
 };
 
-// ── toggle ─────────────────────────────────────────────
 function toggleAgent() {
   agentOpen = !agentOpen;
   const w = document.getElementById('agentWindow');
@@ -2904,7 +3039,6 @@ function agentBegin() {
   setTimeout(() => showOpts(FLOWS.start.opts, 'start'), 1100);
 }
 
-// ── message helpers ────────────────────────────────────
 function addBot(text) {
   const el = document.createElement('div');
   el.className = 'agent-msg bot';
@@ -2952,7 +3086,6 @@ function showOpts(opts, ctx) {
   });
 }
 
-// ── action helpers ─────────────────────────────────────
 function openWA() {
   addBot("Opening WhatsApp now — our team will reply within 2 hours! 🚀");
   setTimeout(() => window.open(AGENT_WA, '_blank'), 600);
@@ -2967,24 +3100,15 @@ function openDiscovery() {
   setTimeout(() => showOpts(["Open WhatsApp 💬"], 'wa_only'), 900);
 }
 
-// ── main pick logic ────────────────────────────────────
 function pick(opt, ctx) {
   addUser(opt);
   clearOpts();
   const o = opt.toLowerCase();
 
-  // ── WhatsApp / email / call actions ──
-  if (o.includes('whatsapp') || o === 'open whatsapp 💬') {
-    openWA(); return;
-  }
-  if (o.includes('email') || o.includes('send me details')) {
-    openEmail(); return;
-  }
-  if (o.includes('discovery call') || o.includes('book a') || o.includes('book a free')) {
-    openDiscovery(); return;
-  }
+  if (o.includes('whatsapp') || o === 'open whatsapp 💬') { openWA(); return; }
+  if (o.includes('email') || o.includes('send me details')) { openEmail(); return; }
+  if (o.includes('discovery call') || o.includes('book a') || o.includes('book a free')) { openDiscovery(); return; }
 
-  // ── from START menu ──
   if (ctx === 'start') {
     if (o.includes('erp') || o.includes('management system')) {
       typing(() => { addBot(FLOWS.erp_type.msg); showOpts(FLOWS.erp_type.opts, 'erp_type'); });
@@ -3000,30 +3124,18 @@ function pick(opt, ctx) {
     return;
   }
 
-  // ── from ERP TYPE menu — each gets a unique response ──
   if (ctx === 'erp_type') {
     let response = FLOWS.erp_type.msg;
-    if (o.includes('retail') || o.includes('shop')) {
-      response = ERP_RESPONSES['retail'];
-    } else if (o.includes('restaurant') || o.includes('food')) {
-      response = ERP_RESPONSES['restaurant'];
-    } else if (o.includes('real estate')) {
-      response = ERP_RESPONSES['real estate'];
-    } else if (o.includes('manufactur')) {
-      response = ERP_RESPONSES['manufacturing'];
-    } else if (o.includes('healthcare')) {
-      response = ERP_RESPONSES['healthcare'];
-    } else {
-      response = ERP_RESPONSES['default'];
-    }
-    typing(() => {
-      addBot(response);
-      setTimeout(() => showOpts(FLOWS.erp_next.opts, 'erp_next'), 600);
-    });
+    if (o.includes('retail') || o.includes('shop')) { response = ERP_RESPONSES['retail']; }
+    else if (o.includes('restaurant') || o.includes('food')) { response = ERP_RESPONSES['restaurant']; }
+    else if (o.includes('real estate')) { response = ERP_RESPONSES['real estate']; }
+    else if (o.includes('manufactur')) { response = ERP_RESPONSES['manufacturing']; }
+    else if (o.includes('healthcare')) { response = ERP_RESPONSES['healthcare']; }
+    else { response = ERP_RESPONSES['default']; }
+    typing(() => { addBot(response); setTimeout(() => showOpts(FLOWS.erp_next.opts, 'erp_next'), 600); });
     return;
   }
 
-  // ── from ERP NEXT menu ──
   if (ctx === 'erp_next') {
     if (o.includes('quote')) {
       typing(() => { addBot(FLOWS.pricing_local.msg); showOpts(FLOWS.pricing_local.opts, 'closing'); });
@@ -3031,13 +3143,10 @@ function pick(opt, ctx) {
       typing(() => { addBot("We have built:\n\n• Gym Management ERP — tracks members, payments, attendance, and reports. Live today.\n• Solar Shop ERP — inventory, orders, and sales. Live today.\n• Flour Mill App — production and delivery management. In development.\n\nAll built from scratch in Java + MySQL for real businesses."); setTimeout(() => showOpts(["Get a quote for my business", "Talk on WhatsApp", "Send me more details by email"], 'closing'), 800); });
     } else if (o.includes('how long')) {
       typing(() => { addBot(FLOWS.how_long.msg); showOpts(FLOWS.how_long.opts, 'closing'); });
-    } else if (o.includes('whatsapp') || o.includes('talk')) {
-      openWA();
-    }
+    } else if (o.includes('whatsapp') || o.includes('talk')) { openWA(); }
     return;
   }
 
-  // ── from WEBSITE menu ──
   if (ctx === 'website') {
     if (o.includes('scratch') || o.includes('new website')) {
       typing(() => { addBot(FLOWS.website_new.msg); showOpts(FLOWS.website_new.opts, 'website_type'); });
@@ -3051,36 +3160,27 @@ function pick(opt, ctx) {
     return;
   }
 
-  // ── from WEBSITE TYPE / PROBLEM ──
   if (ctx === 'website_type' || ctx === 'website_problem') {
-    typing(() => {
-      addBot("Perfect — we have built websites for exactly that type of business. The next step is a free 20-minute call where we look at your requirements and give you a fixed price and timeline.\n\nHow would you like to connect?");
-      showOpts(["Talk on WhatsApp", "Book a free call", "Send details by email"], 'closing');
-    });
+    typing(() => { addBot("Perfect — we have built websites for exactly that type of business. The next step is a free 20-minute call where we look at your requirements and give you a fixed price and timeline.\n\nHow would you like to connect?"); showOpts(["Talk on WhatsApp", "Book a free call", "Send details by email"], 'closing'); });
     return;
   }
 
-  // ── from MARKETING menu ──
   if (ctx === 'marketing') {
     typing(() => { addBot(FLOWS.marketing_next.msg); showOpts(FLOWS.marketing_next.opts, 'marketing_next'); });
     return;
   }
 
-  // ── from MARKETING NEXT ──
   if (ctx === 'marketing_next') {
     if (o.includes('cost') || o.includes('price')) {
       typing(() => { addBot(FLOWS.pricing_local.msg); showOpts(FLOWS.pricing_local.opts, 'closing'); });
-    } else if (o.includes('whatsapp')) {
-      openWA();
-    } else if (o.includes('email')) {
-      openEmail();
-    } else if (o.includes('results')) {
+    } else if (o.includes('whatsapp')) { openWA(); }
+    else if (o.includes('email')) { openEmail(); }
+    else if (o.includes('results')) {
       typing(() => { addBot("Our first digital marketing client signed after seeing our proposal and approach. We track every metric — website traffic, social reach, leads generated, and email performance — and report to you every morning.\n\nResults vary by business but we typically see measurable improvement in website traffic within the first 30 days."); setTimeout(() => showOpts(["Talk on WhatsApp", "What does it cost?"], 'closing'), 800); });
     }
     return;
   }
 
-  // ── from INTERNATIONAL menu ──
   if (ctx === 'international') {
     if (o.includes('how does') || o.includes('remote') || o.includes('process')) {
       typing(() => { addBot(FLOWS.international_process.msg); showOpts(FLOWS.international_process.opts, 'intl_next'); });
@@ -3094,21 +3194,15 @@ function pick(opt, ctx) {
     return;
   }
 
-  // ── from INTL NEXT ──
   if (ctx === 'intl_next' || ctx === 'intl_closing') {
     if (o.includes('quote') || o.includes('custom')) {
       typing(() => { addBot("To give you an accurate quote we need to understand your requirements. The fastest way is a brief email to " + AGENT_EMAIL + " describing what you need. We will reply within 24 hours with a fixed price proposal."); });
-    } else if (o.includes('call') || o.includes('discovery')) {
-      openDiscovery();
-    } else if (o.includes('email')) {
-      openEmail();
-    } else if (o.includes('whatsapp')) {
-      openWA();
-    }
+    } else if (o.includes('call') || o.includes('discovery')) { openDiscovery(); }
+    else if (o.includes('email')) { openEmail(); }
+    else if (o.includes('whatsapp')) { openWA(); }
     return;
   }
 
-  // ── from ABOUT menu ──
   if (ctx === 'about') {
     if (o.includes('project') || o.includes('website')) {
       typing(() => { addBot("You can see all our projects on the website — scroll to the Projects section. We have detailed descriptions of the Gym ERP, Solar Shop ERP, and the Flour Mill App currently in development."); setTimeout(() => showOpts(["How much do you charge?", "I want to work with Infresco", "Talk on WhatsApp"], 'about_next'), 800); });
@@ -3116,13 +3210,10 @@ function pick(opt, ctx) {
       typing(() => { addBot(FLOWS.pricing_local.msg); showOpts(FLOWS.pricing_local.opts, 'closing'); });
     } else if (o.includes('work with') || o.includes('started')) {
       typing(() => { addBot(FLOWS.closing_local.msg); showOpts(FLOWS.closing_local.opts, 'closing'); });
-    } else if (o.includes('founders') || o.includes('directly') || o.includes('talk')) {
-      openWA();
-    }
+    } else if (o.includes('founders') || o.includes('directly') || o.includes('talk')) { openWA(); }
     return;
   }
 
-  // ── generic closing context ──
   if (ctx === 'closing' || ctx === 'about_next' || ctx === 'seo_next' || ctx === 'wa_only') {
     if (o.includes('whatsapp') || o.includes('talk')) { openWA(); }
     else if (o.includes('email') || o.includes('send')) { openEmail(); }
@@ -3133,14 +3224,12 @@ function pick(opt, ctx) {
     return;
   }
 
-  // ── fallback ──
   typing(() => {
     addBot("Thanks for that. The fastest way to get a precise answer is to speak with our team directly — they can answer anything in minutes.");
     setTimeout(() => showOpts(["Talk on WhatsApp 💬", "Send an email", "Book a free call"], 'closing'), 800);
   });
 }
 
-// ── typed input handler ────────────────────────────────
 function agentSend() {
   const input = document.getElementById('agentInput');
   const val   = input.value.trim();
@@ -3152,40 +3241,29 @@ function agentSend() {
 
   if (l.includes('price') || l.includes('cost') || l.includes('how much') || l.includes('charge')) {
     typing(() => { addBot(FLOWS.pricing_local.msg); showOpts(FLOWS.pricing_local.opts, 'closing'); });
-
   } else if (l.includes('hello') || l.includes('hi') || l.includes('hey')) {
     typing(() => addBot("Hello! 👋 Welcome to Infresco. What can we help you with today?"), 500);
     setTimeout(() => showOpts(FLOWS.start.opts, 'start'), 1400);
-
-} else if (l.includes('assalam') || l.includes('salam')) {
+  } else if (l.includes('assalam') || l.includes('salam')) {
     typing(() => addBot("Wa alaikum assalam! 👋 Welcome to Infresco. What can we help you with today?"), 500);
     setTimeout(() => showOpts(FLOWS.start.opts, 'start'), 1400);
-
   } else if (l.includes('different') || l.includes('why infresco') || l.includes('why choose') || l.includes('better than')) {
     typing(() => { addBot(FLOWS.different.msg); showOpts(["I want to work with Infresco", "Talk on WhatsApp", "Book a free call"], 'closing'); });
-
   } else if (l.includes('how long') || l.includes('timeline') || l.includes('how fast') || l.includes('deadline')) {
     typing(() => { addBot(FLOWS.how_long.msg); showOpts(FLOWS.how_long.opts, 'closing'); });
-
   } else if (l.includes('erp') || l.includes('management system') || l.includes('software') || l.includes('system')) {
     typing(() => { addBot(FLOWS.erp_type.msg); showOpts(FLOWS.erp_type.opts, 'erp_type'); });
-
   } else if (l.includes('website') || l.includes('seo') || l.includes('google')) {
     typing(() => { addBot(FLOWS.website.msg); showOpts(FLOWS.website.opts, 'website'); });
-
   } else if (l.includes('marketing') || l.includes('social media') || l.includes('instagram') || l.includes('facebook')) {
     typing(() => { addBot(FLOWS.marketing.msg); showOpts(FLOWS.marketing.opts, 'marketing'); });
-
   } else if (l.includes('uae') || l.includes('dubai') || l.includes('uk') || l.includes('usa') || l.includes('abroad') || l.includes('international') || l.includes('outside pakistan')) {
     typing(() => { addBot(FLOWS.international.msg); showOpts(FLOWS.international.opts, 'international'); });
-
   } else if (l.includes('pakistan') || l.includes('karachi') || l.includes('lahore') || l.includes('islamabad')) {
     typing(() => addBot("We are based in Karachi, Pakistan (PKT — UTC+5). We serve both local Pakistani clients and international clients remotely. What would you like to build?"), 600);
     setTimeout(() => showOpts(FLOWS.start.opts, 'start'), 1600);
-
   } else if (l.includes('thank') || l.includes('thanks') || l.includes('shukriya') || l.includes('شکریہ')) {
     typing(() => addBot("You are welcome! 😊 We are always happy to help. Feel free to reach out anytime."), 500);
-
   } else if (l.includes('restaurant') || l.includes('gym') || l.includes('shop') || l.includes('clinic') || l.includes('hotel')) {
     typing(() => {
       let key = 'default';
@@ -3195,20 +3273,17 @@ function agentSend() {
       addBot("We can definitely build a system for that.\n\n" + ERP_RESPONSES[key]);
       setTimeout(() => showOpts(FLOWS.erp_next.opts, 'erp_next'), 700);
     });
-
   } else if (l.includes('whatsapp') || l.includes('contact') || l.includes('call')) {
     openWA();
-
   } else if (l.includes('email')) {
     openEmail();
-
   } else {
     typing(() => addBot("Good question — let me connect you with our team who can give you a precise answer in minutes."), 700);
     setTimeout(() => showOpts(["Talk on WhatsApp 💬", "Send an email", "Book a free call"], 'closing'), 1600);
   }
 }
 
-// ── whatsapp float position ────────────────────────────
+// WhatsApp float position
 const waFloat = document.getElementById('waFloat');
 
 function updateWaPosition() {
@@ -3234,7 +3309,6 @@ setTimeout(() => {
   waFloat.style.transform = 'scale(1)';
 }, 3000);
 
-// ── auto notify ────────────────────────────────────────
 setTimeout(() => {
   if (!agentOpen && !agentStarted) {
     const notif = document.getElementById('agentNotif');
@@ -3243,8 +3317,8 @@ setTimeout(() => {
 }, 40000);
 
 // ══ END AI AGENT ══════════════════════════════════════
-
 </script>
+
 <!-- ══ AI AGENT BUTTON ══ -->
 <div class="agent-bubble">
   <button class="agent-btn" onclick="toggleAgent()" aria-label="Chat with Infresco assistant">
@@ -3290,7 +3364,6 @@ setTimeout(() => {
   aria-label="Chat with Infresco on WhatsApp"
   id="waFloat"
 >
-  <!-- REPLACE 923XXXXXXXXX with your number — no + sign, no spaces -->
   💬
   <span class="wa-float-tooltip">Chat on WhatsApp</span>
 </a>
