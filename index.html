@@ -748,136 +748,218 @@ section{padding:100px 6%}
   font-size:12px;color:rgba(255,255,255,0.4);
 }
 
-/* ── CONTACT — NEW REDESIGNED STYLES ── */
-#contact { background: var(--white); }
-
-.cs-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: start;
+/* ══════════════════════════════════════════
+   CONTACT SECTION — NEW TIMELINE DESIGN
+   ══════════════════════════════════════════ */
+#contact {
+  background: var(--bg);
+  padding: 100px 6%;
 }
 
-.cs-eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--blue);
-  margin: 0 0 14px;
+.contact-section-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
 }
 
-.cs-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(30px, 4vw, 46px);
-  font-weight: 400;
-  line-height: 1.15;
-  color: var(--ink);
-  margin: 0 0 16px;
-  letter-spacing: -0.5px;
+.contact-header {
+  text-align: center;
+  margin-bottom: 56px;
 }
 
-.cs-sub {
+.contact-header .section-label {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.contact-header .section-title {
+  margin-bottom: 14px;
+}
+
+.contact-header .section-sub {
+  max-width: 480px;
+  margin: 0 auto;
   font-size: 15px;
-  color: var(--ink3);
-  line-height: 1.7;
-  margin: 0 0 32px;
 }
 
-/* Contact item cards */
-.contact-list {
+/* Timeline wrapper */
+.contact-timeline {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0;
 }
 
-.contact-item {
+/* The vertical blue line */
+.contact-timeline::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 20px;
+  bottom: 20px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--blue) 0%, rgba(28,82,227,0.15) 100%);
+  border-radius: 2px;
+  z-index: 0;
+}
+
+/* Each timeline row */
+.ct-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+/* The blue dot */
+.ct-dot {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--blue);
+  flex-shrink: 0;
+  margin-top: 14px;
+  z-index: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ct-dot-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+}
+
+/* The card */
+.ct-card {
+  flex: 1;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: 24px 26px;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.ct-card:hover {
+  border-color: rgba(28,82,227,0.2);
+  box-shadow: 0 8px 32px rgba(28,82,227,0.07);
+}
+
+/* ── Stats card ── */
+.ct-card-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 16px;
+}
+
+.ct-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.ct-stat-box {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 16px 12px;
+  text-align: center;
+}
+
+.ct-stat-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--blue);
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.ct-stat-label {
+  font-size: 11px;
+  color: var(--ink3);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* ── Contact info cards (email / whatsapp / location) ── */
+.ct-info-row {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px 16px;
-  background: var(--white);
-  border: 1px solid var(--rule);
-  border-radius: 12px;
-  transition: border-color .2s;
 }
 
-.contact-item:hover {
-  border-color: rgba(28, 82, 227, 0.25);
-}
-
-.contact-icon-box {
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
+.ct-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.contact-icon-box svg {
+.ct-icon-box svg {
   width: 18px;
   height: 18px;
 }
 
-.contact-item-label {
+.ct-info-label {
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.09em;
   color: var(--ink3);
-  margin: 0 0 2px;
+  margin-bottom: 3px;
 }
 
-.contact-item-value {
-  font-size: 14px;
+.ct-info-value {
+  font-size: 15px;
   font-weight: 600;
   color: var(--ink);
-  margin: 0;
+  margin-bottom: 1px;
 }
 
-.contact-item-note {
+.ct-info-note {
   font-size: 12px;
   color: var(--ink3);
-  margin: 2px 0 0;
+  margin-top: 2px;
 }
 
-/* International card */
-.intl-card {
-  background: var(--bg);
-  border: 1px solid var(--rule);
-  border-radius: 12px;
-  padding: 24px;
+/* ── International clients card ── */
+.ct-intl-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-.intl-card-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--blue);
-  margin: 0 0 20px;
-}
-
-.trust-row {
+.ct-trust-row {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  padding: 14px 0;
+  padding: 13px 0;
   border-bottom: 1px solid var(--rule);
 }
 
-.trust-row:first-of-type { padding-top: 0; }
+.ct-trust-row:first-of-type { padding-top: 0; }
 
-.trust-row:last-of-type {
+.ct-trust-row:last-of-type {
   border-bottom: none;
   padding-bottom: 0;
 }
 
-.trust-icon-box {
-  width: 32px;
-  height: 32px;
+.ct-trust-icon {
+  width: 30px;
+  height: 30px;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -885,36 +967,34 @@ section{padding:100px 6%}
   flex-shrink: 0;
 }
 
-.trust-icon-box svg {
-  width: 16px;
-  height: 16px;
+.ct-trust-icon svg {
+  width: 15px;
+  height: 15px;
 }
 
-.trust-row-title {
+.ct-trust-title {
   font-size: 13px;
   font-weight: 600;
   color: var(--ink);
-  margin: 0 0 3px;
+  margin-bottom: 2px;
 }
 
-.trust-row-desc {
+.ct-trust-desc {
   font-size: 12px;
   color: var(--ink3);
-  line-height: 1.55;
-  margin: 0;
+  line-height: 1.5;
 }
 
-/* Country pills */
-.country-pills {
+.ct-country-pills {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 18px;
-  padding-top: 16px;
+  margin-top: 16px;
+  padding-top: 14px;
   border-top: 1px solid var(--rule);
 }
 
-.cpill {
+.ct-cpill {
   font-size: 11px;
   font-weight: 600;
   padding: 4px 10px;
@@ -924,12 +1004,15 @@ section{padding:100px 6%}
   border: 1px solid #B5D4F4;
 }
 
-/* Contact form */
-.contact-form{
-  background:var(--bg);
-  border:1px solid var(--rule);
-  border-radius:16px;
-  padding:36px;
+/* ── Form card ── */
+.ct-form-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 20px;
+  display: block;
 }
 
 .form-row{
@@ -937,19 +1020,19 @@ section{padding:100px 6%}
 }
 
 .form-group{
-  margin-bottom:18px;
+  margin-bottom:16px;
 }
 
 .form-label{
   display:block;
-  font-size:12px;font-weight:600;color:var(--ink2);
+  font-size:11px;font-weight:600;color:var(--ink2);
   text-transform:uppercase;letter-spacing:0.06em;
-  margin-bottom:7px;
+  margin-bottom:6px;
 }
 
 .form-input{
   width:100%;
-  background:var(--white);
+  background:var(--bg);
   border:1px solid var(--rule);
   border-radius:8px;
   padding:11px 14px;
@@ -959,19 +1042,25 @@ section{padding:100px 6%}
   outline:none;
 }
 
-.form-input:focus{border-color:var(--blue)}
+.form-input:focus{border-color:var(--blue);background:var(--white);}
 .form-input::placeholder{color:var(--ink3)}
 
 textarea.form-input{
-  resize:vertical;min-height:120px;
+  resize:vertical;min-height:110px;
   font-family:'Sora',sans-serif;
 }
 
 select.form-input{cursor:pointer}
 
+.form-input option {
+  font-family: 'Sora', sans-serif;
+  background: #ffffff;
+  color: #0A0E1A;
+}
+
 .form-submit{
   width:100%;
-  padding:14px;
+  padding:13px;
   background:var(--blue);
   color:white;
   border:none;border-radius:8px;
@@ -990,8 +1079,37 @@ select.form-input{cursor:pointer}
 
 .form-success{
   display:none;
-  text-align:center;padding:24px;
+  text-align:center;padding:16px;
   color:var(--blue);font-weight:500;
+  font-size:14px;
+  margin-top:12px;
+}
+
+/* WhatsApp CTA at the bottom of contact */
+.wa-contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 13px;
+  background: #25D366;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 10px;
+  transition: all .2s;
+}
+
+.wa-contact-btn:hover {
+  background: #1ebe57;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(37,211,102,0.3);
 }
 
 /* ── FOOTER ── */
@@ -1112,19 +1230,23 @@ footer{
   .hero-visual{display:none}
   .hero{padding:100px 6% 60px}
 
-  .cs-grid { grid-template-columns: 1fr; gap: 36px; }
-
   .footer-top{grid-template-columns:1fr 1fr}
 
   .process-grid::before{display:none}
 
   section{padding:72px 6%}
+
+  #contact { padding: 72px 6%; }
+
+  .ct-stats-row { grid-template-columns: repeat(3,1fr); }
+
+  .form-row { grid-template-columns: 1fr; }
 }
 
 @media(max-width:480px){
   .footer-top{grid-template-columns:1fr}
   .hero-stats{flex-direction:column;gap:20px}
-  .form-row { grid-template-columns: 1fr; }
+  .ct-stats-row { grid-template-columns: 1fr 1fr; }
 }
 
 /* ── AI AGENT ── */
@@ -1166,17 +1288,6 @@ footer{
 .agent-send:hover{background:#0F3BBF}
 @media(max-width:480px){
   .agent-window{width:calc(100vw - 32px);right:16px;bottom:86px}
-}
-
-/* ── CURRENCY SWITCHER ── */
-@media(max-width: 768px) {
-  .curr-switcher { display: none; }
-  .pricing-teaser { grid-template-columns: 1fr; gap: 28px; padding: 24px; }
-  .pricing-tiers { justify-content: center; }
-}
-@media(max-width: 400px) {
-  .pricing-tiers { flex-direction: column; gap: 14px; }
-  .ptier-divider { width: 60px; height: 1px; }
 }
 
 /* ── WHATSAPP FLOATING BUTTON ── */
@@ -1229,32 +1340,6 @@ footer{
 }
 .wa-float:hover .wa-float-tooltip {
   opacity: 1;
-}
-
-/* WhatsApp button inside contact section */
-.wa-contact-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  padding: 13px;
-  background: #25D366;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-family: 'Sora', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  margin-top: 10px;
-  transition: all .2s;
-}
-.wa-contact-btn:hover {
-  background: #1ebe57;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(37,211,102,0.3);
 }
 
 /* WhatsApp button in hero actions */
@@ -1759,12 +1844,6 @@ footer{
 
 .trust-badge-icon { font-size: 15px; }
 
-.form-input option {
-  font-family: 'Sora', sans-serif;
-  background: #ffffff;
-  color: #0A0E1A;
-}
-
 @media(max-width: 768px) {
   .countries-inner {
     flex-direction: column;
@@ -1776,6 +1855,17 @@ footer{
     align-items: flex-start;
   }
   .countries-list { gap: 16px; }
+}
+
+/* ── CURRENCY SWITCHER ── */
+@media(max-width: 768px) {
+  .curr-switcher { display: none; }
+  .pricing-teaser { grid-template-columns: 1fr; gap: 28px; padding: 24px; }
+  .pricing-tiers { justify-content: center; }
+}
+@media(max-width: 400px) {
+  .pricing-tiers { flex-direction: column; gap: 14px; }
+  .ptier-divider { width: 60px; height: 1px; }
 }
 </style>
 </head>
@@ -1847,6 +1937,7 @@ footer{
         class="btn-wa"
         target="_blank"
         rel="noopener"
+        style="margin-top:14px;display:inline-flex;"
       >
         💬 WhatsApp us
       </a>
@@ -2144,8 +2235,6 @@ footer{
 </div>
 </div>
 
-<section id="services">
-
 <!-- ══ SERVICES ══ -->
 <section id="services">
   <div class="section-inner">
@@ -2221,7 +2310,7 @@ footer{
       </div>
     </div>
 
-<!-- PRICING TEASER — no prices shown yet -->
+<!-- PRICING TEASER -->
 <div class="pricing-teaser">
   <div>
     <div class="pricing-teaser-title">Transparent pricing — tailored to your needs</div>
@@ -2546,223 +2635,252 @@ footer{
 </section>
 
 
-<!-- ══ CONTACT — REDESIGNED ══ -->
+<!-- ══════════════════════════════════════════
+     CONTACT SECTION — TIMELINE DESIGN
+     ══════════════════════════════════════════ -->
 <section id="contact">
-  <div class="section-inner">
+  <div class="contact-section-inner">
 
-    <div class="cs-grid">
+    <!-- Header -->
+    <div class="contact-header">
+      <span class="section-label">Get in touch</span>
+      <h2 class="section-title">Ready to build something together?</h2>
+      <p class="section-sub">Tell us what you need. We respond within 24 hours with a clear plan — no jargon, no fluff.</p>
+    </div>
 
-      <!-- ── Left column ── -->
-      <div>
-        <p class="cs-eyebrow">Get in touch</p>
-        <h2 class="cs-title">Ready to build something together?</h2>
-        <p class="cs-sub">Tell us what you need. We'll respond within 24 hours with a clear plan — no jargon, no fluff.</p>
+    <!-- Timeline -->
+    <div class="contact-timeline">
 
-        <div class="contact-list">
+      <!-- ① Why Choose Us — Stats -->
+      <div class="ct-row fade-up">
+        <div class="ct-dot"><div class="ct-dot-inner"></div></div>
+        <div class="ct-card">
+          <div class="ct-card-label">Why choose us</div>
+          <div class="ct-stats-row">
+            <div class="ct-stat-box">
+              <div class="ct-stat-num">24h</div>
+              <div class="ct-stat-label">Response guarantee</div>
+            </div>
+            <div class="ct-stat-box">
+              <div class="ct-stat-num">100%</div>
+              <div class="ct-stat-label">On-time delivery</div>
+            </div>
+            <div class="ct-stat-box">
+              <div class="ct-stat-num">3+</div>
+              <div class="ct-stat-label">Live projects</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-          <!-- Email -->
-          <div class="contact-item">
-            <div class="contact-icon-box" style="background:#E6F1FB;">
+      <!-- ② Email -->
+      <div class="ct-row fade-up">
+        <div class="ct-dot"><div class="ct-dot-inner"></div></div>
+        <div class="ct-card">
+          <div class="ct-info-row">
+            <div class="ct-icon-box" style="background:#E6F1FB;">
               <svg viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="2" y="4" width="20" height="16" rx="2"/>
                 <path d="m2 7 10 7 10-7"/>
               </svg>
             </div>
             <div>
-              <p class="contact-item-label">Email</p>
-              <p class="contact-item-value">hello@infresco.me</p>
+              <p class="ct-info-label">Email us</p>
+              <p class="ct-info-value">hello@infresco.me</p>
             </div>
           </div>
+        </div>
+      </div>
 
-          <!-- WhatsApp -->
-          <div class="contact-item">
-            <div class="contact-icon-box" style="background:#EAF3DE;">
+      <!-- ③ WhatsApp -->
+      <div class="ct-row fade-up">
+        <div class="ct-dot"><div class="ct-dot-inner"></div></div>
+        <div class="ct-card">
+          <div class="ct-info-row">
+            <div class="ct-icon-box" style="background:#EAF3DE;">
               <svg viewBox="0 0 24 24" fill="none" stroke="#3B6D11" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
               </svg>
             </div>
             <div>
-              <p class="contact-item-label">WhatsApp</p>
-              <p class="contact-item-value">+92 XXX XXX XXXX</p>
+              <p class="ct-info-label">WhatsApp</p>
+              <p class="ct-info-value">+92 XXX XXX XXXX</p>
             </div>
           </div>
+        </div>
+      </div>
 
-          <!-- Location -->
-          <div class="contact-item">
-            <div class="contact-icon-box" style="background:#FAEEDA;">
+      <!-- ④ Location -->
+      <div class="ct-row fade-up">
+        <div class="ct-dot"><div class="ct-dot-inner"></div></div>
+        <div class="ct-card">
+          <div class="ct-info-row">
+            <div class="ct-icon-box" style="background:#FAEEDA;">
               <svg viewBox="0 0 24 24" fill="none" stroke="#854F0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
                 <circle cx="12" cy="9" r="2.5"/>
               </svg>
             </div>
             <div>
-              <p class="contact-item-label">Location</p>
-              <p class="contact-item-value">Karachi, Pakistan</p>
-              <p class="contact-item-note">Available remotely worldwide</p>
+              <p class="ct-info-label">Location</p>
+              <p class="ct-info-value">Karachi, Pakistan</p>
+              <p class="ct-info-note">Available remotely worldwide</p>
             </div>
           </div>
-
-          <!-- Response Time -->
-          <div class="contact-item">
-            <div class="contact-icon-box" style="background:#EEEDFE;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#534AB7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="9"/>
-                <path d="M12 7v5l3 3"/>
-              </svg>
-            </div>
-            <div>
-              <p class="contact-item-label">Response time</p>
-              <p class="contact-item-value">Within 24 hours guaranteed</p>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- International clients card -->
-        <div class="intl-card" style="margin-top: 24px;">
-          <p class="intl-card-label">For international clients</p>
-
-          <div class="trust-row">
-            <div class="trust-icon-box" style="background:#E6F1FB;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="9"/>
-                <path d="M12 7v5l3 3"/>
-              </svg>
-            </div>
-            <div>
-              <p class="trust-row-title">Timezone-friendly calls</p>
-              <p class="trust-row-desc">We're PKT (UTC+5) — we schedule calls to suit your timezone, not ours.</p>
-            </div>
-          </div>
-
-          <div class="trust-row">
-            <div class="trust-icon-box" style="background:#EAF3DE;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#3B6D11" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="5" width="20" height="14" rx="2"/>
-                <path d="M2 10h20"/>
-              </svg>
-            </div>
-            <div>
-              <p class="trust-row-title">Flexible payments</p>
-              <p class="trust-row-desc">Payoneer, Wise, SWIFT, and local bank transfer — pick what works for you.</p>
-            </div>
-          </div>
-
-          <div class="trust-row">
-            <div class="trust-icon-box" style="background:#FAEEDA;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#854F0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
-              </svg>
-            </div>
-            <div>
-              <p class="trust-row-title">Written agreement first</p>
-              <p class="trust-row-desc">Every project starts with a clear contract — no surprises, ever.</p>
-            </div>
-          </div>
-
-          <div class="trust-row">
-            <div class="trust-icon-box" style="background:#EEEDFE;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#534AB7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="trust-row-title">Milestone-based billing</p>
-              <p class="trust-row-desc">50% upfront, 50% on delivery — your investment is always protected.</p>
-            </div>
-          </div>
-
-          <div class="country-pills">
-            <span class="cpill">🇦🇪 UAE</span>
-            <span class="cpill">🇬🇧 UK</span>
-            <span class="cpill">🇺🇸 USA</span>
-            <span class="cpill">🇸🇦 Saudi Arabia</span>
-            <span class="cpill">🌍 + more</span>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- ── Right column: contact form ── -->
-      <div class="contact-form" id="contactForm">
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">First name</label>
-            <input type="text" class="form-input" placeholder="Your name" id="fname">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Last name</label>
-            <input type="text" class="form-input" placeholder="Last name" id="lname">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Email address</label>
-          <input type="email" class="form-input" placeholder="you@company.com" id="email">
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">WhatsApp number</label>
-          <input type="tel" class="form-input" placeholder="+92 XXX XXX XXXX" id="phone">
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Your country</label>
-          <select class="form-input" id="country">
-            <option value="">Select your country...</option>
-            <option>Pakistan</option>
-            <option>United Arab Emirates</option>
-            <option>Saudi Arabia</option>
-            <option>United Kingdom</option>
-            <option>United States</option>
-            <option>Canada</option>
-            <option>Australia</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Service needed</label>
-          <select class="form-input" id="service">
-            <option value="">Select a service...</option>
-            <option>Custom ERP System</option>
-            <option>Website Development & SEO</option>
-            <option>Social Media Management</option>
-            <option>Data Analytics & Reporting</option>
-            <option>Email Marketing</option>
-            <option>AI Agent / Chatbot</option>
-            <option>Full Digital Growth Package</option>
-            <option>Something else</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Tell us about your business</label>
-          <textarea class="form-input" placeholder="What does your business do? What problem do you need solved?" id="message"></textarea>
-        </div>
-
-        <button class="form-submit" onclick="submitForm()">
-          Send message
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-
-        <div class="form-success" id="formSuccess">
-          ✓ Message sent! We will get back to you within 24 hours.
         </div>
       </div>
 
-    </div><!-- end cs-grid -->
+      <!-- ⑤ For International Clients -->
+      <div class="ct-row fade-up">
+        <div class="ct-dot"><div class="ct-dot-inner"></div></div>
+        <div class="ct-card">
+          <div class="ct-card-label">For international clients</div>
+          <div class="ct-intl-list">
 
-    <a
-      href="https://wa.me/923012702169?text=Hi%20Infresco%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20discuss%20a%20project."
-      class="wa-contact-btn"
-      target="_blank"
-      rel="noopener"
-    >
-      💬 Or message us directly on WhatsApp
-    </a>
+            <div class="ct-trust-row">
+              <div class="ct-trust-icon" style="background:#E6F1FB;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+                </svg>
+              </div>
+              <div>
+                <p class="ct-trust-title">Timezone-friendly calls</p>
+                <p class="ct-trust-desc">PKT (UTC+5) — we schedule around you.</p>
+              </div>
+            </div>
 
+            <div class="ct-trust-row">
+              <div class="ct-trust-icon" style="background:#EAF3DE;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#3B6D11" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>
+                </svg>
+              </div>
+              <div>
+                <p class="ct-trust-title">Flexible payments</p>
+                <p class="ct-trust-desc">Payoneer, Wise, SWIFT, and bank transfer.</p>
+              </div>
+            </div>
+
+            <div class="ct-trust-row">
+              <div class="ct-trust-icon" style="background:#FAEEDA;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#854F0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                </svg>
+              </div>
+              <div>
+                <p class="ct-trust-title">Written agreement first</p>
+                <p class="ct-trust-desc">Clear contract before any work begins.</p>
+              </div>
+            </div>
+
+            <div class="ct-trust-row">
+              <div class="ct-trust-icon" style="background:#EEEDFE;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#534AB7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="ct-trust-title">Milestone-based billing</p>
+                <p class="ct-trust-desc">50% upfront, 50% on delivery.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="ct-country-pills">
+            <span class="ct-cpill">🇦🇪 UAE</span>
+            <span class="ct-cpill">🇬🇧 UK</span>
+            <span class="ct-cpill">🇺🇸 USA</span>
+            <span class="ct-cpill">🇸🇦 Saudi Arabia</span>
+            <span class="ct-cpill">🌍 + more</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ⑥ Contact Form -->
+      <div class="ct-row fade-up">
+        <div class="ct-dot"><div class="ct-dot-inner"></div></div>
+        <div class="ct-card">
+          <span class="ct-form-label">Send us a message</span>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First name</label>
+              <input type="text" class="form-input" placeholder="Your name" id="fname">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last name</label>
+              <input type="text" class="form-input" placeholder="Last name" id="lname">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email address</label>
+            <input type="email" class="form-input" placeholder="you@company.com" id="email">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">WhatsApp number</label>
+            <input type="tel" class="form-input" placeholder="+92 XXX XXX XXXX" id="phone">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Country</label>
+              <select class="form-input" id="country">
+                <option value="">Select country...</option>
+                <option>Pakistan</option>
+                <option>United Arab Emirates</option>
+                <option>Saudi Arabia</option>
+                <option>United Kingdom</option>
+                <option>United States</option>
+                <option>Canada</option>
+                <option>Australia</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Service needed</label>
+              <select class="form-input" id="service">
+                <option value="">Select service...</option>
+                <option>Custom ERP System</option>
+                <option>Website Development & SEO</option>
+                <option>Social Media Management</option>
+                <option>Data Analytics & Reporting</option>
+                <option>Email Marketing</option>
+                <option>AI Agent / Chatbot</option>
+                <option>Full Digital Growth Package</option>
+                <option>Something else</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Tell us about your business</label>
+            <textarea class="form-input" placeholder="What does your business do? What problem do you need solved?" id="message"></textarea>
+          </div>
+
+          <button class="form-submit" onclick="submitForm()">
+            Send message →
+          </button>
+
+          <a
+            href="https://wa.me/923012702169?text=Hi%20Infresco%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20discuss%20a%20project."
+            class="wa-contact-btn"
+            target="_blank"
+            rel="noopener"
+          >
+            💬 Or message us directly on WhatsApp
+          </a>
+
+          <div class="form-success" id="formSuccess">
+            ✓ Message sent! We will get back to you within 24 hours.
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end contact-timeline -->
   </div>
 </section>
 
