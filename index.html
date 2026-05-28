@@ -34,6 +34,13 @@
 
 html{scroll-behavior:smooth}
 
+.nav-dropdown{position:relative;}
+.nav-dropdown .dropdown-menu{display:none;position:absolute;top:100%;left:0;background:#ffffff;border:1px solid #E8EBF2;border-radius:10px;padding:8px 0;min-width:220px;box-shadow:0 8px 24px rgba(0,0,0,0.1);z-index:200;}
+.nav-dropdown .dropdown-menu li{list-style:none;}
+.nav-dropdown .dropdown-menu a{display:block;padding:10px 16px;font-size:13px;color:#2D3348;text-decoration:none;transition:all .2s;}
+.nav-dropdown .dropdown-menu a:hover{background:#F8F9FC;color:#1C52E3;}
+.nav-dropdown:hover .dropdown-menu{display:block;}
+  
 body{
   font-family:'Sora',sans-serif;
   background:var(--white);
