@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How We Built a Custom Solar Shop Management System in Pakistan | Infresco</title>
+<meta name="description" content="A complete case study of how Infresco built a custom solar equipment shop management system for Veer Electronic in Tando Jam — saving 3 hours of manual work every single day.">
+<meta name="keywords" content="solar shop management system Pakistan, solar equipment ERP Pakistan, shop management software Sindh, inventory management system Pakistan, custom software Tando Jam">
+<meta property="og:title" content="How We Built a Custom Solar Shop Management System in Pakistan">
+<meta property="og:description" content="From paper registers to fully digital — how Infresco saved a solar shop 3+ hours of manual work every day.">
+<meta property="og:url" content="https://infresco.me/solar-shop-erp-case-study">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0A0E1A;
+  --ink2: #2D3348;
+  --ink3: #6B7490;
+  --rule: #E8EBF2;
+  --bg: #F8F9FC;
+  --white: #FFFFFF;
+  --blue: #1C52E3;
+  --blue2: #0F3BBF;
+  --red: #E8320D;
+  --green: #16A34A;
+  --amber: #D97706;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6%; height: 64px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-mark { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.logo-dot-r { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+.logo-dot-b { width: 10px; height: 14px; border-radius: 5px 5px 2px 8px; background: var(--blue); }
+.logo-text { font-size: 19px; font-weight: 700; color: var(--ink2); letter-spacing: -0.5px; }
+.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+.nav-links a { text-decoration: none; font-size: 13px; font-weight: 500; color: var(--ink3); transition: color .2s; }
+.nav-links a:hover { color: var(--blue); }
+.nav-cta { background: var(--blue) !important; color: var(--white) !important; padding: 8px 18px; border-radius: 8px; }
+
+.article-hero {
+  padding: 120px 6% 72px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.article-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(28,82,227,0.08);
+  border: 1px solid rgba(28,82,227,0.15);
+  border-radius: 40px;
+  padding: 5px 14px;
+  font-size: 11px; font-weight: 600;
+  color: var(--blue);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.article-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  margin-bottom: 20px;
+}
+
+.article-subtitle {
+  font-size: 18px;
+  color: var(--ink3);
+  line-height: 1.7;
+  margin-bottom: 36px;
+  max-width: 640px;
+}
+
+.article-meta {
+  display: flex; align-items: center; gap: 24px;
+  padding: 20px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex; flex-direction: column; gap: 2px;
+}
+
+.meta-label {
+  font-size: 10px; font-weight: 600;
+  color: var(--ink3);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+
+.meta-value {
+  font-size: 13px; font-weight: 500;
+  color: var(--ink2);
+}
+
+.meta-divider {
+  width: 1px; height: 36px;
+  background: var(--rule);
+}
+
+.stats-strip {
+  background: var(--ink);
+  padding: 48px 6%;
+  margin: 60px 0;
+}
+
+.stats-inner {
+  max-width: 860px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.stat-cell {
+  background: var(--ink);
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px; font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-num span { color: #5B8EF0; }
+
+.stat-label {
+  font-size: 11px; font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  line-height: 1.4;
+}
+
+.article-body {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 6% 80px;
+}
+
+.article-body h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 600;
+  color: var(--ink);
+  margin: 52px 0 16px;
+  letter-spacing: -0.3px;
+}
+
+.article-body h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px; font-weight: 600;
+  color: var(--ink);
+  margin: 32px 0 12px;
+}
+
+.article-body p {
+  font-size: 16px;
+  color: var(--ink2);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.article-body p strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.pull-quote {
+  border-left: 3px solid var(--blue);
+  padding: 20px 28px;
+  margin: 36px 0;
+  background: rgba(28,82,227,0.04);
+  border-radius: 0 10px 10px 0;
+}
+
+.pull-quote p {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-style: italic;
+  color: var(--ink);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.pull-quote cite {
+  font-size: 12px; font-weight: 600;
+  color: var(--ink3);
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.info-card {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.info-card.problem { border-left: 3px solid var(--red); }
+.info-card.solution { border-left: 3px solid var(--green); }
+.info-card.amber { border-left: 3px solid var(--amber); }
+
+.info-card-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.info-card.problem .info-card-label { color: var(--red); }
+.info-card.solution .info-card-label { color: var(--green); }
+.info-card.amber .info-card-label { color: var(--amber); }
+
+.info-card ul {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.info-card ul li {
+  font-size: 13.5px;
+  color: var(--ink2);
+  line-height: 1.55;
+  padding-left: 16px;
+  position: relative;
+}
+
+.info-card ul li::before {
+  content: '';
+  position: absolute; left: 0; top: 8px;
+  width: 6px; height: 6px; border-radius: 50%;
+}
+
+.info-card.problem ul li::before { background: var(--red); }
+.info-card.solution ul li::before { background: var(--green); }
+.info-card.amber ul li::before { background: var(--amber); }
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.tech-item {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.tech-icon { font-size: 24px; margin-bottom: 8px; display: block; }
+.tech-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.tech-desc { font-size: 11px; color: var(--ink3); margin-top: 3px; }
+
+.result-box {
+  background: var(--ink);
+  border-radius: 16px;
+  padding: 40px;
+  margin: 36px 0;
+  color: white;
+}
+
+.result-box h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 600;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.result-list {
+  display: flex; flex-direction: column; gap: 12px;
+}
+
+.result-item {
+  display: flex; align-items: flex-start; gap: 12px;
+}
+
+.result-check {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: rgba(22,163,74,0.2);
+  color: #4ADE80;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+.result-text {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.6;
+}
+
+/* Black box highlight */
+.blackbox-card {
+  background: #060810;
+  border: 1px solid rgba(28,82,227,0.3);
+  border-radius: 16px;
+  padding: 32px;
+  margin: 36px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.blackbox-card::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(28,82,227,0.15) 0%, transparent 65%);
+}
+
+.blackbox-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  color: #5B8EF0;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.blackbox-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.blackbox-text {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.75;
+}
+
+.blackbox-features {
+  display: flex; flex-direction: column; gap: 8px;
+  margin-top: 16px;
+}
+
+.blackbox-feature {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+}
+
+.blackbox-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #1C52E3;
+  flex-shrink: 0;
+}
+
+.timeline {
+  margin: 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.timeline-item:last-child { border-bottom: none; }
+
+.timeline-week {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding-top: 2px;
+}
+
+.timeline-content { font-size: 14px; color: var(--ink2); line-height: 1.6; }
+.timeline-content strong { color: var(--ink); font-weight: 600; }
+
+.time-saved-box {
+  background: linear-gradient(135deg, rgba(22,163,74,0.08) 0%, rgba(28,82,227,0.08) 100%);
+  border: 1px solid rgba(22,163,74,0.2);
+  border-radius: 16px;
+  padding: 32px;
+  margin: 36px 0;
+  text-align: center;
+}
+
+.time-saved-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px; font-weight: 700;
+  color: var(--green);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.time-saved-label {
+  font-size: 16px; font-weight: 500;
+  color: var(--ink2);
+  margin-bottom: 8px;
+}
+
+.time-saved-sub {
+  font-size: 13px;
+  color: var(--ink3);
+}
+
+.article-cta {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: 40px;
+  margin: 52px 0 0;
+  text-align: center;
+}
+
+.article-cta h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.article-cta p {
+  font-size: 15px;
+  color: var(--ink3);
+  margin-bottom: 24px;
+  max-width: 480px;
+  margin-left: auto; margin-right: auto;
+}
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--blue); color: var(--white);
+  text-decoration: none;
+  padding: 13px 24px; border-radius: 10px;
+  font-size: 14px; font-weight: 600;
+  transition: all .2s; margin: 4px;
+}
+
+.btn-primary:hover { background: var(--blue2); transform: translateY(-1px); }
+
+.btn-wa {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #25D366; color: white;
+  text-decoration: none;
+  padding: 13px 24px; border-radius: 10px;
+  font-size: 14px; font-weight: 600;
+  transition: all .2s; margin: 4px;
+}
+
+.btn-wa:hover { background: #1ebe57; transform: translateY(-1px); }
+
+footer {
+  background: var(--ink);
+  padding: 40px 6%;
+  text-align: center;
+}
+
+.footer-logo { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 12px; }
+.footer-copy { font-size: 13px; color: rgba(255,255,255,0.3); }
+.footer-links { display: flex; gap: 24px; justify-content: center; margin-top: 16px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: white; }
+
+@media(max-width: 768px) {
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .article-meta { gap: 16px; }
+  .meta-divider { display: none; }
+  .time-saved-num { font-size: 56px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://infresco.me" class="nav-logo">
+    <div class="logo-mark">
+      <div class="logo-dot-r"></div>
+      <div class="logo-dot-b"></div>
+    </div>
+    <span class="logo-text">infresco</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="https://infresco.me/#services">Services</a></li>
+    <li><a href="https://infresco.me/#projects">Projects</a></li>
+    <li><a href="https://infresco.me/gym-erp-case-study.html">Blog</a></li>
+    <li><a href="https://infresco.me/#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<div class="article-hero">
+  <div class="article-tag">Case Study — Shop Management System</div>
+
+  <h1 class="article-title">
+    How We Built a Custom Solar Shop Management System in Pakistan
+  </h1>
+
+  <p class="article-subtitle">
+    From paper registers and manual headaches to a fully digital system — how Infresco saved Veer Electronic more than 3 hours of manual work every single day.
+  </p>
+
+  <div class="article-meta">
+    <div class="meta-item">
+      <span class="meta-label">Client</span>
+      <span class="meta-value">Veer Electronic</span>
+    </div>
+    <div class="meta-divider"></div>
+    <div class="meta-item">
+      <span class="meta-label">Industry</span>
+      <span class="meta-value">Solar Equipment Retail</span>
+    </div>
+    <div class="meta-divider"></div>
+    <div class="meta-item">
+      <span class="meta-label">Location</span>
+      <span class="meta-value">Tando Jam, Sindh, Pakistan</span>
+    </div>
+    <div class="meta-divider"></div>
+    <div class="meta-item">
+      <span class="meta-label">Time Saved</span>
+      <span class="meta-value" style="color:#16A34A;font-weight:600">3+ hours daily</span>
+    </div>
+    <div class="meta-divider"></div>
+    <div class="meta-item">
+      <span class="meta-label">Status</span>
+      <span class="meta-value" style="color:#16A34A;font-weight:600">✓ Live in production</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-cell">
+      <div class="stat-num">3<span>+</span></div>
+      <div class="stat-label">Hours saved every day</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Product types managed</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Paper registers remaining</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">1</div>
+      <div class="stat-label">System for everything</div>
+    </div>
+  </div>
+</div>
+
+<div class="article-body">
+
+  <h2>The business and the challenge</h2>
+
+  <p>
+    Veer Electronic is a solar equipment shop based in Tando Jam, Sindh, Pakistan — selling panels, batteries, inverters, and complete solar systems. In just over a year of operation the business had grown to the point where manual management was becoming a serious problem.
+  </p>
+
+  <p>
+    Like most small businesses in Pakistan, Veer Electronic was managing everything on paper registers. Every sale was handwritten. Every stock entry was manual. Every credit record lived in a notebook. And every morning started with the same tedious process of going through those records to understand where the business stood.
+  </p>
+
+  <div class="pull-quote">
+    <p>"Managing low quantity items and getting a record of each item, sales, and credit records was the biggest challenge. Most of the work was done manually."</p>
+    <cite>— Kelash Kumar, Owner, Veer Electronic</cite>
+  </div>
+
+  <div class="two-col">
+    <div class="info-card problem">
+      <div class="info-card-label">Before Infresco</div>
+      <ul>
+        <li>Paper registers for all stock records</li>
+        <li>Manual sales recording for every transaction</li>
+        <li>No alerts for low stock items</li>
+        <li>Credit records tracked in notebooks</li>
+        <li>No visibility into daily business performance</li>
+        <li>3+ hours of manual work every single day</li>
+      </ul>
+    </div>
+    <div class="info-card solution">
+      <div class="info-card-label">After Infresco</div>
+      <ul>
+        <li>All stock managed digitally in one system</li>
+        <li>Invoice generation with one click</li>
+        <li>Automatic low stock alerts daily</li>
+        <li>Complete digital credit records per customer</li>
+        <li>Real-time account alerts for every customer</li>
+        <li>3+ hours saved every single day</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>What we built</h2>
+
+  <p>
+    Infresco built a complete solar shop management system from scratch — designed specifically around how Veer Electronic operates on a daily basis. The goal was simple: replace every paper register and manual process with one fast, reliable digital system.
+  </p>
+
+  <h3>Invoice Generation</h3>
+  <p>
+    The most used feature every day. Before the system, every invoice was handwritten — time consuming, error prone, and impossible to track. Now every sale generates a complete digital invoice instantly with all product details, quantities, prices, and customer information. What used to take minutes now takes seconds.
+  </p>
+
+  <h3>Stock and Inventory Management</h3>
+  <p>
+    Managing solar equipment inventory — panels, batteries, inverters, and complete systems — requires tracking multiple product types with different quantities and price points. The system maintains a complete real-time stock register for all products and sends automatic alerts when any item falls below the minimum stock level.
+  </p>
+
+  <h3>Credit Records and Customer Accounts</h3>
+  <p>
+    One of the most painful parts of running a shop in Pakistan is tracking which customers have outstanding balances. The system maintains a complete digital ledger for every customer — all transactions, payments made, and current balance. The owner gets automatic daily alerts about customer accounts so nothing falls through the cracks.
+  </p>
+
+  <h3>Data Backup System</h3>
+  <p>
+    All business data is backed up automatically. No more fear of losing records if something goes wrong. Every transaction, every invoice, every stock entry — all safely stored and recoverable.
+  </p>
+
+  <!-- BLACK BOX FEATURE -->
+  <div class="blackbox-card">
+    <div class="blackbox-title">Unique Feature</div>
+    <div class="blackbox-heading">The Black Box System</div>
+    <div class="blackbox-text">
+      One of the most unique features Infresco built for Veer Electronic is what the owner calls the "black box system" — a complete audit trail that records every action taken inside the system. Every login. Every change. Every deletion. The system logs who did what, when, and from which account.
+    </div>
+    <div class="blackbox-features">
+      <div class="blackbox-feature">
+        <div class="blackbox-dot"></div>
+        <span>Records every login with timestamp and user identity</span>
+      </div>
+      <div class="blackbox-feature">
+        <div class="blackbox-dot"></div>
+        <span>Tracks every change made to stock or invoices</span>
+      </div>
+      <div class="blackbox-feature">
+        <div class="blackbox-dot"></div>
+        <span>Identifies exactly who made any modification</span>
+      </div>
+      <div class="blackbox-feature">
+        <div class="blackbox-dot"></div>
+        <span>Cannot be deleted or modified — permanent record</span>
+      </div>
+    </div>
+    <div class="blackbox-text" style="margin-top:16px;">
+      This feature gives the business owner complete accountability over everything that happens in the system. If anything goes wrong — the black box shows exactly what happened, who did it, and when. It is the kind of feature that large enterprise software charges a premium for. Infresco built it for a small shop in Tando Jam.
+    </div>
+  </div>
+
+  <h2>The tech stack</h2>
+
+  <div class="tech-grid">
+    <div class="tech-item">
+      <span class="tech-icon">☕</span>
+      <div class="tech-name">Java</div>
+      <div class="tech-desc">Core application logic</div>
+    </div>
+    <div class="tech-item">
+      <span class="tech-icon">🗄️</span>
+      <div class="tech-name">MySQL</div>
+      <div class="tech-desc">All business data</div>
+    </div>
+    <div class="tech-item">
+      <span class="tech-icon">🖥️</span>
+      <div class="tech-name">JavaFX</div>
+      <div class="tech-desc">Desktop interface</div>
+    </div>
+    <div class="tech-item">
+      <span class="tech-icon">📄</span>
+      <div class="tech-name">PDF Invoices</div>
+      <div class="tech-desc">Printable documents</div>
+    </div>
+    <div class="tech-item">
+      <span class="tech-icon">🔒</span>
+      <div class="tech-name">Audit Trail</div>
+      <div class="tech-desc">Black box logging</div>
+    </div>
+    <div class="tech-item">
+      <span class="tech-icon">💾</span>
+      <div class="tech-name">Auto Backup</div>
+      <div class="tech-desc">Daily data protection</div>
+    </div>
+  </div>
+
+  <h2>The number that matters most</h2>
+
+  <div class="time-saved-box">
+    <div class="time-saved-num">3+</div>
+    <div class="time-saved-label">Hours saved every single day</div>
+    <div class="time-saved-sub">That is 90+ hours per month. Over 1,000 hours per year. Time the owner now spends growing the business — not managing paperwork.</div>
+  </div>
+
+  <p>
+    When we asked Kelash Kumar how much time the system saves him, he said he has no exact number — but he knows it is more than 3 hours every day. For a small business owner that is transformational. Three hours every day is time that was previously lost to manual work that produced no value. That time now goes into serving customers, finding new clients, and growing the business.
+  </p>
+
+  <h2>What the owner says</h2>
+
+  <div class="result-box">
+    <h3>Results — in the owner's own words</h3>
+    <div class="result-list">
+      <div class="result-item">
+        <div class="result-check">✓</div>
+        <div class="result-text">Managing accounts moved from paper registers to a fully digital system — everything in one place</div>
+      </div>
+      <div class="result-item">
+        <div class="result-check">✓</div>
+        <div class="result-text">Daily automatic alerts about customer accounts — no more manually checking who owes what</div>
+      </div>
+      <div class="result-item">
+        <div class="result-check">✓</div>
+        <div class="result-text">More than 3 hours saved every single day — previously lost to manual paperwork</div>
+      </div>
+      <div class="result-item">
+        <div class="result-check">✓</div>
+        <div class="result-text">Low stock alerts, login alerts, data backup, and the black box audit system — features he values most</div>
+      </div>
+      <div class="result-item">
+        <div class="result-check">✓</div>
+        <div class="result-text">"I will recommend other shop owners to use these types of systems — and specifically go for Infresco."</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>What made this project different</h2>
+
+  <p>
+    The black box system is what stands out from this project. It was not in the original requirements — it emerged from a conversation about accountability and trust in a small business environment.
+  </p>
+
+  <p>
+    In Pakistani small businesses, the owner cannot always be present. Staff manage the system in their absence. The black box gives the owner complete visibility into every action taken — even when they are not there. <strong>This is enterprise-level accountability built for a small shop.</strong>
+  </p>
+
+  <p>
+    This is what Infresco does differently. We do not just build what is written in a requirements document. We listen to how a business actually works, understand the real problems beneath the surface, and build features that solve those problems completely.
+  </p>
+
+  <h2>A recommendation from the owner</h2>
+
+  <div class="pull-quote">
+    <p>"I will recommend them to use these types of systems — and specially go for Infresco."</p>
+    <cite>— Kelash Kumar, Owner, Veer Electronic, Tando Jam</cite>
+  </div>
+
+  <p>
+    That recommendation means everything to us. Veer Electronic is a young business — just over a year old — and already operating with the kind of digital systems that most established businesses in Pakistan do not have. That is what Infresco delivers.
+  </p>
+
+  <h2>Is your shop still running on paper?</h2>
+
+  <p>
+    If you run a shop, a store, or any retail business in Pakistan and you are still managing stock, sales, and customer records on paper — you are losing hours every day. Hours that could go into growing your business.
+  </p>
+
+  <p>
+    We build custom management systems for retail shops, solar equipment dealers, medical stores, and any business that needs to go digital. Every system is built specifically for your business — not a generic template adapted to fit.
+  </p>
+
+  <div class="article-cta">
+    <h3>Ready to save 3 hours every day?</h3>
+    <p>Tell us about your business. We respond within 24 hours with a clear plan — no jargon, no obligation.</p>
+    <div>
+      <a href="https://infresco.me/#contact" class="btn-primary">Start a conversation →</a>
+      <a href="https://wa.me/923012702169?text=Hi%20Infresco%2C%20I%20read%20your%20solar%20shop%20case%20study%20and%20I%20am%20interested%20in%20a%20similar%20system%20for%20my%20business." class="btn-wa">💬 WhatsApp us</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">
+    <div class="logo-mark">
+      <div class="logo-dot-r"></div>
+      <div class="logo-dot-b"></div>
+    </div>
+    <span class="logo-text" style="color:white">infresco</span>
+  </div>
+  <p class="footer-copy">© 2026 Infresco. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="https://infresco.me">Home</a>
+    <a href="https://infresco.me/#services">Services</a>
+    <a href="https://infresco.me/gym-erp-case-study.html">Gym ERP Case Study</a>
+    <a href="https://infresco.me/#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
